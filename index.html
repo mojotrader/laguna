@@ -1,0 +1,1774 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lagūna — Apartamentai ir restoranas Šventojoje</title>
+  <meta name="description" content="Lagūna — apartamentai ir restoranas Šventojoje. 50 m iki jūros. Tarp jūros, uosto ir pušyno." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --dark:#1a1a1a;--navy:#1e2b3a;--mid:#6b6b6b;
+      --light:#f8f5f0;--white:#fff;--accent:#c9a96e;--border:#e0dbd3;--nav-h:76px;
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;color:var(--dark);background:var(--white);overflow-x:hidden}
+    img{display:block;width:100%;height:100%;object-fit:cover}
+    a{color:inherit;text-decoration:none}
+    button{cursor:pointer;border:none;background:none;font-family:inherit}
+    ul{list-style:none}
+    h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:400;line-height:1.15}
+    h1{font-size:clamp(2.4rem,5.5vw,4.8rem)}
+    h2{font-size:clamp(1.9rem,3.8vw,3rem)}
+    h3{font-size:clamp(1.2rem,2.2vw,1.6rem)}
+    p{font-size:clamp(0.93rem,1.4vw,1.03rem);line-height:1.75;color:var(--mid)}
+    .container{max-width:1200px;margin:0 auto;padding:0 2rem}
+    .section{padding:100px 0}
+    .section--dark{background:var(--dark)}
+    .section--dark p{color:rgba(255,255,255,.6)}
+    .section--light{background:var(--light)}
+    .section-label{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.1rem}
+
+    /* ── SCROLL PROGRESS ── */
+    #progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:9999;width:0%;transition:width .1s linear}
+
+    /* ── FADE UP ── */
+    .fade-up{opacity:0;transform:translateY(36px);transition:opacity .8s ease,transform .8s ease}
+    .fade-up.visible{opacity:1;transform:translateY(0)}
+    .fade-up.d1{transition-delay:.12s}.fade-up.d2{transition-delay:.24s}
+    .fade-up.d3{transition-delay:.36s}.fade-up.d4{transition-delay:.48s}
+    .fade-up.d5{transition-delay:.6s}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes bounceY{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
+    @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(201,169,110,.4)}70%{box-shadow:0 0 0 10px rgba(201,169,110,0)}}
+
+    /* ── NAV ── */
+    #nav{position:fixed;top:3px;left:0;right:0;z-index:1000;height:var(--nav-h);transition:background .4s,box-shadow .4s;display:flex;align-items:center}
+    #nav.scrolled{background:rgba(255,255,255,.97);box-shadow:0 1px 0 var(--border)}
+    #nav .nav-inner{width:100%;max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between}
+    #nav .nav-logo img{height:48px;width:auto;transition:filter .4s;filter:brightness(0) invert(1)}
+    #nav.scrolled .nav-logo img{filter:brightness(0)}
+    #nav ul{display:flex;gap:1.8rem;align-items:center}
+    #nav ul li a{font-size:.76rem;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.88);transition:color .25s;position:relative;padding-bottom:2px}
+    #nav ul li a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--accent);transition:width .3s}
+    #nav ul li a:hover::after,#nav ul li a.active::after{width:100%}
+    #nav ul li a:hover,#nav ul li a.active{color:var(--accent)}
+    #nav.scrolled ul li a{color:var(--dark)}
+    #nav.scrolled ul li a:hover,#nav.scrolled ul li a.active{color:var(--accent)}
+    #nav .nav-cta{padding:9px 22px;border:1px solid rgba(255,255,255,.55);border-radius:2px;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#fff;transition:all .3s;white-space:nowrap}
+    #nav.scrolled .nav-cta{border-color:var(--dark);color:var(--dark)}
+    #nav .nav-cta:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+    #nav .hamburger{display:none;flex-direction:column;gap:5px;padding:4px}
+    #nav .hamburger span{display:block;width:24px;height:2px;background:#fff;transition:background .3s}
+    #nav.scrolled .hamburger span{background:var(--dark)}
+
+    /* ── HERO ── */
+    #hero{position:relative;height:88vh;min-height:580px;display:flex;flex-direction:column;overflow:hidden}
+    #hero .hero-bg{position:absolute;inset:0;z-index:0}
+    #hero .hero-bg img{object-position:center 40%;will-change:transform}
+    #hero .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.48) 0%,rgba(0,0,0,.22) 40%,rgba(0,0,0,.72) 100%)}
+    .hero-center{flex:1;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;padding:calc(var(--nav-h) + 20px) 2rem 24px}
+    .hero-text-wrap{width:100%;max-width:900px;text-align:center;animation:fadeUp .9s ease .2s both}
+    .hero-eyebrow{font-size:.68rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:1.1rem;display:block}
+    #hero h1{color:#fff;font-weight:300;margin-bottom:1.1rem}
+    #hero h1 em{font-style:italic;color:var(--accent)}
+    .hero-sub{font-size:clamp(.92rem,1.7vw,1.1rem);color:rgba(255,255,255,.72);font-weight:300;margin-bottom:2.4rem;line-height:1.7}
+
+    /* Booking widget */
+    .bw-wrap{margin-top:.5rem}
+    .bw-label{font-size:.6rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:10px;display:block}
+    .bw-card{background:rgba(8,14,22,.75);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.1);border-top:2px solid var(--accent);padding:22px 28px}
+    .bw-form{display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap}
+    .bw-field{display:flex;flex-direction:column;gap:5px;flex:1;min-width:110px}
+    .bw-field--sm{flex:0 0 90px;min-width:80px}
+    .bw-field label{font-size:.58rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+    .bw-field input,.bw-field select{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#fff;padding:10px 12px;font-size:.86rem;font-family:'Inter',sans-serif;border-radius:2px;outline:none;width:100%;transition:border-color .25s;-webkit-appearance:none;appearance:none;color-scheme:dark}
+    .bw-field input:focus,.bw-field select:focus{border-color:var(--accent)}
+    .bw-field select{background-color:rgba(8,14,22,.9);cursor:pointer}
+    .bw-field select option{background:#1e2b3a;color:#fff}
+    .bw-btn{padding:10px 26px;background:var(--accent);color:#fff;font-family:'Inter',sans-serif;font-size:.74rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;border-radius:2px;white-space:nowrap;transition:background .25s,transform .15s;flex-shrink:0;border:1px solid var(--accent)}
+    .bw-btn:hover{background:#b8944f;border-color:#b8944f;transform:translateY(-1px)}
+
+    /* Scroll arrow */
+    .hero-scroll-arrow{position:relative;z-index:1;display:flex;justify-content:center;padding:14px 0 18px;animation:bounceY 2s ease-in-out infinite}
+    .hero-scroll-arrow svg{color:rgba(255,255,255,.4)}
+
+    /* ── MOBILE BOOKING ── */
+    #mobile-booking{display:none;background:var(--navy);padding:24px 20px}
+    #mobile-booking .bw-card{background:rgba(8,14,22,.9);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.1);border-top:2px solid var(--accent);padding:20px}
+    #mobile-booking .bw-form{flex-direction:column;gap:10px}
+    #mobile-booking .bw-field,#mobile-booking .bw-field--sm{flex:none;width:100%}
+
+    /* ── STATS BAND ── */
+    #stats-band{display:grid;grid-template-columns:repeat(4,1fr);background:var(--navy)}
+    .sband-item{padding:28px 20px;text-align:center;border-right:1px solid rgba(255,255,255,.08)}
+    .sband-item:last-child{border-right:none}
+    .sband-num{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:#fff;line-height:1.3;font-weight:400}
+    .sband-lbl{font-size:.62rem;font-weight:600;letter-spacing:.17em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+
+    /* ── ABOUT ── */
+    #apie{display:grid;grid-template-columns:1fr 1fr;min-height:560px}
+    #apie .about-img{position:relative;min-height:460px;overflow:hidden}
+    #apie .about-img img{transition:transform 6s ease}
+    #apie .about-img:hover img{transform:scale(1.04)}
+    #apie .about-text{background:var(--light);display:flex;align-items:center;padding:80px 68px}
+    #apie .about-inner{max-width:460px}
+    #apie h2{margin-bottom:1.4rem}
+    #apie p{margin-bottom:1.3rem}
+    .divider{width:44px;height:2px;background:var(--accent);margin:1.8rem 0}
+    .btn-primary{display:inline-block;padding:13px 28px;font-size:.73rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;border-radius:2px;transition:all .28s;background:var(--accent);color:#fff;border:1px solid var(--accent)}
+    .btn-primary:hover{background:#b8944f;border-color:#b8944f;transform:translateY(-2px)}
+    .btn-outline{display:inline-block;padding:13px 28px;font-size:.73rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;border-radius:2px;transition:all .28s;background:transparent;color:var(--dark);border:1px solid var(--dark)}
+    .btn-outline:hover{background:var(--dark);color:#fff;transform:translateY(-2px)}
+
+    /* ── ROOMS ── */
+    #kambariai{padding:100px 0;background:var(--white)}
+    .rooms-header{text-align:center;max-width:700px;margin:0 auto 48px}
+    .amenity-icons{display:flex;flex-wrap:wrap;justify-content:center;gap:18px 28px;margin-top:1.1rem}
+    .amenity-icon{display:flex;align-items:center;gap:7px;font-size:.78rem;color:var(--mid);font-weight:500}
+    .amenity-icon svg{color:var(--accent);flex-shrink:0}
+    .rooms-header h2{margin-bottom:.9rem}
+    .rooms-filter-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;margin-bottom:52px}
+    .rf-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center}
+    .rf-row-label{font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);flex-shrink:0;white-space:nowrap}
+    .rf-pills{display:flex;gap:6px;flex-wrap:wrap}
+    .rf-pill{padding:9px 18px;border:1px solid var(--border);background:#fff;font-family:'Inter',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);border-radius:2px;cursor:pointer;transition:all .22s}
+    .rf-pill.active{background:var(--dark);color:#fff;border-color:var(--dark)}
+    .rf-pill:hover:not(.active){border-color:var(--accent);color:var(--accent)}
+    .rf-pill.feat-pill.active{background:var(--navy);border-color:var(--navy)}
+    .room-tag{display:inline-flex;align-items:center;gap:4px;font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 9px;border-radius:20px;margin-right:4px;margin-bottom:4px}
+    .room-tag-studio{background:rgba(201,169,110,.12);color:var(--accent);border:1px solid rgba(201,169,110,.3)}
+    .room-tag-lux{background:rgba(30,43,58,.08);color:var(--navy);border:1px solid rgba(30,43,58,.2)}
+    .room-tag-delux{background:rgba(30,43,58,.08);color:var(--navy);border:1px solid rgba(30,43,58,.2)}
+    .room-tag-premium{background:rgba(201,169,110,.18);color:#8a6830;border:1px solid rgba(201,169,110,.4)}
+    .room-tag-pusyna{background:rgba(76,141,80,.1);color:#2e7d32;border:1px solid rgba(76,141,80,.25)}
+    .room-tag-ac{background:rgba(30,43,58,.07);color:var(--navy);border:1px solid rgba(30,43,58,.18)}
+    .room-tags{margin-bottom:.9rem;display:flex;flex-wrap:wrap}
+    .rooms-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .room-card{background:#fff;border:1px solid var(--border);overflow:hidden;transition:box-shadow .3s,transform .3s}
+    .room-card:hover{box-shadow:0 8px 40px rgba(0,0,0,.1);transform:translateY(-4px)}
+    .room-card.hidden{display:none}
+
+    /* Room slider */
+    .room-slider{position:relative;height:260px;background:var(--border);overflow:hidden}
+    .room-slide{position:absolute;inset:0;opacity:0;transition:opacity .45s ease}
+    .room-slide.active{opacity:1}
+    .room-slide img{width:100%;height:100%;object-fit:cover}
+    .rsl-prev,.rsl-next{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;background:rgba(0,0,0,.52);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:3;transition:background .2s;font-size:1.1rem;line-height:1}
+    .rsl-prev{left:10px}.rsl-next{right:10px}
+    .rsl-prev:hover,.rsl-next:hover{background:var(--accent)}
+    .rsl-dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:3}
+    .dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer;transition:background .2s}
+    .dot.active{background:var(--accent)}
+
+    /* Room body */
+    .room-body{padding:22px 24px 24px}
+    .room-body h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--dark);margin-bottom:.5rem;font-weight:500}
+    .room-body .room-desc{font-size:.87rem;color:var(--mid);line-height:1.65;margin-bottom:1rem}
+    .room-features{margin-bottom:1.2rem}
+    .room-features li{font-size:.82rem;color:var(--mid);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+    .room-features li:last-child{border-bottom:none}
+    .room-features li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0}
+    .room-price{display:flex;gap:24px;margin-top:-.4rem;margin-bottom:1.2rem}
+    .room-price span{display:flex;flex-direction:column;gap:2px}
+    .room-price small{display:block;font-family:'Inter',sans-serif;font-size:.7rem;color:var(--mid);font-weight:400;font-style:normal}
+    .room-price strong{display:block;font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:400;font-style:italic;color:var(--accent)}
+    .room-btn{display:block;text-align:center;padding:11px 20px;background:var(--dark);color:#fff;font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;transition:background .25s;border-radius:2px}
+    .room-btn:hover{background:var(--accent)}
+    .rooms-cta{text-align:center;margin-top:52px}
+    .rooms-empty{display:none;text-align:center;padding:64px 24px}
+    .rooms-empty svg{color:var(--border);margin:0 auto 20px;display:block}
+    .rooms-empty h3{font-family:'Cormorant Garamond',serif;font-size:1.7rem;color:var(--dark);margin-bottom:.6rem;font-weight:400}
+    .rooms-empty p{font-size:.9rem;color:var(--mid);max-width:340px;margin:0 auto 1.4rem}
+    .rooms-empty button{background:none;border:1px solid var(--border);padding:9px 22px;font-family:'Inter',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);border-radius:2px;cursor:pointer;transition:all .22s}
+    .rooms-empty button:hover{border-color:var(--accent);color:var(--accent)}
+
+    /* ── COMPARISON TABLE ── */
+
+
+    /* ── RESTAURANT ── */
+    #restoranas{padding:100px 0;background:var(--dark)}
+    .resto-header{text-align:center;max-width:660px;margin:0 auto 52px}
+    .resto-header h2{color:#fff;margin-bottom:1rem}
+    .resto-header p{color:rgba(255,255,255,.5);font-size:.95rem;line-height:1.75;margin-bottom:1.6rem}
+    .resto-opening{display:inline-flex;align-items:center;gap:10px;background:rgba(201,169,110,.1);border:1px solid rgba(201,169,110,.3);padding:10px 22px}
+    .resto-opening-dot{width:7px;height:7px;background:var(--accent);border-radius:50%;animation:pulse 2s ease-in-out infinite;flex-shrink:0}
+    .resto-opening span{font-family:'Inter',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+    .resto-slideshow{position:relative;height:480px;margin-bottom:60px;overflow:hidden}
+    .resto-slides-wrap{position:relative;width:100%;height:100%}
+    .resto-slide{position:absolute;inset:0;opacity:0;transition:opacity .5s ease}
+    .resto-slide.active{opacity:1}
+    .resto-slide img{width:100%;height:100%;object-fit:contain;display:block}
+    .rmo-label{position:absolute;bottom:0;left:0;right:0;padding:60px 20px 18px;background:linear-gradient(transparent,rgba(0,0,0,.6));font-family:'Inter',sans-serif;font-size:.6rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.75)}
+    .resto-nav-btn{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;background:rgba(0,0,0,.45);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:3;transition:background .2s;font-size:1.5rem;line-height:1;cursor:pointer;border:none;left:14px}
+    .resto-nav-next{left:auto;right:14px}
+    .resto-nav-btn:hover{background:var(--accent)}
+    .resto-counter{position:absolute;top:16px;right:16px;z-index:3;font-size:.65rem;font-weight:600;letter-spacing:.12em;color:rgba(255,255,255,.7);background:rgba(0,0,0,.4);padding:3px 10px}
+    .resto-dots{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:3}
+    .resto-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35);cursor:pointer;transition:background .2s;border:none;padding:0}
+    .resto-dot.active{background:var(--accent)}
+    .resto-menu-cta{text-align:center;margin-bottom:52px}
+    .btn-menu-main{display:inline-flex;align-items:center;gap:10px;font-family:'Inter',sans-serif;font-size:.75rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--dark);background:var(--accent);padding:16px 40px;border:none;cursor:pointer;transition:background .25s}
+    .btn-menu-main:hover{background:#b8944f}
+    .btn-menu-main svg{flex-shrink:0}
+    .resto-bottom{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+    .rfeat-grid{display:flex;flex-direction:column;gap:20px}
+    .rfeat-item{display:flex;align-items:flex-start;gap:14px}
+    .rfeat-icon{width:38px;height:38px;flex-shrink:0;background:rgba(201,169,110,.1);border:1px solid rgba(201,169,110,.22);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--accent)}
+    .rfeat-item h4{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:#fff;margin-bottom:2px}
+    .rfeat-item p{font-size:.82rem;color:rgba(255,255,255,.4);margin:0}
+    .resto-ctas p{color:rgba(255,255,255,.5);font-size:.92rem;line-height:1.75;margin-bottom:1.6rem}
+    .resto-btn-row{display:flex;gap:12px;flex-wrap:wrap}
+    .btn-outline-light{display:inline-block;padding:13px 28px;font-family:'Inter',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.7);transition:all .25s}
+    .btn-outline-light:hover{background:#fff;color:var(--dark)}
+    /* Menu modal */
+    #menu-modal{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.97);display:none;flex-direction:column}
+    #menu-modal.open{display:flex}
+    .menu-modal-top{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;border-bottom:1px solid rgba(255,255,255,.07);flex-shrink:0}
+    .menu-modal-top span{font-family:'Inter',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+    .menu-modal-close{background:none;border:none;color:#fff;font-size:1.9rem;line-height:1;cursor:pointer;opacity:.6;transition:opacity .2s;padding:0}
+    .menu-modal-close:hover{opacity:1}
+    .menu-modal-cats{display:flex;flex-wrap:wrap;gap:6px;padding:14px 24px;border-bottom:1px solid rgba(255,255,255,.05);flex-shrink:0}
+    .menu-modal-cat{padding:7px 16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.45);font-family:'Inter',sans-serif;font-size:.63rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .2s}
+    .menu-modal-cat.active{background:var(--accent);border-color:var(--accent);color:#fff}
+    .menu-modal-body{flex:1;overflow-y:auto;display:flex;justify-content:center;align-items:flex-start;padding:28px 24px}
+    .menu-modal-body img{max-width:680px;width:100%;height:auto;display:block}
+
+    /* ── YOUTUBE ── */
+    #video{padding:80px 0;background:var(--navy)}
+    .yt-header{text-align:center;margin-bottom:44px}
+    .yt-header h2{color:#fff;margin-bottom:.7rem}
+    .yt-header p{color:rgba(255,255,255,.55)}
+    .yt-embed-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:900px;margin:0 auto;border-top:2px solid var(--accent)}
+    .yt-embed-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none}
+
+    /* ── AERIAL GALLERY ── */
+    #galerija{padding:100px 0;background:var(--light)}
+    .gal-header{text-align:center;max-width:540px;margin:0 auto 44px}
+    .gal-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:220px;gap:6px}
+    .gal-item{position:relative;overflow:hidden;cursor:pointer;background:var(--border)}
+    .gal-item.wide{grid-column:span 2}.gal-item.tall{grid-row:span 2}
+    .gal-item img{transition:transform .6s ease;width:100%;height:100%;object-fit:cover}
+    .gal-item:hover img{transform:scale(1.07)}
+    .gal-item .ov{position:absolute;inset:0;background:rgba(0,0,0,0);display:flex;align-items:center;justify-content:center;transition:background .3s}
+    .gal-item:hover .ov{background:rgba(0,0,0,.3)}
+    .gal-item .ov-icon{opacity:0;transform:scale(.7);transition:all .3s;color:#fff}
+    .gal-item:hover .ov-icon{opacity:1;transform:scale(1)}
+
+    /* ── LIGHTBOX ── */
+    #lightbox{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.95);display:none;align-items:center;justify-content:center}
+    #lightbox.open{display:flex}
+    #lightbox img{max-width:90vw;max-height:90vh;width:auto;height:auto;object-fit:contain}
+    #lightbox .lb-close{position:absolute;top:22px;right:22px;color:#fff;font-size:2rem;cursor:pointer;opacity:.65;transition:opacity .2s}
+    #lightbox .lb-close:hover{opacity:1}
+    #lightbox .lb-prev,#lightbox .lb-next{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:2.5rem;padding:14px 18px;opacity:.55;transition:opacity .2s;user-select:none}
+    #lightbox .lb-prev{left:6px}#lightbox .lb-next{right:6px}
+    #lightbox .lb-prev:hover,#lightbox .lb-next:hover{opacity:1}
+    #lightbox .lb-count{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.45);font-size:.78rem;letter-spacing:.1em}
+
+    /* ── ROOM LIGHTBOX ── */
+    #room-lb{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.96);display:none;align-items:center;justify-content:center;flex-direction:column}
+    #room-lb.open{display:flex}
+    #room-lb .rlb-img-wrap{position:relative;max-width:92vw;max-height:86vh;display:flex;align-items:center;justify-content:center}
+    #room-lb .rlb-img-wrap img{max-width:92vw;max-height:84vh;width:auto;height:auto;object-fit:contain;border-top:2px solid var(--accent)}
+    #room-lb .rlb-close{position:absolute;top:16px;right:20px;color:#fff;font-size:2rem;cursor:pointer;opacity:.65;transition:opacity .2s;z-index:10}
+    #room-lb .rlb-close:hover{opacity:1}
+    #room-lb .rlb-prev,#room-lb .rlb-next{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:2.8rem;padding:10px 18px;opacity:.55;transition:opacity .2s;user-select:none;cursor:pointer;background:rgba(0,0,0,.3);border-radius:50%}
+    #room-lb .rlb-prev{left:-60px}#room-lb .rlb-next{right:-60px}
+    #room-lb .rlb-prev:hover,#room-lb .rlb-next:hover{opacity:1;background:var(--accent)}
+    #room-lb .rlb-title{margin-top:14px;font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:rgba(255,255,255,.6);letter-spacing:.08em}
+    #room-lb .rlb-count{font-size:.72rem;color:rgba(255,255,255,.35);margin-top:4px;letter-spacing:.1em}
+    .room-slider{cursor:zoom-in}
+    @media(max-width:600px){#room-lb .rlb-prev{left:-4px}#room-lb .rlb-next{right:-4px}}
+
+    /* ── FAQ ── */
+    #instagram{padding:100px 0}
+    .insta-header{text-align:center;max-width:560px;margin:0 auto 52px}
+    .insta-header h2{margin-bottom:.8rem}
+    .insta-header p{font-size:.9rem;color:var(--mid);margin-bottom:1.4rem}
+    .insta-follow{display:inline-flex;align-items:center;gap:8px;font-family:'Inter',sans-serif;font-size:.75rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--dark);border:1px solid var(--dark);padding:10px 22px;transition:all .25s}
+    .insta-follow:hover{background:var(--dark);color:#fff}
+    .insta-feed{width:100%}
+    #duk{padding:80px 0;background:#ece6dc}
+    .duk-header{text-align:center;max-width:560px;margin:0 auto 52px}
+    .duk-header h2{margin-bottom:.8rem}
+    .duk-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:0}
+    .duk-item{border-bottom:1px solid var(--border)}
+    .duk-item:first-child{border-top:1px solid var(--border)}
+    .duk-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 4px;background:none;border:none;cursor:pointer;text-align:left;font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--dark);font-weight:500}
+    .duk-q:hover{color:var(--accent)}
+    .duk-icon{flex-shrink:0;width:20px;height:20px;position:relative;color:var(--accent)}
+    .duk-icon::before,.duk-icon::after{content:'';position:absolute;background:currentColor;border-radius:2px;transition:transform .3s,opacity .3s}
+    .duk-icon::before{width:12px;height:1.5px;top:50%;left:50%;transform:translate(-50%,-50%)}
+    .duk-icon::after{width:1.5px;height:12px;top:50%;left:50%;transform:translate(-50%,-50%)}
+    .duk-item.open .duk-icon::after{transform:translate(-50%,-50%) rotate(90deg);opacity:0}
+    .duk-a{display:none;padding:0 4px 20px;font-size:.9rem;color:var(--mid);line-height:1.75;max-width:680px}
+    .duk-a strong{color:var(--dark);font-weight:600}
+    .duk-item.open .duk-a{display:block}
+
+    /* ── CONTACT ── */
+    #kontaktai{padding:100px 0;background:var(--white)}
+    .contact-inner{display:grid;grid-template-columns:5fr 7fr;gap:80px;align-items:start}
+    #kontaktai h2{margin-bottom:1rem}
+    .contact-details{display:flex;flex-direction:column;gap:1.4rem;margin-bottom:2.2rem}
+    .crow{display:flex;align-items:flex-start;gap:13px}
+    .cicon{width:38px;height:38px;background:var(--light);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--accent)}
+    .ctext span{display:block;font-size:.68rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
+    .ctext a,.ctext p{font-size:.92rem;color:var(--dark);line-height:1.5}
+    .csocials{display:flex;gap:10px}
+    .social-btn{width:38px;height:38px;background:var(--light);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--dark);transition:all .22s}
+    .social-btn:hover{background:var(--dark);color:#fff;border-color:var(--dark)}
+    .cform{display:flex;flex-direction:column;gap:14px}
+    .fg{display:flex;flex-direction:column;gap:5px}
+    .fg label{font-size:.62rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+    .fg input,.fg select,.fg textarea{width:100%;padding:12px 14px;background:#fff;border:1px solid var(--border);font-family:'Inter',sans-serif;font-size:.88rem;color:var(--dark);border-radius:2px;outline:none;transition:border-color .25s;-webkit-appearance:none;appearance:none}
+    .fg input::placeholder,.fg textarea::placeholder{color:var(--mid)}
+    .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--accent)}
+    .fg textarea{resize:vertical;min-height:100px}
+    .frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .fsuccess{display:none;padding:13px 18px;background:#e8f5e9;border:1px solid #a5d6a7;color:#2e7d32;font-size:.86rem;border-radius:2px}
+    .fsuccess.show{display:block}
+    .submit-btn{padding:14px 36px;background:var(--accent);color:#fff;font-family:'Inter',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.17em;text-transform:uppercase;border-radius:2px;transition:background .28s,transform .15s;cursor:pointer;border:none;align-self:flex-start}
+    .submit-btn:hover{background:#b8944f;transform:translateY(-2px)}
+
+    /* ── MAP ── */
+    #vieta{padding:80px 0 0;background:var(--light)}
+    .vieta-header{text-align:center;max-width:600px;margin:0 auto 48px}
+    .vieta-header h2{margin-bottom:1rem}
+    .vieta-map-wrap{width:100%;height:480px;overflow:hidden;border-top:2px solid var(--accent)}
+    .vieta-map-wrap iframe{width:100%;height:100%;border:none;display:block}
+
+    /* ── FOOTER ── */
+    footer{background:#111;color:rgba(255,255,255,.45);padding:52px 0 32px}
+    .footer-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px}
+    .footer-brand img{height:48px;width:auto;filter:brightness(0) invert(1);opacity:.75;margin-bottom:1.1rem}
+    .footer-brand p{font-size:.83rem;line-height:1.7}
+    .fcol h4{font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:1.1rem}
+    .fcol ul{display:flex;flex-direction:column;gap:.55rem}
+    .fcol ul li a{font-size:.83rem;color:rgba(255,255,255,.42);transition:color .22s}
+    .fcol ul li a:hover{color:var(--accent)}
+    .footer-bottom{max-width:1200px;margin:36px auto 0;padding:22px 2rem 0;border-top:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:space-between;font-size:.76rem}
+
+    /* ── FLOATING CTA ── */
+    #sticky-cta{position:fixed;bottom:96px;right:28px;z-index:900;opacity:0;transform:translateY(16px);transition:opacity .4s,transform .4s;pointer-events:none}
+    #sticky-cta.show{opacity:1;transform:translateY(0);pointer-events:auto}
+    #sticky-cta a{display:block;padding:11px 22px;background:var(--accent);color:#fff;font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;border-radius:2px;box-shadow:0 4px 20px rgba(201,169,110,.4);transition:background .25s;animation:pulse 2.5s ease-in-out infinite}
+    #sticky-cta a:hover{background:#b8944f}
+
+    /* ── PHONE FLOAT ── */
+    #phone-float{position:fixed;bottom:28px;right:28px;z-index:900;width:54px;height:54px;background:var(--navy);border:2px solid var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(30,43,58,.45);transition:transform .22s,box-shadow .22s}
+    #phone-float:hover{transform:scale(1.1);box-shadow:0 6px 22px rgba(30,43,58,.65)}
+    #phone-float svg{color:var(--accent)}
+
+    /* ── MOBILE MENU ── */
+    #mobile-menu{display:none;position:fixed;inset:0;z-index:999;background:#fff;flex-direction:column;align-items:center;justify-content:center;gap:1.8rem}
+    #mobile-menu.open{display:flex}
+    #mobile-menu a{font-size:1.5rem;font-family:'Cormorant Garamond',serif;color:var(--dark)}
+    #mobile-menu a:hover{color:var(--accent)}
+    #mobile-menu .m-close{position:absolute;top:22px;right:22px;font-size:2rem;color:var(--dark)}
+    #mobile-menu .m-cta{font-size:.75rem;font-family:'Inter',sans-serif;padding:12px 34px;background:var(--accent);color:#fff;letter-spacing:.16em;text-transform:uppercase;border-radius:2px;margin-top:.5rem}
+
+    /* ── CHATBOT ── */
+    #lg-chat-widget{position:fixed;bottom:28px;right:96px;z-index:910}
+    #lg-chat-toggle{width:54px;height:54px;border-radius:50%;background:var(--navy);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 18px rgba(30,43,58,.5);transition:transform .22s,box-shadow .22s;animation:pulse 3s ease-in-out infinite}
+    #lg-chat-toggle:hover{transform:scale(1.1);box-shadow:0 6px 24px rgba(30,43,58,.65)}
+    #lg-chat-toggle svg{color:var(--accent)}
+    #lg-chat-box{position:absolute;bottom:66px;right:0;width:340px;background:#fff;border-radius:4px;box-shadow:0 8px 48px rgba(0,0,0,.2);display:flex;flex-direction:column;overflow:hidden;transform:scale(.9) translateY(12px);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;transform-origin:bottom right;max-height:520px}
+    #lg-chat-box.open{transform:scale(1) translateY(0);opacity:1;pointer-events:auto}
+    .lgc-header{background:var(--navy);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+    .lgc-header-left{display:flex;align-items:center;gap:10px}
+    .lgc-avatar{width:36px;height:36px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1rem;color:#fff;font-weight:600;flex-shrink:0}
+    .lgc-name{font-size:.82rem;font-weight:600;color:#fff;letter-spacing:.03em}
+    .lgc-status{font-size:.67rem;color:rgba(255,255,255,.5);margin-top:1px;display:flex;align-items:center;gap:5px}
+    .lgc-status::before{content:'';width:6px;height:6px;border-radius:50%;background:#4caf50;flex-shrink:0}
+    .lgc-close{background:none;border:none;color:rgba(255,255,255,.5);font-size:1.5rem;cursor:pointer;padding:0;line-height:1;transition:color .2s}
+    .lgc-close:hover{color:#fff}
+    #lg-chat-msgs{flex:1;height:300px;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:9px;background:#f8f5f0}
+    #lg-chat-msgs::-webkit-scrollbar{width:4px}
+    #lg-chat-msgs::-webkit-scrollbar-thumb{background:#e0dbd3;border-radius:2px}
+    .lgc-msg{max-width:84%;padding:9px 13px;font-size:.83rem;line-height:1.6;border-radius:3px}
+    .lgc-msg.bot{background:#fff;color:#1a1a1a;align-self:flex-start;box-shadow:0 1px 4px rgba(0,0,0,.07);border:1px solid #e0dbd3}
+    .lgc-msg.user{background:var(--navy);color:#fff;align-self:flex-end}
+    .lgc-msg.typing{background:#fff;color:#6b6b6b;font-style:italic;border:1px solid #e0dbd3;align-self:flex-start}
+    .lgc-input-row{display:flex;border-top:1px solid #e0dbd3;background:#fff;flex-shrink:0}
+    #lg-chat-input{flex:1;border:none;outline:none;padding:12px 14px;font-family:'Inter',sans-serif;font-size:.85rem;color:#1a1a1a;background:transparent}
+    #lg-chat-input::placeholder{color:#6b6b6b}
+    #lg-chat-send{padding:10px 16px;background:var(--accent);border:none;cursor:pointer;color:#fff;transition:background .2s;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+    #lg-chat-send:hover{background:#b8944f}
+    #lg-chat-send:disabled{background:#ccc;cursor:not-allowed}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:1024px){
+      .rooms-grid{grid-template-columns:repeat(2,1fr)}
+      .resto-bottom{grid-template-columns:1fr}
+      .menu-modal-body{padding:16px}
+      .menu-modal-cats{padding:12px 16px}
+      .contact-inner{grid-template-columns:1fr}
+      .footer-inner{grid-template-columns:1fr 1fr;gap:32px}
+      #stats-band{grid-template-columns:repeat(2,1fr)}
+      .gal-grid{grid-template-columns:repeat(3,1fr)}
+    }
+    @media(max-width:768px){
+      :root{--nav-h:62px}
+      #nav ul,#nav .nav-cta{display:none}
+      #nav .hamburger{display:flex}
+      .rooms-grid{grid-template-columns:1fr}
+      .resto-slideshow{height:280px}
+      .gal-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:180px}
+      .gal-item.wide{grid-column:span 1}.gal-item.tall{grid-row:span 1}
+      .frow{grid-template-columns:1fr}
+      .footer-inner{grid-template-columns:1fr}
+      .footer-bottom{flex-direction:column;gap:7px;text-align:center}
+      .bw-form{flex-direction:column;align-items:stretch}
+      .bw-field,.bw-field--sm{flex:none;width:100%}
+      #hero .bw-wrap{display:none}
+      #mobile-booking{display:block}
+      .vieta-map-wrap{height:320px}
+      .rf-pills{width:100%}
+      .rf-pill{flex:1;text-align:center}
+      #lg-chat-widget{right:8px;bottom:130px}
+      #lg-chat-box{width:calc(100vw - 16px);right:-8px}
+    }
+    @media(max-width:480px){
+      .gal-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- ═══ NAV ═══ -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo"><img src="images/Laguna logo/laguna logo white.png" alt="Lagūna" id="nav-logo-img" /></a>
+    <ul>
+      <li><a href="#apie">Apie mus</a></li>
+      <li><a href="#kambariai">Apartamentai</a></li>
+      <li><a href="#restoranas">Restoranas</a></li>
+      <li><a href="#galerija">Galerija</a></li>
+      <li><a href="#duk">DUK</a></li>
+      <li><a href="#kontaktai">Kontaktai</a></li>
+    </ul>
+    <a href="https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt" target="_blank" rel="noopener" class="nav-cta">Rezervuoti</a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div id="mobile-menu">
+  <button class="m-close" id="m-close">&times;</button>
+  <a href="#apie" class="ml">Apie mus</a>
+  <a href="#kambariai" class="ml">Apartamentai</a>
+  <a href="#restoranas" class="ml">Restoranas</a>
+  <a href="#galerija" class="ml">Galerija</a>
+  <a href="#kontaktai" class="ml">Kontaktai</a>
+  <a href="https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt" target="_blank" rel="noopener" class="m-cta ml">Rezervuoti</a>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="hero-bg"><img src="images/Skrydis/DJI_0441.jpg" alt="Lagūna Šventoji" id="hero-img" /></div>
+  <div class="hero-center">
+    <div class="hero-text-wrap">
+      <h1>Tarp jūros, uosto<br /><em>ir pušyno</em></h1>
+      <p class="hero-sub">Modernūs apartamentai ir restoranas Šventojoje.<br />Vos 50 metrų nuo Baltijos jūros kopų.</p>
+      <div class="bw-wrap">
+        <span class="bw-label">Pasirinkite datas ir apartamento tipą</span>
+        <div class="bw-card">
+          <div class="bw-form">
+            <div class="bw-field"><label for="bw-from">Atvykimas</label><input type="date" id="bw-from" /></div>
+            <div class="bw-field"><label for="bw-to">Išvykimas</label><input type="date" id="bw-to" /></div>
+            <div class="bw-field">
+              <label for="bw-adults">Suaugę</label>
+              <select id="bw-adults">
+                <option value="1">1</option>
+                <option value="2" selected>2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+              </select>
+            </div>
+            <div class="bw-field">
+              <label for="bw-children">Vaikai</label>
+              <select id="bw-children">
+                <option value="0" selected>0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+            <button class="bw-btn" onclick="goToBooking()">Tikrinti</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll-arrow">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+  </div>
+</section>
+
+<!-- ═══ MOBILE BOOKING ═══ -->
+<div id="mobile-booking">
+  <span class="bw-label">Pasirinkite datas ir rezervuokite</span>
+  <div class="bw-card">
+    <div class="bw-form">
+      <div class="bw-field"><label for="mbw-from">Atvykimas</label><input type="date" id="mbw-from" /></div>
+      <div class="bw-field"><label for="mbw-to">Išvykimas</label><input type="date" id="mbw-to" /></div>
+      <div class="bw-field">
+        <label for="mbw-adults">Suaugę</label>
+        <select id="mbw-adults">
+          <option value="1">1</option>
+          <option value="2" selected>2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+        </select>
+      </div>
+      <div class="bw-field">
+        <label for="mbw-children">Vaikai</label>
+        <select id="mbw-children">
+          <option value="0" selected>0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+      <button class="bw-btn" onclick="goToBookingMobile()">Tikrinti</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ STATS BAND ═══ -->
+<div id="stats-band">
+  <div class="sband-item"><div class="sband-num">50 m iki kopų</div></div>
+  <div class="sband-item"><div class="sband-num">apartamentai iki 43 kv. m.</div></div>
+  <div class="sband-item"><div class="sband-num">vaikų žaidimo aikštelė</div></div>
+  <div class="sband-item"><div class="sband-num">restoranas</div></div>
+</div>
+
+<!-- ═══ APIE ═══ -->
+<section id="apie">
+  <div class="about-img fade-up"><img src="images/Skrydis/DJI_0445.jpg" alt="Lagūna — kompleksas Šventojoje" /></div>
+  <div class="about-text">
+    <div class="about-inner">
+      <span class="section-label">Apie mus</span>
+      <h2 class="fade-up">Jūros, uosto ir pušyno apsuptas poilsis</h2>
+      <div class="divider"></div>
+      <p class="fade-up d1"><strong>Lagūna</strong> — tai modernus apartamentų kompleksas Šventojoje, esantis vos 50 metrų nuo Baltijos jūros kopų. Čia rasite viską, ko reikia tobuloms atostogoms: erdvius apartamentus su visais patogumais, autentišką restoraną ir unikalią pakrantės atmosferą.</p>
+      <p class="fade-up d2">Vienuolika skirtingų apartamentų tipų — nuo jaukių dviviečių iki erdvių šešiaviečių — leidžia pasirinkti geriausiai poreikius atitinkantį variantą. Visi apartamentai įrengti su virtuvėle, todėl tinka tiek trumpalaikiam savaitgaliui, tiek ilgesniam poilsiui.</p>
+      <a href="https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt" target="_blank" rel="noopener" class="btn-primary fade-up d3" style="margin-top:1.2rem;display:inline-block">Rezervuoti</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ APARTAMENTAI ═══ -->
+<section id="kambariai">
+  <div class="container">
+    <div class="rooms-header">
+      <span class="section-label">Apartamentai</span>
+      <h2 class="fade-up">Raskite savo apartamentą</h2>
+      <div class="amenity-icons fade-up d1">
+        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path d="M3 9V6a1 1 0 011-1h4v4H3z"/><path d="M3 9h7v11H4a1 1 0 01-1-1V9z"/><path d="M10 5h4a1 1 0 011 1v14H10V5z"/><path d="M15 8h2a2 2 0 012 2v9a1 1 0 01-1 1h-3V8z"/></svg>Balkonas / Terasa</span>
+        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Televizorius 32"</span>
+        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path d="M5 12.55a11 11 0 0114 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01"/></svg>Bevielis internetas</span>
+        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path d="M4 12h1m14 0h1M12 4v1m0 14v1M6.3 6.3l.7.7m10 10l.7.7M6.3 17.7l.7-.7m10-10l.7-.7"/><circle cx="12" cy="12" r="4"/><path d="M5 12a7 7 0 016-6.93"/></svg>Privatus vonios kambarys</span>
+        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/><circle cx="8.5" cy="14" r="1.5"/><circle cx="15.5" cy="14" r="1.5"/></svg>Elektrinė viryklė</span>
+        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M5 10h14"/><path d="M9 6h2"/><circle cx="16" cy="16" r="1.5"/></svg>Šaldytuvas su šaldymo kamera</span>
+        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/><circle cx="8" cy="15" r="1"/><circle cx="12" cy="15" r="1"/></svg>Mikrobangų krosnelė</span>
+        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path d="M8 3v2m4-2v2m4-2v2"/><path d="M3 8h18v2a9 9 0 01-18 0V8z"/><path d="M8 19h8"/></svg>Valgymo reikmenys</span>
+        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path d="M6 7c0-1.1.9-2 2-2h8a2 2 0 012 2v1H6V7z"/><path d="M4 8h16v2a8 8 0 01-16 0V8z"/><path d="M8 18h8"/><path d="M12 14v4"/></svg>Puodai ir keptuvė</span>
+        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path d="M3 9h18v10a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path d="M3 9V7a2 2 0 012-2h14a2 2 0 012 2v2"/><path d="M12 12v5"/></svg>Rankšluosčiai ir patalynė</span>
+        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path d="M9 3c-1.5 0-5 1-5 5 0 3 2 4 3 5l1 8h6l1-8c1-1 3-2 3-5 0-4-3.5-5-5-5"/><path d="M9 3h6"/><path d="M12 3v4"/></svg>Plaukų džiovintuvas</span>
+      </div>
+    </div>
+    <div class="rooms-filter-wrap fade-up d2">
+      <div class="rf-row">
+        <span class="rf-row-label">Apartamentai:</span>
+        <div class="rf-pills" id="cap-pills">
+          <button class="rf-pill active" onclick="filterCap('all',this)">Visi</button>
+          <button class="rf-pill" onclick="filterCap('2',this)">Dviviečiai</button>
+          <button class="rf-pill" onclick="filterCap('3',this)">Triviečiai</button>
+          <button class="rf-pill" onclick="filterCap('4',this)">Keturviečiai</button>
+          <button class="rf-pill" onclick="filterCap('6',this)">Šešiaviečiai</button>
+        </div>
+      </div>
+      <div class="rf-row">
+        <span class="rf-row-label">Filtrai:</span>
+        <div class="rf-pills" id="feat-pills">
+          <button class="rf-pill feat-pill active" onclick="filterFeat('all',this)">Visi</button>
+          <button class="rf-pill feat-pill" onclick="filterFeat('studio',this)">Studio</button>
+          <button class="rf-pill feat-pill" onclick="filterFeat('lux',this)">Vienas miegamasis</button>
+          <button class="rf-pill feat-pill" onclick="filterFeat('delux',this)">Du miegamieji</button>
+          <button class="rf-pill feat-pill" onclick="filterFeat('ac',this)">Kondicionierius &amp; palydovinė TV</button>
+          <button class="rf-pill feat-pill" onclick="filterFeat('pusyna',this)">Su vaizdu į pušyną</button>
+        </div>
+      </div>
+    </div>
+    <div class="rooms-grid" id="rooms-grid">
+
+      <!-- Dvivietis Mini (2p) -->
+      <div class="room-card fade-up" data-capacity="2" data-feat="studio">
+        <div class="room-slider">
+          <div class="room-slide active"><img src="images/1. Dvivietis Mini/0Z7A6336.jpg" alt="Dvivietis Mini" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/1. Dvivietis Mini/0Z7A6345.jpg" alt="Dvivietis Mini" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/1. Dvivietis Mini/0Z7A6338.jpg" alt="Dvivietis Mini" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/1. Dvivietis Mini/0Z7A6356-Edit.jpg" alt="Dvivietis Mini" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/1. Dvivietis Mini/0Z7A6365.jpg" alt="Dvivietis Mini" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/1. Dvivietis Mini/0Z7A6361-Edit.jpg" alt="Dvivietis Mini" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/1. Dvivietis Mini/0Z7A6363-Edit.jpg" alt="Dvivietis Mini" loading="lazy" /></div>
+          <button class="rsl-prev">&#8249;</button>
+          <button class="rsl-next">&#8250;</button>
+          <div class="rsl-dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        </div>
+        <div class="room-body">
+          <h3>Dvivietis Mini</h3>
+          <ul class="room-features">
+            <li>Viena bendra erdvė</li>
+            <li>Dvi viengulės lovos</li>
+          </ul>
+          <div class="room-price">
+            <span><small>ne sezono metu</small><strong>nuo 65 Eur/nakvynė</strong></span>
+            <span><small>sezono metu</small><strong>nuo 90 Eur/nakvynė</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dvivietis Studio (2p) -->
+      <div class="room-card fade-up d1" data-capacity="2" data-feat="studio">
+        <div class="room-slider">
+          <div class="room-slide active"><img src="images/2. Dvivietis studio/0Z7A6263.jpg" alt="Dvivietis Studio" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/2. Dvivietis studio/0Z7A6278.jpg" alt="Dvivietis Studio" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/2. Dvivietis studio/0Z7A6268.jpg" alt="Dvivietis Studio" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/2. Dvivietis studio/0Z7A6282-Edit.jpg" alt="Dvivietis Studio" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/2. Dvivietis studio/0Z7A6291-Edit.jpg" alt="Dvivietis Studio" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/2. Dvivietis studio/0Z7A6298-Edit.jpg" alt="Dvivietis Studio" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/2. Dvivietis studio/0Z7A6315.jpg" alt="Dvivietis Studio" loading="lazy" /></div>
+          <button class="rsl-prev">&#8249;</button>
+          <button class="rsl-next">&#8250;</button>
+          <div class="rsl-dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        </div>
+        <div class="room-body">
+          <h3>Dvivietis Studio</h3>
+          <ul class="room-features">
+            <li>Viena bendra erdvė</li>
+            <li>Dvigulė lova</li>
+          </ul>
+          <div class="room-price">
+            <span><small>ne sezono metu</small><strong>nuo 70 Eur/nakvynė</strong></span>
+            <span><small>sezono metu</small><strong>nuo 100 Eur/nakvynė</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trivietis Studio (3p) -->
+      <div class="room-card fade-up d2" data-capacity="3" data-feat="studio">
+        <div class="room-slider">
+          <div class="room-slide active"><img src="images/3. Trivietis studio/0Z7A6877-Edit.jpg" alt="Trivietis Studio" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/3. Trivietis studio/0Z7A6878.jpg" alt="Trivietis Studio" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/3. Trivietis studio/0Z7A6919.jpg" alt="Trivietis Studio" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/3. Trivietis studio/0Z7A6939-Edit.jpg" alt="Trivietis Studio" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/3. Trivietis studio/0Z7A6909.jpg" alt="Trivietis Studio" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/3. Trivietis studio/0Z7A6904-Edit.jpg" alt="Trivietis Studio" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/3. Trivietis studio/0Z7A6912.jpg" alt="Trivietis Studio" loading="lazy" /></div>
+          <button class="rsl-prev">&#8249;</button>
+          <button class="rsl-next">&#8250;</button>
+          <div class="rsl-dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        </div>
+        <div class="room-body">
+          <h3>Trivietis Studio</h3>
+          <ul class="room-features">
+            <li>Viena bendra erdvė</li>
+            <li>Dvigulė ir viengulė lova</li>
+          </ul>
+          <div class="room-price">
+            <span><small>ne sezono metu</small><strong>nuo 70 Eur/nakvynė</strong></span>
+            <span><small>sezono metu</small><strong>nuo 100 Eur/nakvynė</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Keturvietis Studio (4p) -->
+      <div class="room-card fade-up" data-capacity="4" data-feat="studio">
+        <div class="room-slider">
+          <div class="room-slide active"><img src="images/4. Keturvietis studio/0Z7A6872-Edit.jpg" alt="Keturvietis Studio" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/4. Keturvietis studio/0Z7A6878.jpg" alt="Keturvietis Studio" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/4. Keturvietis studio/0Z7A6919.jpg" alt="Keturvietis Studio" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/4. Keturvietis studio/0Z7A6884-Edit.jpg" alt="Keturvietis Studio" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/4. Keturvietis studio/0Z7A6909.jpg" alt="Keturvietis Studio" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/4. Keturvietis studio/0Z7A6904-Edit.jpg" alt="Keturvietis Studio" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/4. Keturvietis studio/0Z7A6912.jpg" alt="Keturvietis Studio" loading="lazy" /></div>
+          <button class="rsl-prev">&#8249;</button>
+          <button class="rsl-next">&#8250;</button>
+          <div class="rsl-dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        </div>
+        <div class="room-body">
+          <h3>Keturvietis Studio</h3>
+          <ul class="room-features">
+            <li>Viena bendra erdvė</li>
+            <li>Dvi dvigulės lovos</li>
+          </ul>
+          <div class="room-price">
+            <span><small>ne sezono metu</small><strong>nuo 75 Eur/nakvynė</strong></span>
+            <span><small>sezono metu</small><strong>nuo 105 Eur/nakvynė</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Keturvietis LUX (4p) -->
+      <div class="room-card fade-up d1" data-capacity="4" data-feat="lux">
+        <div class="room-slider">
+          <div class="room-slide active"><img src="images/5. Ketuvietis LUX/0Z7A6491.jpg" alt="Keturvietis LUX" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/5. Ketuvietis LUX/0Z7A6494-Edit.jpg" alt="Keturvietis LUX" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/5. Ketuvietis LUX/0Z7A6495-Edit-Edit.jpg" alt="Keturvietis LUX" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/5. Ketuvietis LUX/0Z7A6497-Edit.jpg" alt="Keturvietis LUX" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/5. Ketuvietis LUX/0Z7A6485.jpg" alt="Keturvietis LUX" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/5. Ketuvietis LUX/0Z7A6486.jpg" alt="Keturvietis LUX" loading="lazy" /></div>
+          <button class="rsl-prev">&#8249;</button>
+          <button class="rsl-next">&#8250;</button>
+          <div class="rsl-dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        </div>
+        <div class="room-body">
+          <h3>Keturvietis LUX</h3>
+          <ul class="room-features">
+            <li>Vienas uždaras miegamasis</li>
+            <li>Dvigulė lova ir dvi viengulės lovos</li>
+          </ul>
+          <div class="room-price">
+            <span><small>ne sezono metu</small><strong>nuo 80 Eur/nakvynė</strong></span>
+            <span><small>sezono metu</small><strong>nuo 115 Eur/nakvynė</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Keturvietis Delux (4p) -->
+      <div class="room-card fade-up d2" data-capacity="4" data-feat="delux">
+        <div class="room-slider">
+          <div class="room-slide active"><img src="images/6. Keturvietis Delux/0Z7A6418.jpg" alt="Keturvietis Delux" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/6. Keturvietis Delux/0Z7A6423-Edit.jpg" alt="Keturvietis Delux" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/6. Keturvietis Delux/0Z7A6425.jpg" alt="Keturvietis Delux" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/6. Keturvietis Delux/0Z7A6396-Edit.jpg" alt="Keturvietis Delux" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/6. Keturvietis Delux/0Z7A6400.jpg" alt="Keturvietis Delux" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/6. Keturvietis Delux/0Z7A6404-Edit.jpg" alt="Keturvietis Delux" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/6. Keturvietis Delux/0Z7A6429.jpg" alt="Keturvietis Delux" loading="lazy" /></div>
+          <button class="rsl-prev">&#8249;</button>
+          <button class="rsl-next">&#8250;</button>
+          <div class="rsl-dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        </div>
+        <div class="room-body">
+          <h3>Keturvietis Delux</h3>
+          <ul class="room-features">
+            <li>Du uždari miegamieji</li>
+            <li>Dvigulė lova ir dvi viengulės lovos</li>
+          </ul>
+          <div class="room-price">
+            <span><small>ne sezono metu</small><strong>nuo 85 Eur/nakvynė</strong></span>
+            <span><small>sezono metu</small><strong>nuo 120 Eur/nakvynė</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Šešiavietis (6p) -->
+      <div class="room-card fade-up" data-capacity="6" data-feat="sesiavietis">
+        <div class="room-slider">
+          <div class="room-slide active"><img src="images/7. Sesiavietis/0Z7A6981-Edit.jpg" alt="Šešiavietis" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/7. Sesiavietis/0Z7A6960-Edit.jpg" alt="Šešiavietis" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/7. Sesiavietis/0Z7A6966-Edit.jpg" alt="Šešiavietis" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/7. Sesiavietis/0Z7A6954.jpg" alt="Šešiavietis" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/7. Sesiavietis/0Z7A7002.jpg" alt="Šešiavietis" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/7. Sesiavietis/0Z7A6904-Edit.jpg" alt="Šešiavietis" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/7. Sesiavietis/0Z7A6905.jpg" alt="Šešiavietis" loading="lazy" /></div>
+          <button class="rsl-prev">&#8249;</button>
+          <button class="rsl-next">&#8250;</button>
+          <div class="rsl-dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        </div>
+        <div class="room-body">
+          <h3>Šešiavietis</h3>
+          <ul class="room-features">
+            <li>Vienas uždaras miegamasis</li>
+            <li>Dvigulė lova ir dvi viengulės lovos</li>
+            <li>Sofa-lova</li>
+          </ul>
+          <div class="room-price">
+            <span><small>ne sezono metu</small><strong>nuo 110 Eur/nakvynė</strong></span>
+            <span><small>sezono metu</small><strong>nuo 135 Eur/nakvynė</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trivietis Premium (3p) -->
+      <div class="room-card fade-up d1" data-capacity="3" data-feat="lux premium pusyna ac">
+        <div class="room-slider">
+          <div class="room-slide active"><img src="images/8. Trivietis Premium/0Z7A6438-Edit.jpg" alt="Trivietis Premium" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/8. Trivietis Premium/0Z7A6420.jpg" alt="Trivietis Premium" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/8. Trivietis Premium/0Z7A6428.jpg" alt="Trivietis Premium" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/8. Trivietis Premium/0Z7A6400-Edit.jpg" alt="Trivietis Premium" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/8. Trivietis Premium/0Z7A6405-Edit.jpg" alt="Trivietis Premium" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/8. Trivietis Premium/0Z7A6443.jpg" alt="Trivietis Premium" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/8. Trivietis Premium/0Z7A6449.jpg" alt="Trivietis Premium" loading="lazy" /></div>
+          <button class="rsl-prev">&#8249;</button>
+          <button class="rsl-next">&#8250;</button>
+          <div class="rsl-dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        </div>
+        <div class="room-body">
+          <h3>Trivietis Premium</h3>
+          <ul class="room-features">
+            <li>Uždaras miegamasis</li>
+            <li>Dvigulė ir viengulė lova</li>
+            <li>Oro kondicionierius</li>
+            <li>Palydovinė TV</li>
+            <li>Su vaizdu į pušyną</li>
+          </ul>
+          <div class="room-price">
+            <span><small>ne sezono metu</small><strong>nuo 75 Eur/nakvynė</strong></span>
+            <span><small>sezono metu</small><strong>nuo 110 Eur/nakvynė</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Keturvietis Lux Premium (5p) -->
+      <div class="room-card fade-up d2" data-capacity="4" data-feat="lux premium pusyna ac">
+        <div class="room-slider">
+          <div class="room-slide active"><img src="images/9. Keturvietis Lux Premium/0Z7A6522-Edit.jpg" alt="Keturvietis Lux Premium" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/9. Keturvietis Lux Premium/0Z7A6513-Edit-Edit.jpg" alt="Keturvietis Lux Premium" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/9. Keturvietis Lux Premium/0Z7A6510.jpg" alt="Keturvietis Lux Premium" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/9. Keturvietis Lux Premium/0Z7A6496.jpg" alt="Keturvietis Lux Premium" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/9. Keturvietis Lux Premium/0Z7A6502-Edit.jpg" alt="Keturvietis Lux Premium" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/9. Keturvietis Lux Premium/0Z7A6528.jpg" alt="Keturvietis Lux Premium" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/9. Keturvietis Lux Premium/0Z7A6539.jpg" alt="Keturvietis Lux Premium" loading="lazy" /></div>
+          <button class="rsl-prev">&#8249;</button>
+          <button class="rsl-next">&#8250;</button>
+          <div class="rsl-dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        </div>
+        <div class="room-body">
+          <h3>Keturvietis Lux Premium</h3>
+          <ul class="room-features">
+            <li>Vienas uždaras miegamasis</li>
+            <li>Dvigulė lova ir dvi viengulės lovos</li>
+            <li>Oro kondicionierius</li>
+            <li>Palydovinė TV</li>
+            <li>Su vaizdu į pušyną (už papildomą mokestį)</li>
+          </ul>
+          <div class="room-price">
+            <span><small>ne sezono metu</small><strong>nuo 85 Eur/nakvynė</strong></span>
+            <span><small>sezono metu</small><strong>nuo 125 Eur/nakvynė</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Keturvietis Delux Premium (5p) -->
+      <div class="room-card fade-up" data-capacity="4" data-feat="delux premium pusyna ac">
+        <div class="room-slider">
+          <div class="room-slide active"><img src="images/10. Keturvietis Delux Premium/0Z7A6658.jpg" alt="Keturvietis Delux Premium" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/10. Keturvietis Delux Premium/0Z7A6649-Edit-Edit.jpg" alt="Keturvietis Delux Premium" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/10. Keturvietis Delux Premium/0Z7A6673-Edit.jpg" alt="Keturvietis Delux Premium" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/10. Keturvietis Delux Premium/0Z7A6641-Edit.jpg" alt="Keturvietis Delux Premium" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/10. Keturvietis Delux Premium/0Z7A6705.jpg" alt="Keturvietis Delux Premium" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/10. Keturvietis Delux Premium/0Z7A6667.jpg" alt="Keturvietis Delux Premium" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/10. Keturvietis Delux Premium/0Z7A6708.jpg" alt="Keturvietis Delux Premium" loading="lazy" /></div>
+          <button class="rsl-prev">&#8249;</button>
+          <button class="rsl-next">&#8250;</button>
+          <div class="rsl-dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        </div>
+        <div class="room-body">
+          <h3>Keturvietis Delux Premium</h3>
+          <ul class="room-features">
+            <li>Du uždari miegamieji</li>
+            <li>Dvigulė lova ir dvi viengulės lovos</li>
+            <li>Oro kondicionierius</li>
+            <li>Palydovinė TV</li>
+            <li>Su vaizdu į pušyną (už papildomą mokestį)</li>
+          </ul>
+          <div class="room-price">
+            <span><small>ne sezono metu</small><strong>nuo 90 Eur/nakvynė</strong></span>
+            <span><small>sezono metu</small><strong>nuo 130 Eur/nakvynė</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Keturvietis Delux Premium 2×2 (5p) -->
+      <div class="room-card fade-up d1" data-capacity="4" data-feat="delux premium ac">
+        <div class="room-slider">
+          <div class="room-slide active"><img src="images/11. Keturvietis Delux Premium 2x2/0Z7A6572-Edit.jpg" alt="Keturvietis Delux Premium 2x2" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/11. Keturvietis Delux Premium 2x2/0Z7A6580-Edit.jpg" alt="Keturvietis Delux Premium 2x2" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/11. Keturvietis Delux Premium 2x2/0Z7A6587-Edit.jpg" alt="Keturvietis Delux Premium 2x2" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/11. Keturvietis Delux Premium 2x2/0Z7A6559.jpg" alt="Keturvietis Delux Premium 2x2" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/11. Keturvietis Delux Premium 2x2/0Z7A6564-Edit.jpg" alt="Keturvietis Delux Premium 2x2" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/11. Keturvietis Delux Premium 2x2/0Z7A6594.jpg" alt="Keturvietis Delux Premium 2x2" loading="lazy" /></div>
+          <div class="room-slide"><img src="images/11. Keturvietis Delux Premium 2x2/0Z7A6600.jpg" alt="Keturvietis Delux Premium 2x2" loading="lazy" /></div>
+          <button class="rsl-prev">&#8249;</button>
+          <button class="rsl-next">&#8250;</button>
+          <div class="rsl-dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        </div>
+        <div class="room-body">
+          <h3>Keturvietis Delux Premium 2×2</h3>
+          <ul class="room-features">
+            <li>Du uždari miegamieji</li>
+            <li>Dvi dvigulės lovos</li>
+            <li>Oro kondicionierius</li>
+            <li>Palydovinė TV</li>
+          </ul>
+          <div class="room-price">
+            <span><small>ne sezono metu</small><strong>nuo 90 Eur/nakvynė</strong></span>
+            <span><small>sezono metu</small><strong>nuo 145 Eur/nakvynė</strong></span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /rooms-grid -->
+    <div class="rooms-empty" id="rooms-empty">
+      <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      <h3>Apartamentų nerasta</h3>
+      <p>Pasirinktų filtrų deriniui šiuo metu nėra tinkamų apartamentų.</p>
+      <button onclick="resetFilters()">Rodyti visus apartamentus</button>
+    </div>
+    <div class="rooms-cta fade-up">
+      <a href="https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt" target="_blank" rel="noopener" class="btn-primary">Užimtumas, kainos ir rezervacija</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ RESTORANAS ═══ -->
+<section id="restoranas" class="section section--dark">
+  <div class="container">
+
+    <div class="resto-header fade-up">
+      <span class="section-label">Restoranas</span>
+      <h2>Skonis jūros<br><em>pakrantėje</em></h2>
+      <p>Lagūnos restoranas — tai vieta, kur geras maistas susitinka su jūros atmosfera. Itališka pica, žuvies ir mėsos patiekalai, vegetariški variantai ir vaikų meniu. Vasarą — atvira terasa po dangumi.</p>
+      <div class="resto-opening">
+        <span class="resto-opening-dot"></span>
+        <span>Restoranas atsidaro 2026 m. birželio 12 d.</span>
+      </div>
+    </div>
+
+    <div class="resto-slideshow fade-up">
+      <div class="resto-slides-wrap" id="resto-slides-wrap">
+        <div class="resto-slide active"><img src="images/Resto/0Z7A6757.jpg" alt="Salė"><div class="rmo-label">Salė</div></div>
+        <div class="resto-slide"><img src="images/Resto/0Z7A6758.jpg" alt="Salė"></div>
+        <div class="resto-slide"><img src="images/Resto/0Z7A6754.jpg" alt="Salė"></div>
+        <div class="resto-slide"><img src="images/Resto/0Z7A6753.jpg" alt="Salė"></div>
+        <div class="resto-slide"><img src="images/Resto/0Z7A6765.jpg" alt="Salė"></div>
+        <div class="resto-slide"><img src="images/Resto/0Z7A6780.jpg" alt="Salė"></div>
+        <div class="resto-slide"><img src="images/Resto Tarasa/IevaJazbutephotostories(177).JPG" alt="Terasa"><div class="rmo-label">Terasa</div></div>
+        <div class="resto-slide"><img src="images/Resto Tarasa/IevaJazbutephotostories(187).JPG" alt="Terasa"></div>
+        <div class="resto-slide"><img src="images/Resto Tarasa/IevaJazbutephotostories(189).JPG" alt="Terasa"></div>
+        <div class="resto-slide"><img src="images/Resto Tarasa/A232.JPG" alt="Terasa"></div>
+        <div class="resto-slide"><img src="images/Resto Tarasa/0Z7A6741.jpg" alt="Terasa"></div>
+        <div class="resto-slide"><img src="images/Resto Tarasa/0Z7A6734.jpg" alt="Terasa"></div>
+      </div>
+      <button class="resto-nav-btn" id="resto-prev">&#8249;</button>
+      <button class="resto-nav-btn resto-nav-next" id="resto-next">&#8250;</button>
+      <div class="resto-counter" id="resto-counter">1 / 12</div>
+      <div class="resto-dots" id="resto-dots"></div>
+    </div>
+
+    <div class="resto-menu-cta fade-up">
+      <button onclick="openMenuModal()" class="btn-menu-main">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+        Peržiūrėti meniu
+      </button>
+    </div>
+
+    <div class="resto-bottom fade-up">
+      <div class="rfeat-grid">
+        <div class="rfeat-item">
+          <div class="rfeat-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/></svg></div>
+          <div><h4>Įvairus meniu</h4><p>Pizza, žuvis, mėsa, vegetariška, vaikų meniu</p></div>
+        </div>
+        <div class="rfeat-item">
+          <div class="rfeat-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg></div>
+          <div><h4>Atvira terasa</h4><p>Vasarą mėgaukitės maistu po atviru dangumi</p></div>
+        </div>
+        <div class="rfeat-item">
+          <div class="rfeat-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>
+          <div><h4>Rezervacija</h4><p>Iš anksto rezervuokite stalą telefonu</p></div>
+        </div>
+        <div class="rfeat-item">
+          <div class="rfeat-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m8.66-10h-1M4.34 12h-1m15.07-6.07l-.71.71M6.34 17.66l-.71.71m12.73 0l-.71-.71M6.34 6.34l-.71-.71"/></svg></div>
+          <div><h4>Pusryčiai</h4><p>Kiekvieną rytą nuo 8:00 — šviežia kava ir maistas</p></div>
+        </div>
+        <div class="rfeat-item">
+          <div class="rfeat-icon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0A1.99 1.99 0 013 15.546M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-4"/></svg></div>
+          <div><h4>Šventės ir renginiai</h4><p>Nuomojame restoraną nuo kelių valandų iki viso savaitgalio</p></div>
+        </div>
+      </div>
+      <div class="resto-ctas">
+        <p>Norėdami rezervuoti stalą, sužinoti darbo laiką ar pasiteirauti dėl meniu — susisiekite su mumis tiesiogiai.</p>
+        <div class="resto-ctas-event">
+          <p style="margin-top:1.4rem;padding-top:1.4rem;border-top:1px solid rgba(255,255,255,.08)"><strong style="color:#fff;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400">Šventės ir renginiai</strong><br>Nuomojame restoraną šventėms — nuo kelių valandų iki viso savaitgalio. Pageidaujant pasirūpiname visu procesu: pasiruošimu, dekoracijomis ir maitinimu. Susisiekite dėl individualaus pasiūlymo.</p>
+          <div class="resto-btn-row" style="margin-top:1rem">
+            <a href="tel:+37067647693" class="btn-primary">+370 676 47693</a>
+            <a href="mailto:labas@laguna.lt" class="btn-outline-light">labas@laguna.lt</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Menu modal -->
+<div id="menu-modal">
+  <div class="menu-modal-top">
+    <span>Restoranas Lagūna — Meniu</span>
+    <button class="menu-modal-close" onclick="closeMenuModal()">&times;</button>
+  </div>
+  <div class="menu-modal-cats">
+    <button class="menu-modal-cat active" onclick="menuShowCat(this,'pusryčiai')">Pusryčiai</button>
+    <button class="menu-modal-cat" onclick="menuShowCat(this,'užkandžiai salotos')">Užkandžiai</button>
+    <button class="menu-modal-cat" onclick="menuShowCat(this,'pagrindiniai')">Pagrindiniai</button>
+    <button class="menu-modal-cat" onclick="menuShowCat(this,'picos')">Picos</button>
+    <button class="menu-modal-cat" onclick="menuShowCat(this,'desertai')">Desertai</button>
+    <button class="menu-modal-cat" onclick="menuShowCat(this,'gėrimai')">Gėrimai</button>
+    <button class="menu-modal-cat" onclick="menuShowCat(this,'kokteiliai')">Kokteiliai</button>
+    <button class="menu-modal-cat" onclick="menuShowCat(this,'alus_vynas')">Alus &amp; Vynas</button>
+    <button class="menu-modal-cat" onclick="menuShowCat(this,'stiprieji gėrimai')">Stiprieji</button>
+  </div>
+  <div class="menu-modal-body">
+    <img id="menu-modal-img" src="images/menu/pusryčiai.png" alt="Meniu">
+  </div>
+</div>
+<!-- ═══ VIDEO ═══ -->
+<section id="video">
+  <div class="container">
+    <div class="yt-header fade-up">
+      <span class="section-label">Lagūna iš oro</span>
+      <h2 style="color:#fff">Pajuskite Lagūnos dvasią</h2>
+      <p>Žiūrėkite kaip atrodo mūsų kompleksas ir aplinka iš paukščio skrydžio</p>
+    </div>
+    <div class="yt-embed-wrap fade-up d1">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/gJ_2ec-jCNA?si=unBvhgQdlu-PyWiY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GALERIJA (SKRYDIS) ═══ -->
+<section id="galerija" class="section section--light">
+  <div class="container">
+    <div class="gal-header">
+      <span class="section-label">Galerija</span>
+      <h2 class="fade-up">Apartamentai ir aplinka</h2>
+      <p class="fade-up d1">Visi apartamentų tipai ir komplekso aplinka Šventojoje</p>
+    </div>
+    <div class="gal-grid">
+      <div class="gal-item wide fade-up"><img src="images/Skrydis/DJI_0441.jpg" alt="Lagūna iš oro" loading="lazy" /><div class="ov"><svg class="ov-icon" width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      <div class="gal-item fade-up d1"><img src="images/1. Dvivietis Mini/0Z7A6336.jpg" alt="Dvivietis Mini" loading="lazy" /><div class="ov"><svg class="ov-icon" width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      <div class="gal-item fade-up d2"><img src="images/2. Dvivietis studio/0Z7A6263.jpg" alt="Dvivietis Studio" loading="lazy" /><div class="ov"><svg class="ov-icon" width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      <div class="gal-item fade-up d3"><img src="images/3. Trivietis studio/0Z7A6877-Edit.jpg" alt="Trivietis Studio" loading="lazy" /><div class="ov"><svg class="ov-icon" width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      <div class="gal-item fade-up"><img src="images/4. Keturvietis studio/0Z7A6872-Edit.jpg" alt="Keturvietis Studio" loading="lazy" /><div class="ov"><svg class="ov-icon" width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      <div class="gal-item fade-up d1"><img src="images/5. Ketuvietis LUX/0Z7A6485.jpg" alt="Keturvietis LUX" loading="lazy" /><div class="ov"><svg class="ov-icon" width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      <div class="gal-item fade-up d2"><img src="images/6. Keturvietis Delux/0Z7A6396-Edit.jpg" alt="Keturvietis Delux" loading="lazy" /><div class="ov"><svg class="ov-icon" width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      <div class="gal-item fade-up d3"><img src="images/7. Sesiavietis/0Z7A6951-Edit-Edit.jpg" alt="Šešiavietis" loading="lazy" /><div class="ov"><svg class="ov-icon" width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      <div class="gal-item fade-up"><img src="images/8. Trivietis Premium/0Z7A6400-Edit.jpg" alt="Trivietis Premium" loading="lazy" /><div class="ov"><svg class="ov-icon" width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      <div class="gal-item fade-up d1"><img src="images/9. Keturvietis Lux Premium/0Z7A6496.jpg" alt="Keturvietis Lux Premium" loading="lazy" /><div class="ov"><svg class="ov-icon" width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      <div class="gal-item fade-up d2"><img src="images/10. Keturvietis Delux Premium/0Z7A6641-Edit.jpg" alt="Keturvietis Delux Premium" loading="lazy" /><div class="ov"><svg class="ov-icon" width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+      <div class="gal-item fade-up d3"><img src="images/11. Keturvietis Delux Premium 2x2/0Z7A6559.jpg" alt="Keturvietis Delux Premium 2×2" loading="lazy" /><div class="ov"><svg class="ov-icon" width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ LIGHTBOX ═══ -->
+<div id="room-lb">
+  <button class="rlb-close" id="rlb-close">&times;</button>
+  <div class="rlb-img-wrap">
+    <button class="rlb-prev" id="rlb-prev">&#8249;</button>
+    <img id="rlb-img" src="" alt="" />
+    <button class="rlb-next" id="rlb-next">&#8250;</button>
+  </div>
+  <div class="rlb-title" id="rlb-title"></div>
+  <div class="rlb-count" id="rlb-count"></div>
+</div>
+
+<div id="lightbox">
+  <button class="lb-close" id="lb-close">&times;</button>
+  <button class="lb-prev" id="lb-prev">&#8249;</button>
+  <img id="lb-img" src="" alt="" />
+  <button class="lb-next" id="lb-next">&#8250;</button>
+  <div class="lb-count" id="lb-count"></div>
+</div>
+
+<!-- ═══ DUK ═══ -->
+<section id="duk">
+  <div class="container">
+    <div class="duk-header">
+      <span class="section-label">Pagalba</span>
+      <h2 class="fade-up">Dažniausiai užduodami klausimai</h2>
+      <p class="fade-up d1">Neradote atsakymo? Susisiekite su mumis tiesiogiai — mielai padėsime.</p>
+    </div>
+    <div class="duk-list fade-up d2">
+
+      <div class="duk-item">
+        <button class="duk-q" onclick="dukToggle(this)">
+          Kada galiu įsiregistruoti ir išsiregistruoti?
+          <span class="duk-icon"></span>
+        </button>
+        <div class="duk-a">
+          <strong>Įsiregistravimas (Check-in)</strong> — nuo 15:00 val.<br>
+          <strong>Išsiregistravimas (Check-out)</strong> — iki 11:00 val.<br><br>
+          Ankstesnis įsiregistravimas ar vėlesnis išvykimas galimas iš anksto suderinus su administracija.
+        </div>
+      </div>
+
+      <div class="duk-item">
+        <button class="duk-q" onclick="dukToggle(this)">
+          Ar mokama miesto rinkliava?
+          <span class="duk-icon"></span>
+        </button>
+        <div class="duk-a">
+          Taip. Pagal Palangos miesto savivaldybės sprendimą taikoma <strong>kurortinė rinkliava — 2 €/nakvynė</strong>. Ji sumokama atvykus. Rinkliava taikoma svečiams nuo <strong>18 metų</strong>.
+        </div>
+      </div>
+
+      <div class="duk-item">
+        <button class="duk-q" onclick="dukToggle(this)">
+          Ką būtina turėti atvykus?
+          <span class="duk-icon"></span>
+        </button>
+        <div class="duk-a">
+          Atvykus prašome pateikti:<br><br>
+          — <strong>Asmens dokumentą</strong> (pasą arba asmens tapatybės kortelę)<br>
+          — <strong>Likutinę apmokėjimo sumą</strong> (grynaisiais, kortele arba pavedimu)<br><br>
+          Atkreipiame dėmesį, kad pagal Lietuvos Respublikos įstatymą <strong>visi</strong> atvykstantys svečiai privalo pateikti galiojantį asmens dokumentą.
+        </div>
+      </div>
+
+      <div class="duk-item">
+        <button class="duk-q" onclick="dukToggle(this)">
+          Ar yra vietos parkavimui?
+          <span class="duk-icon"></span>
+        </button>
+        <div class="duk-a">
+          Svečiams prieinama <strong>nemokama automobilių stovėjimo aikštelė</strong> privačioje teritorijoje Mokyklos g., apie 700 m nuo komplekso „Lagūna". Išankstinė vietos rezervacija šioje aikštelėje nereikalinga. Vairuotojas gali nuvežti ir parvežti darbo valandomis.<br><br>
+          Pageidaujantiems statyti automobilį <strong>komplekso teritorijoje</strong> taikomas papildomas mokestis — <strong>15 €/nakvynė</strong>. Vietų skaičius yra ribotas, todėl būtina <strong>išankstinė rezervacija</strong>.
+        </div>
+      </div>
+
+      <div class="duk-item">
+        <button class="duk-q" onclick="dukToggle(this)">
+          Koks avansas reikalingas rezervacijai?
+          <span class="duk-icon"></span>
+        </button>
+        <div class="duk-a">
+          Rezervacija patvirtinama tik gavus avansinį mokėjimą.<br><br>
+          — Rezervuojant <strong>telefonu</strong> — avansas sudaro vienos nakvynės kainą.<br>
+          — Rezervuojant <strong>per sistemą</strong> — avansas sudaro 30% visos viešnagės kainos.<br><br>
+          Likusi suma apmokama atvykus grynaisiais, kortele arba banko pavedimu.
+        </div>
+      </div>
+
+      <div class="duk-item">
+        <button class="duk-q" onclick="dukToggle(this)">
+          Ar galiu atšaukti rezervaciją arba keisti datas?
+          <span class="duk-icon"></span>
+        </button>
+        <div class="duk-a">
+          Taip, tačiau atšaukimo sąlygos priklauso nuo to, kiek laiko liko iki atvykimo:<br><br>
+          — Likus <strong>14 ir daugiau dienų</strong> — grąžinamas visas avansas.<br>
+          — Likus <strong>10–13 dienų</strong> — grąžinama 80% avanso.<br>
+          — Likus <strong>7–9 dienoms</strong> — grąžinama 40% avanso.<br>
+          — Likus <strong>6 ir mažiau dienų</strong> — avansas negrąžinamas.<br>
+          — <strong>Neatvykus be pranešimo</strong> — avansas negrąžinamas.<br>
+          — <strong>Sutrumpinus viešnagę</strong> viešnagės metu — taikomas 100% vienos nakvynės mokestis.<br><br>
+          <strong>Datų keitimas</strong> galimas iš anksto suderinus su administracija ir priklauso nuo laisvų vietų bei sezono. Kreipkitės: <a href="tel:+37067647693" style="color:var(--accent)">+370 676 47693</a>
+        </div>
+      </div>
+
+      <div class="duk-item">
+        <button class="duk-q" onclick="dukToggle(this)">
+          Ar galiu atvykti su augintiniu?
+          <span class="duk-icon"></span>
+        </button>
+        <div class="duk-a">
+          Priimami tik šuniukai iki <strong>6 kg</strong>, iš anksto suderinus su administracija. Taikomas papildomas mokestis — <strong>10 €/nakvynė</strong>. Prašome susisiekti prieš rezervuojant: <a href="tel:+37067647693" style="color:var(--accent)">+370 676 47693</a>
+        </div>
+      </div>
+
+      <div class="duk-item">
+        <button class="duk-q" onclick="dukToggle(this)">
+          Ar galima vėliau išvykti?
+          <span class="duk-icon"></span>
+        </button>
+        <div class="duk-a">
+          Standartinis išvykimo laikas — iki <strong>11:00 val.</strong><br><br>
+          Vėlyvas išvykimas galimas iš anksto suderinus su administracija:<br>
+          — Iki <strong>15:00 val.</strong> — 25% paros kainos mokestis.<br>
+          — Iki <strong>18:00 val.</strong> — 50% paros kainos mokestis.<br>
+          — Po <strong>18:00 val.</strong> — 100% paros kainos mokestis.
+        </div>
+      </div>
+
+      <div class="duk-item">
+        <button class="duk-q" onclick="dukToggle(this)">
+          Ar į kainą įskaičiuoti pusryčiai?
+          <span class="duk-icon"></span>
+        </button>
+        <div class="duk-a">
+          Ne, pusryčiai į apartamento kainą neįskaičiuoti. Tačiau juos galima užsisakyti iš anksto — paskambinę telefonu arba parašę el. paštu, registracijos metu arba tiesiogiai restorane.
+        </div>
+      </div>
+
+      <div class="duk-item">
+        <button class="duk-q" onclick="dukToggle(this)">
+          Ar galiu įsigyti dovanų kuponą?
+          <span class="duk-icon"></span>
+        </button>
+        <div class="duk-a">
+          Taip! Dovanų kuponus galite įsigyti susisiekę tiesiogiai — telefonu arba el. paštu. Kupono vertė turi būti apmokėta pilnai.
+        </div>
+      </div>
+
+      <div class="duk-item">
+        <button class="duk-q" onclick="dukToggle(this)">
+          Ar yra maniežas ir maitinimo kėdutė?
+          <span class="duk-icon"></span>
+        </button>
+        <div class="duk-a">
+          Taip, maniežą ir maitinimo kėdutę galima užsisakyti iš anksto — per mūsų rezervacijos sistemą, telefonu arba el. paštu.<br><br>
+          — <strong>Maniežas</strong> — 5 €/nakvynė<br>
+          — <strong>Maitinimo kėdutė</strong> — 3 €/nakvynė
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ INSTAGRAM ═══ -->
+<section id="instagram" class="section section--light">
+  <div class="container">
+    <div class="insta-header fade-up">
+      <span class="section-label">Socialiniai tinklai</span>
+      <h2>Naujienos &amp; įspūdžiai</h2>
+      <p>Sekite mus Instagram ir būkite pirmieji, kurie sužino apie naujausius pasiūlymus, renginius ir gyvenimą Lagūnoje.</p>
+      <a href="https://www.instagram.com/laguna.sventoji" target="_blank" rel="noopener" class="insta-follow">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        @laguna.sventoji
+      </a>
+    </div>
+    <div class="insta-feed fade-up">
+      <!-- Behold Instagram widget — sign up free at behold.so, connect @laguna.sventoji, paste your widget ID below -->
+      <behold-widget feed-id="B5QKZ"></behold-widget>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ KONTAKTAI ═══ -->
+<section id="kontaktai" class="section">
+  <div class="container">
+    <div class="contact-inner">
+      <div>
+        <span class="section-label">Kontaktai</span>
+        <h2 class="fade-up">Susisiekite su mumis</h2>
+        <div class="divider"></div>
+        <div class="contact-details">
+          <div class="crow">
+            <div class="cicon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg></div>
+            <div class="ctext"><span>Telefonas</span><a href="tel:+37067647693">+370 676 47693</a></div>
+          </div>
+          <div class="crow">
+            <div class="cicon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
+            <div class="ctext"><span>El. paštas</span><a href="mailto:labas@laguna.lt">labas@laguna.lt</a></div>
+          </div>
+          <div class="crow">
+            <div class="cicon"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+            <div class="ctext"><span>Adresas</span><p>Prieplaukos g. 18, 00305 Palanga (Šventoji)</p></div>
+          </div>
+        </div>
+        <div class="csocials">
+          <a href="https://www.facebook.com/lagunasventoji/" target="_blank" rel="noopener" class="social-btn" title="Facebook">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/laguna.sventoji" target="_blank" rel="noopener" class="social-btn" title="Instagram">
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="cform fade-up d1">
+        <p class="vform-title" style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--dark);font-weight:400;margin-bottom:8px">Parašykite mums</p>
+        <div class="fsuccess" id="contact-success">Ačiū! Jūsų žinutė išsiųsta. Susisieksime kuo greičiau.</div>
+        <form class="cform" id="contact-form" onsubmit="submitContactForm(event)">
+          <div class="frow">
+            <div class="fg"><label>Vardas</label><input type="text" name="name" placeholder="Jūsų vardas" required /></div>
+            <div class="fg"><label>El. paštas</label><input type="email" name="email" placeholder="jusu@el.pastas.lt" required /></div>
+          </div>
+          <div class="fg"><label>Telefono numeris</label><input type="tel" name="phone" placeholder="+370 ..." /></div>
+          <div class="fg"><label>Žinutė</label><textarea name="message" placeholder="Jūsų klausimas ar žinutė..." required></textarea></div>
+          <button type="submit" class="submit-btn">Siųsti žinutę</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ VIETA ═══ -->
+<section id="vieta">
+  <div class="container">
+    <div class="vieta-header">
+      <span class="section-label">Vieta</span>
+      <h2 class="fade-up">Kur mus rasti</h2>
+      <p class="fade-up d1">Šventoji — Šventoji, Palanga. Tarp jūros, uosto ir pušyno.</p>
+    </div>
+  </div>
+  <div class="vieta-map-wrap">
+    <iframe src="https://maps.google.com/maps?q=Lag%C5%ABna+apart%C4%81mentai+%C5%A0ventoji+Palanga+Lietuva&t=&z=17&ie=UTF8&iwloc=&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="images/Laguna logo/laguna logo white.png" alt="Lagūna" />
+      <p>Modernūs apartamentai ir restoranas Šventojoje. Vos 50 metrų nuo Baltijos jūros kopų.</p>
+    </div>
+    <div class="fcol">
+      <h4>Navigacija</h4>
+      <ul>
+        <li><a href="#apie">Apie mus</a></li>
+        <li><a href="#kambariai">Apartamentai</a></li>
+        <li><a href="#restoranas">Restoranas</a></li>
+        <li><a href="#galerija">Galerija</a></li>
+        <li><a href="#duk">DUK</a></li>
+      <li><a href="#kontaktai">Kontaktai</a></li>
+              </ul>
+    </div>
+    <div class="fcol">
+      <h4>Apartamentai</h4>
+      <ul>
+        <li><a href="#kambariai">Dviviečiai (2)</a></li>
+        <li><a href="#kambariai">Triviečiai (2)</a></li>
+        <li><a href="#kambariai">Keturviečiai (6)</a></li>
+        <li><a href="#kambariai">Šešiavietis (1)</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h4>Kontaktai</h4>
+      <ul>
+        <li><a href="tel:+37067647693">+370 676 47693</a></li>
+        <li><a href="mailto:labas@laguna.lt">labas@laguna.lt</a></li>
+        <li><a href="https://www.facebook.com/lagunasventoji/" target="_blank" rel="noopener">Facebook</a></li>
+        <li><a href="https://www.instagram.com/laguna.sventoji" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="#vieta">Šventoji, Palanga</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Lagūna. Visos teisės saugomos.</span>
+    <a href="taisykles.html" style="color:rgba(255,255,255,.4);transition:color .2s" onmouseover="this.style.color='#c9a96e'" onmouseout="this.style.color='rgba(255,255,255,.4)'">Taisyklės ir sąlygos</a>
+  </div>
+</footer>
+
+<!-- ═══ STICKY CTA ═══ -->
+<div id="sticky-cta"><a href="https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt" target="_blank" rel="noopener">Rezervuoti</a></div>
+
+<!-- ═══ PHONE FLOAT ═══ -->
+<a id="phone-float" href="tel:+37067647693" title="Skambinti">
+  <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+</a>
+
+<!-- ═══ AI CHAT WIDGET ═══ -->
+<div id="lg-chat-widget">
+  <div id="lg-chat-box">
+    <div class="lgc-header">
+      <div class="lgc-header-left">
+        <div class="lgc-avatar">L</div>
+        <div>
+          <div class="lgc-name">Lagūna</div>
+          <div class="lgc-status">AI asistentas</div>
+        </div>
+      </div>
+      <button class="lgc-close" id="lg-chat-close">&times;</button>
+    </div>
+    <div id="lg-chat-msgs">
+      <div class="lgc-msg bot">Sveiki! Esu Lagūnos AI asistentas. Galiu atsakyti į klausimus apie apartamentus, restoraną, kainas ar vietą. Kuo galiu padėti?</div>
+    </div>
+    <div class="lgc-input-row">
+      <input type="text" id="lg-chat-input" placeholder="Rašykite klausimą..." autocomplete="off" />
+      <button id="lg-chat-send">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+      </button>
+    </div>
+  </div>
+  <button id="lg-chat-toggle" title="Kalbėkitės su AI asistentu">
+    <svg width="23" height="23" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+  </button>
+</div>
+
+<!-- ═══ SCRIPTS ═══ -->
+<script>
+// ── FAQ accordion ──
+function dukToggle(btn) {
+  const item = btn.closest('.duk-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.duk-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// ── Booking widget ──
+function goToBooking() {
+  const from = document.getElementById('bw-from').value;
+  const to = document.getElementById('bw-to').value;
+  let url = 'https://ibe.sabeeapp.com/properties/Lag\u016bna-\u0160ventoji-u\u017esakymas/?p=bSp833e4f0d9cbea803&l=lt';
+  if (from) url += (url.includes('?') ? '&' : '?') + 'checkin=' + from;
+  if (to) url += '&checkout=' + to;
+  window.open(url, '_blank');
+}
+function goToBookingMobile() {
+  const from = document.getElementById('mbw-from').value;
+  const to = document.getElementById('mbw-to').value;
+  let url = 'https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt';
+  if (from) url += (url.includes('?') ? '&' : '?') + 'checkin=' + from;
+  if (to) url += '&checkout=' + to;
+  window.open(url, '_blank');
+}
+// Set min dates
+(function(){
+  const today = new Date().toISOString().split('T')[0];
+  ['bw-from','bw-to','mbw-from','mbw-to'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.min = today;
+  });
+  document.getElementById('bw-from').addEventListener('change', function(){
+    document.getElementById('bw-to').min = this.value;
+  });
+  document.getElementById('mbw-from').addEventListener('change', function(){
+    document.getElementById('mbw-to').min = this.value;
+  });
+})();
+
+// ── Nav scroll ──
+const nav = document.getElementById('nav');
+const logoImg = document.getElementById('nav-logo-img');
+const stickyCta = document.getElementById('sticky-cta');
+window.addEventListener('scroll', () => {
+  const s = window.scrollY > 60;
+  nav.classList.toggle('scrolled', s);
+  logoImg.src = s ? 'images/Laguna logo/laguna logo black.png' : 'images/Laguna logo/laguna logo white.png';
+  stickyCta.classList.toggle('show', window.scrollY > 400);
+  // Progress bar
+  const total = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progress-bar').style.width = (window.scrollY / total * 100) + '%';
+}, { passive: true });
+
+// ── Mobile menu ──
+document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobile-menu').classList.add('open'));
+document.getElementById('m-close').addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('open'));
+document.querySelectorAll('#mobile-menu .ml').forEach(a => a.addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('open')));
+
+// ── Fade up observer ──
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+// ── Room capacity filter ──
+let _capFilter = 'all', _featSet = new Set();
+function applyFilters() {
+  let visible = 0;
+  document.querySelectorAll('.room-card').forEach(card => {
+    const capOk = _capFilter === 'all' || card.dataset.capacity === _capFilter || card.dataset.also === _capFilter;
+    let featOk = true;
+    if (_featSet.size > 0) {
+      const cardFeats = card.dataset.feat ? card.dataset.feat.split(' ') : [];
+      featOk = [..._featSet].every(f => cardFeats.includes(f));
+    }
+    const show = capOk && featOk;
+    card.classList.toggle('hidden', !show);
+    if (show) { card.classList.add('visible'); visible++; }
+  });
+  const empty = document.getElementById('rooms-empty');
+  if (empty) empty.style.display = visible === 0 ? 'block' : 'none';
+}
+function resetFilters() {
+  _capFilter = 'all';
+  _featSet.clear();
+  document.querySelectorAll('#cap-pills .rf-pill').forEach((p,i) => p.classList.toggle('active', i===0));
+  document.querySelectorAll('#feat-pills .rf-pill').forEach((p,i) => p.classList.toggle('active', i===0));
+  applyFilters();
+}
+function syncFeatAllBtn() {
+  const allBtn = document.querySelector('#feat-pills .rf-pill:first-child');
+  if (allBtn) allBtn.classList.toggle('active', _featSet.size === 0);
+}
+function filterCap(val, btn) {
+  document.querySelectorAll('#cap-pills .rf-pill').forEach(p => p.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  _capFilter = val;
+  applyFilters();
+}
+function filterFeat(val, btn) {
+  if (val === 'all') {
+    _featSet.clear();
+    document.querySelectorAll('#feat-pills .rf-pill').forEach(p => p.classList.remove('active'));
+  } else {
+    document.querySelector('#feat-pills .rf-pill:first-child').classList.remove('active');
+    if (_featSet.has(val)) {
+      _featSet.delete(val);
+      if (btn) btn.classList.remove('active');
+    } else {
+      _featSet.add(val);
+      if (btn) btn.classList.add('active');
+    }
+  }
+  syncFeatAllBtn();
+  applyFilters();
+}
+
+// ── Room image sliders ──
+document.querySelectorAll('.room-slider').forEach(slider => {
+  const slides = slider.querySelectorAll('.room-slide');
+  const dots = slider.querySelectorAll('.dot');
+  let cur = 0;
+  function goTo(idx) {
+    slides[cur].classList.remove('active');
+    dots[cur].classList.remove('active');
+    cur = (idx + slides.length) % slides.length;
+    slides[cur].classList.add('active');
+    dots[cur].classList.add('active');
+  }
+  slider.querySelector('.rsl-prev').addEventListener('click', e => { e.preventDefault(); goTo(cur - 1); });
+  slider.querySelector('.rsl-next').addEventListener('click', e => { e.preventDefault(); goTo(cur + 1); });
+  dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+
+  // Click on slide image → open room lightbox
+  slider.addEventListener('click', e => {
+    if (e.target.closest('.rsl-prev') || e.target.closest('.rsl-next') || e.target.closest('.dot')) return;
+    const card = slider.closest('.room-card');
+    const title = card.querySelector('h3') ? card.querySelector('h3').textContent : '';
+    const imgs = Array.from(slider.querySelectorAll('.room-slide img'));
+    openRoomLb(imgs, cur, title);
+  });
+});
+
+// ── Room lightbox ──
+const rlb = document.getElementById('room-lb');
+const rlbImg = document.getElementById('rlb-img');
+const rlbTitle = document.getElementById('rlb-title');
+const rlbCount = document.getElementById('rlb-count');
+let rlbImgs = [], rlbCur = 0;
+function openRoomLb(imgs, startIdx, title) {
+  rlbImgs = imgs;
+  rlbCur = startIdx;
+  rlbImg.src = imgs[startIdx].src;
+  rlbTitle.textContent = title;
+  rlbCount.textContent = (startIdx + 1) + ' / ' + imgs.length;
+  rlb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function navRoomLb(dir) {
+  rlbCur = (rlbCur + dir + rlbImgs.length) % rlbImgs.length;
+  rlbImg.src = rlbImgs[rlbCur].src;
+  rlbCount.textContent = (rlbCur + 1) + ' / ' + rlbImgs.length;
+}
+function closeRoomLb() { rlb.classList.remove('open'); document.body.style.overflow = ''; }
+document.getElementById('rlb-close').addEventListener('click', closeRoomLb);
+document.getElementById('rlb-prev').addEventListener('click', () => navRoomLb(-1));
+document.getElementById('rlb-next').addEventListener('click', () => navRoomLb(1));
+rlb.addEventListener('click', e => { if (e.target === rlb) closeRoomLb(); });
+document.addEventListener('keydown', e => {
+  if (!rlb.classList.contains('open')) return;
+  if (e.key === 'ArrowLeft') navRoomLb(-1);
+  if (e.key === 'ArrowRight') navRoomLb(1);
+  if (e.key === 'Escape') closeRoomLb();
+});
+
+// ── Restaurant slideshow ──
+(function(){
+  const slides = Array.from(document.querySelectorAll('#resto-slides-wrap .resto-slide'));
+  const dotsWrap = document.getElementById('resto-dots');
+  const counter = document.getElementById('resto-counter');
+  let cur = 0;
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'resto-dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(d);
+  });
+  const dots = () => Array.from(dotsWrap.querySelectorAll('.resto-dot'));
+  function goTo(n) {
+    slides[cur].classList.remove('active');
+    dots()[cur].classList.remove('active');
+    cur = (n + slides.length) % slides.length;
+    slides[cur].classList.add('active');
+    dots()[cur].classList.add('active');
+    counter.textContent = (cur + 1) + ' / ' + slides.length;
+  }
+  document.getElementById('resto-prev').addEventListener('click', () => goTo(cur - 1));
+  document.getElementById('resto-next').addEventListener('click', () => goTo(cur + 1));
+  setInterval(() => goTo(cur + 1), 4000);
+})();
+
+// ── Menu modal ──
+const menuImages = {
+  'pusryčiai': 'images/menu/pusryčiai.png',
+  'užkandžiai salotos': 'images/menu/užkandžiai salotos.png',
+  'pagrindiniai': 'images/menu/pagrindiniai.png',
+  'picos': 'images/menu/picos.png',
+  'desertai': 'images/menu/desertai.png',
+  'gėrimai': 'images/menu/gėrimai.png',
+  'kokteiliai': 'images/menu/kokteiliai.png',
+  'alus_vynas': 'images/menu/alus_vynas.png',
+  'stiprieji gėrimai': 'images/menu/stiprieji gėrimai.png'
+};
+window.openMenuModal = function() {
+  document.getElementById('menu-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+};
+window.closeMenuModal = function() {
+  document.getElementById('menu-modal').classList.remove('open');
+  document.body.style.overflow = '';
+};
+window.menuShowCat = function(btn, cat) {
+  document.querySelectorAll('.menu-modal-cat').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const img = document.getElementById('menu-modal-img');
+  if (img && menuImages[cat]) img.src = menuImages[cat];
+};
+document.getElementById('menu-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeMenuModal();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.getElementById('menu-modal').classList.contains('open')) closeMenuModal();
+});
+
+// ── Gallery lightbox ──
+const lbImgs = Array.from(document.querySelectorAll('.gal-item img'));
+let lbCur = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lb-img');
+const lbCount = document.getElementById('lb-count');
+function openLb(idx) {
+  lbCur = idx;
+  lbImg.src = lbImgs[idx].src;
+  lbCount.textContent = (idx + 1) + ' / ' + lbImgs.length;
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLb() { lb.classList.remove('open'); document.body.style.overflow = ''; }
+lbImgs.forEach((img, i) => img.closest('.gal-item').addEventListener('click', () => openLb(i)));
+document.getElementById('lb-close').addEventListener('click', closeLb);
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.getElementById('lb-prev').addEventListener('click', () => { openLb((lbCur - 1 + lbImgs.length) % lbImgs.length); });
+document.getElementById('lb-next').addEventListener('click', () => { openLb((lbCur + 1) % lbImgs.length); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'ArrowLeft') openLb((lbCur - 1 + lbImgs.length) % lbImgs.length);
+  if (e.key === 'ArrowRight') openLb((lbCur + 1) % lbImgs.length);
+  if (e.key === 'Escape') closeLb();
+});
+
+// ── Contact form ──
+async function submitContactForm(e) {
+  e.preventDefault();
+  const form = e.target;
+  const btn = form.querySelector('.submit-btn');
+  btn.textContent = 'Siunčiama...';
+  btn.disabled = true;
+  const data = {
+    name: form.querySelector('[name=name]').value,
+    email: form.querySelector('[name=email]').value,
+    phone: form.querySelector('[name=phone]').value,
+    message: form.querySelector('[name=message]').value,
+  };
+  try {
+    const res = await fetch('https://formspree.io/f/mdapkyga', {
+      method: 'POST', body: JSON.stringify(data),
+      headers: { Accept: 'application/json', 'Content-Type': 'application/json' }
+    });
+    if (res.ok) {
+      document.getElementById('contact-success').classList.add('show');
+      form.reset();
+    } else {
+      alert('Nepavyko išsiųsti. Bandykite dar kartą arba parašykite labas@laguna.lt');
+    }
+  } catch {
+    alert('Klaida. Parašykite labas@laguna.lt');
+  }
+  btn.textContent = 'Siųsti žinutę';
+  btn.disabled = false;
+}
+
+// ── AI Chatbot ──
+(function(){
+  // TODO: Replace YOUR_WORKER_URL with deployed Cloudflare Worker URL
+  const WORKER_URL = 'YOUR_WORKER_URL';
+  const history = [];
+  const toggle = document.getElementById('lg-chat-toggle');
+  const box = document.getElementById('lg-chat-box');
+  const closeBtn = document.getElementById('lg-chat-close');
+  const input = document.getElementById('lg-chat-input');
+  const sendBtn = document.getElementById('lg-chat-send');
+  const msgs = document.getElementById('lg-chat-msgs');
+
+  toggle.addEventListener('click', () => {
+    box.classList.toggle('open');
+    if (box.classList.contains('open')) input.focus();
+  });
+  closeBtn.addEventListener('click', () => box.classList.remove('open'));
+
+  function addMsg(text, role) {
+    const d = document.createElement('div');
+    d.className = 'lgc-msg ' + role;
+    const esc = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    d.innerHTML = esc.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Rezervuoti galite čia</a>');
+    msgs.appendChild(d);
+    msgs.scrollTop = msgs.scrollHeight;
+    return d;
+  }
+
+  async function sendMsg() {
+    const text = input.value.trim();
+    if (!text || sendBtn.disabled) return;
+    input.value = '';
+    addMsg(text, 'user');
+    history.push({ role: 'user', content: text });
+    const typing = addMsg('Rašoma...', 'typing');
+    sendBtn.disabled = true;
+    try {
+      const res = await fetch(WORKER_URL, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: history })
+      });
+      const data = await res.json();
+      typing.remove();
+      const reply = data.reply || 'Atsiprašome, įvyko klaida.';
+      addMsg(reply, 'bot');
+      history.push({ role: 'assistant', content: reply });
+    } catch {
+      typing.remove();
+      addMsg('Atsiprašome, ryšio klaida. Bandykite skambinti: +370 676 47693', 'bot');
+    }
+    sendBtn.disabled = false;
+    input.focus();
+  }
+
+  sendBtn.addEventListener('click', sendMsg);
+  input.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMsg(); } });
+})();
+
+// ── Active nav link ──
+const sections = document.querySelectorAll('section[id], div[id="stats-band"]');
+const navLinks = document.querySelectorAll('#nav ul li a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+  });
+}, { passive: true });
+</script>
+
+<script src="https://w.behold.so/widget.js" type="module"></script>
+</body>
+</html>
