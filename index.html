@@ -85,7 +85,7 @@
     .bw-field{display:flex;flex-direction:column;gap:5px;flex:1;min-width:110px}
     .bw-field--sm{flex:0 0 90px;min-width:80px}
     .bw-field label{font-size:.58rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4)}
-    .bw-field input,.bw-field select{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#fff;padding:10px 12px;font-size:.86rem;font-family:'Inter',sans-serif;border-radius:2px;outline:none;width:100%;transition:border-color .25s;-webkit-appearance:none;appearance:none;color-scheme:dark}
+    .bw-field input,.bw-field select{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#fff;padding:10px 12px;font-size:.86rem;font-family:'Inter',sans-serif;border-radius:2px;outline:none;width:100%;height:42px;transition:border-color .25s;-webkit-appearance:none;appearance:none;color-scheme:dark;box-sizing:border-box}
     .bw-field input:focus,.bw-field select:focus{border-color:var(--accent)}
     .bw-field select{background-color:rgba(8,14,22,.9);cursor:pointer}
     .bw-field select option{background:#1e2b3a;color:#fff}
@@ -1261,6 +1261,26 @@
         </div>
       </div>
 
+      <div class="duk-item">
+        <button class="duk-q" onclick="dukToggle(this)">
+          Ar galima pasinaudoti skalbimo paslauga?
+          <span class="duk-icon"></span>
+        </button>
+        <div class="duk-a">
+          Taip, skalbimo paslauga teikiama. Kaina — 10 €/3 kg. Kreipkitės į registratūrą.
+        </div>
+      </div>
+
+      <div class="duk-item">
+        <button class="duk-q" onclick="dukToggle(this)">
+          Ar teikiamas poilsiautojų transportavimas?
+          <span class="duk-icon"></span>
+        </button>
+        <div class="duk-a">
+          Taip, nemokamas atvežimas ir nuvežimas iš/į Šventosios autobusų stotį bei Palangos oro uostą darbo laiko metu.
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1271,7 +1291,7 @@
     <div class="insta-header fade-up">
       <span class="section-label">Socialiniai tinklai</span>
       <h2>Naujienos &amp; įspūdžiai</h2>
-      <p>Sekite mus Instagram ir būkite pirmieji, kurie sužino apie naujausius pasiūlymus, renginius ir gyvenimą Lagūnoje.</p>
+      <p>Sekite mus Instagram ir būkite pirmieji, kurie sužino apie naujausius pasiūlymus, renginius ir daugiau.</p>
     </div>
 
     <div class="ig-feed-wrap fade-up">
@@ -1334,7 +1354,7 @@
     <div class="vieta-header">
       <span class="section-label">Vieta</span>
       <h2 class="fade-up">Kur mus rasti</h2>
-      <p class="fade-up d1">Šventoji — Šventoji, Palanga. Tarp jūros, uosto ir pušyno.</p>
+      <p class="fade-up d1">Prieplaukos g. 18, Palanga. Tarp jūros, uosto ir pušyno.</p>
     </div>
   </div>
   <div class="vieta-map-wrap">
