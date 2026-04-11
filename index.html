@@ -110,12 +110,11 @@
     .sband-lbl{font-size:.62rem;font-weight:600;letter-spacing:.17em;text-transform:uppercase;color:rgba(255,255,255,.45)}
 
     /* ── ABOUT ── */
-    #apie{display:grid;grid-template-columns:1fr 1fr;min-height:560px}
-    #apie .about-img{position:relative;min-height:460px;overflow:hidden}
-    #apie .about-img img{transition:transform 6s ease}
-    #apie .about-img:hover img{transform:scale(1.04)}
-    #apie .about-text{background:var(--light);display:flex;align-items:center;padding:80px 68px}
-    #apie .about-inner{max-width:460px}
+    #apie{background:var(--light);padding:90px 0}
+    #apie .about-text{display:flex;justify-content:center}
+    #apie .about-inner{max-width:760px;width:100%;padding:0 2rem}
+    #apie .about-cols{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:1.4rem}
+    @media(max-width:640px){#apie .about-cols{grid-template-columns:1fr}}
     #apie h2{margin-bottom:1.4rem}
     #apie p{margin-bottom:1.3rem}
     .divider{width:44px;height:2px;background:var(--accent);margin:1.8rem 0}
@@ -498,7 +497,7 @@
 
 <!-- ═══ HERO ═══ -->
 <section id="hero">
-  <div class="hero-bg"><img src="images/Skrydis/DJI_0441.jpg" alt="Lagūna Šventoji" id="hero-img" /></div>
+  <div class="hero-bg"><img src="images/Skrydis/header croped.jpg" alt="Lagūna Šventoji" id="hero-img" /></div>
   <div class="hero-center">
     <div class="hero-text-wrap">
       <h1>Tarp jūros, uosto<br /><em>ir pušyno</em></h1>
@@ -586,15 +585,16 @@
 
 <!-- ═══ APIE ═══ -->
 <section id="apie">
-  <div class="about-img fade-up"><img src="images/Skrydis/DJI_0445.jpg" alt="Lagūna — kompleksas Šventojoje" /></div>
   <div class="about-text">
     <div class="about-inner">
       <span class="section-label">Apie mus</span>
       <h2 class="fade-up">Jūros, uosto ir pušyno apsuptas poilsis</h2>
       <div class="divider"></div>
-      <p class="fade-up d1"><strong>Lagūna</strong> — tai modernus apartamentų kompleksas Šventojoje, esantis vos 50 metrų nuo Baltijos jūros kopų. Čia rasite viską, ko reikia tobuloms atostogoms: erdvius apartamentus su visais patogumais, autentišką restoraną ir unikalią pakrantės atmosferą.</p>
-      <p class="fade-up d2">Vienuolika skirtingų apartamentų tipų — nuo jaukių dviviečių iki erdvių šešiaviečių — leidžia pasirinkti geriausiai poreikius atitinkantį variantą. Visi apartamentai įrengti su virtuvėle, todėl tinka tiek trumpalaikiam savaitgaliui, tiek ilgesniam poilsiui.</p>
-      <a href="https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt" target="_blank" rel="noopener" class="btn-primary fade-up d3" style="margin-top:1.2rem;display:inline-block">Rezervuoti</a>
+      <div class="about-cols">
+        <p class="fade-up d1"><strong>Lagūna</strong> — tai modernus apartamentų kompleksas Šventojoje, esantis vos 50 metrų nuo Baltijos jūros kopų. Čia rasite viską, ko reikia tobuloms atostogoms: erdvius apartamentus su visais patogumais, autentišką restoraną ir unikalią pakrantės atmosferą.</p>
+        <p class="fade-up d2">Vienuolika skirtingų apartamentų tipų — nuo jaukių dviviečių iki erdvių šešiaviečių — leidžia pasirinkti geriausiai poreikius atitinkantį variantą. Visi apartamentai įrengti su virtuvėle, todėl tinka tiek trumpalaikiam savaitgaliui, tiek ilgesniam poilsiui.</p>
+      </div>
+      <a href="https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt" target="_blank" rel="noopener" class="btn-primary fade-up d3" style="margin-top:1.8rem;display:inline-block">Rezervuoti</a>
     </div>
   </div>
 </section>
@@ -973,10 +973,10 @@
     <div class="resto-header fade-up">
       <span class="section-label">Restoranas</span>
       <h2>Skonis jūros<br><em>pakrantėje</em></h2>
-      <p>Lagūnos restoranas — tai vieta, kur geras maistas susitinka su jūros atmosfera. Itališka pica, žuvies ir mėsos patiekalai, vegetariški variantai ir vaikų meniu. Vasarą — atvira terasa po dangumi.</p>
+      <p>Lagūnos restoranas — tai vieta, kur geras maistas susitinka su jūros atmosfera. Itališka pica, žuvies ir mėsos patiekalai, vegetariški ir veganiški variantai bei vaikų meniu. Vasarą — atvira terasa po dangumi.</p>
       <div class="resto-opening">
         <span class="resto-opening-dot"></span>
-        <span>Restoranas atsidaro 2026 m. birželio 12 d.</span>
+        <span>Restoranas dirba nuo birželio iki rugsėjo</span>
       </div>
     </div>
 
