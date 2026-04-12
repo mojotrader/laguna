@@ -496,7 +496,7 @@
       <li><a href="#duk" data-i18n="nav_faq">DUK</a></li>
       <li><a href="#kontaktai" data-i18n="nav_contact">Kontaktai</a></li>
     </ul>
-    <a href="https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt" target="_blank" rel="noopener" class="nav-cta" data-i18n="cta_book">Rezervuoti</a>
+    <a href="https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt" target="_blank" rel="noopener" class="nav-cta" data-booking data-i18n="cta_book">Rezervuoti</a>
     <div class="lang-switch"><button class="lang-btn active" id="lang-lt" onclick="setLang('lt')">LT</button><span class="lang-sep">|</span><button class="lang-btn" id="lang-en" onclick="setLang('en')">EN</button></div><button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -508,7 +508,7 @@
   <a href="#restoranas" class="ml" data-i18n="nav_resto">Restoranas</a>
   <a href="#galerija" class="ml" data-i18n="nav_gallery">Galerija</a>
   <a href="#kontaktai" class="ml" data-i18n="nav_contact">Kontaktai</a>
-  <a href="https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt" target="_blank" rel="noopener" class="m-cta ml" data-i18n="cta_book">Rezervuoti</a>
+  <a href="https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt" target="_blank" rel="noopener" class="m-cta ml" data-booking data-i18n="cta_book">Rezervuoti</a>
 </div>
 
 <!-- ═══ HERO ═══ -->
@@ -610,7 +610,7 @@
         <p class="fade-up d1" data-i18n-html="about_p1">Lagūna – modernus apartamentų kompleksas vienoje gražiausių Šventosios vietų, kviečiantis patirti tikrą pajūrio poilsį. Čia jūsų laukia viskas, ko reikia tobuloms atostogoms: jaukūs šeimyniniai apartamentai su visais patogumais, vaikų žaidimų aikštelė, autentiškas restoranas ir ypatinga, tik pakrantei būdinga atmosfera.</p>
         <p class="fade-up d2" data-i18n-html="about_p2">Mūsų apartamentai sukurti taip, kad kiekvienas rastų sau idealų pasirinkimą – nuo jaukių dviviečių iki erdvių šešiaviečių. Visuose įrengtos virtuvėlės, todėl galėsite mėgautis tiek trumpu savaitgalio pabėgimu, tiek ilgesniu, ramiu poilsiu prie jūros.</p>
       </div>
-      <a href="https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt" target="_blank" rel="noopener" class="btn-primary fade-up d3" style="margin-top:1.8rem;display:inline-block"data-i18n="cta_book">Rezervuoti</a>
+      <a href="https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt" target="_blank" rel="noopener" class="btn-primary fade-up d3" data-booking style="margin-top:1.8rem;display:inline-block"data-i18n="cta_book">Rezervuoti</a>
     </div>
   </div>
 </section>
@@ -980,7 +980,7 @@
       <button onclick="resetFilters()">Rodyti visus apartamentus</button>
     </div>
     <div class="rooms-cta fade-up">
-      <a href="https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt" target="_blank" rel="noopener" class="btn-primary" data-i18n="btn_booking">Užimtumas, kainos ir rezervacija</a>
+      <a href="https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt" target="_blank" rel="noopener" class="btn-primary" data-i18n="btn_booking" data-booking>Užimtumas, kainos ir rezervacija</a>
     </div>
   </div>
 </section>
@@ -1440,7 +1440,7 @@
 </footer>
 
 <!-- ═══ STICKY CTA ═══ -->
-<div id="sticky-cta"><a href="https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt" target="_blank" rel="noopener"data-i18n="cta_book">Rezervuoti</a></div>
+<div id="sticky-cta"><a href="https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt" target="_blank" rel="noopener" data-booking data-i18n="cta_book">Rezervuoti</a></div>
 
 <!-- ═══ PHONE FLOAT ═══ -->
 <a id="phone-float" href="tel:+37067647693" title="Skambinti">
@@ -1486,19 +1486,26 @@ function dukToggle(btn) {
 }
 
 // ── Booking widget ──
+const BOOKING_URLS = {
+  lt: 'https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt',
+  en: 'https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-booking/?p=bSp833e4f0d9cbea803&l=en',
+};
+function getBookingUrl() {
+  try { return BOOKING_URLS[localStorage.getItem('laguna_lang')] || BOOKING_URLS.lt; } catch(e) { return BOOKING_URLS.lt; }
+}
 function goToBooking() {
   const from = document.getElementById('bw-from').value;
   const to = document.getElementById('bw-to').value;
-  let url = 'https://ibe.sabeeapp.com/properties/Lag\u016bna-\u0160ventoji-u\u017esakymas/?p=bSp833e4f0d9cbea803&l=lt';
-  if (from) url += (url.includes('?') ? '&' : '?') + 'checkin=' + from;
+  let url = getBookingUrl();
+  if (from) url += '&checkin=' + from;
   if (to) url += '&checkout=' + to;
   window.open(url, '_blank');
 }
 function goToBookingMobile() {
   const from = document.getElementById('mbw-from').value;
   const to = document.getElementById('mbw-to').value;
-  let url = 'https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt';
-  if (from) url += (url.includes('?') ? '&' : '?') + 'checkin=' + from;
+  let url = getBookingUrl();
+  if (from) url += '&checkin=' + from;
   if (to) url += '&checkout=' + to;
   window.open(url, '_blank');
 }
@@ -2206,6 +2213,12 @@ function setLang(lang) {
     const key = el.getAttribute('data-i18n-html');
     if (th[key] !== undefined) el.innerHTML = th[key];
   });
+
+  // Update booking links
+  const bookingUrl = (lang === 'en')
+    ? 'https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-booking/?p=bSp833e4f0d9cbea803&l=en'
+    : 'https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt';
+  document.querySelectorAll('[data-booking]').forEach(el => el.href = bookingUrl);
 
   // Update html lang attribute
   document.documentElement.lang = lang;
