@@ -32,6 +32,15 @@
     .section--light{background:var(--light)}
     .section-label{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.1rem}
 
+    /* ── LANG SWITCH ── */
+    .lang-switch{display:flex;align-items:center;gap:5px;margin-right:10px}
+    .lang-btn{font-family:'Inter',sans-serif;font-size:.68rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);background:none;border:none;cursor:pointer;padding:3px 1px;transition:color .25s;line-height:1}
+    .lang-btn.active{color:#fff}
+    .lang-sep{color:rgba(255,255,255,.25);font-size:.65rem;line-height:1}
+    #nav.scrolled .lang-btn{color:var(--mid)}
+    #nav.scrolled .lang-btn.active{color:var(--dark)}
+    #nav.scrolled .lang-sep{color:var(--border)}
+
     /* ── SCROLL PROGRESS ── */
     #progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:9999;width:0%;transition:width .1s linear}
 
@@ -480,26 +489,26 @@
   <div class="nav-inner">
     <a href="#" class="nav-logo"><img src="images/Laguna logo/laguna logo white.png" alt="Lagūna" id="nav-logo-img" /></a>
     <ul>
-      <li><a href="#apie">Apie mus</a></li>
-      <li><a href="#kambariai">Apartamentai</a></li>
-      <li><a href="#restoranas">Restoranas</a></li>
-      <li><a href="#galerija">Galerija</a></li>
-      <li><a href="#duk">DUK</a></li>
-      <li><a href="#kontaktai">Kontaktai</a></li>
+      <li><a href="#apie" data-i18n="nav_about">Apie mus</a></li>
+      <li><a href="#kambariai" data-i18n="nav_rooms">Apartamentai</a></li>
+      <li><a href="#restoranas" data-i18n="nav_resto">Restoranas</a></li>
+      <li><a href="#galerija" data-i18n="nav_gallery">Galerija</a></li>
+      <li><a href="#duk" data-i18n="nav_faq">DUK</a></li>
+      <li><a href="#kontaktai" data-i18n="nav_contact">Kontaktai</a></li>
     </ul>
-    <a href="https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt" target="_blank" rel="noopener" class="nav-cta">Rezervuoti</a>
-    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    <a href="https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt" target="_blank" rel="noopener" class="nav-cta" data-i18n="cta_book">Rezervuoti</a>
+    <div class="lang-switch"><button class="lang-btn active" id="lang-lt" onclick="setLang('lt')">LT</button><span class="lang-sep">|</span><button class="lang-btn" id="lang-en" onclick="setLang('en')">EN</button></div><button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
 <div id="mobile-menu">
   <button class="m-close" id="m-close">&times;</button>
-  <a href="#apie" class="ml">Apie mus</a>
-  <a href="#kambariai" class="ml">Apartamentai</a>
-  <a href="#restoranas" class="ml">Restoranas</a>
-  <a href="#galerija" class="ml">Galerija</a>
-  <a href="#kontaktai" class="ml">Kontaktai</a>
-  <a href="https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt" target="_blank" rel="noopener" class="m-cta ml">Rezervuoti</a>
+  <a href="#apie" class="ml" data-i18n="nav_about">Apie mus</a>
+  <a href="#kambariai" class="ml" data-i18n="nav_rooms">Apartamentai</a>
+  <a href="#restoranas" class="ml" data-i18n="nav_resto">Restoranas</a>
+  <a href="#galerija" class="ml" data-i18n="nav_gallery">Galerija</a>
+  <a href="#kontaktai" class="ml" data-i18n="nav_contact">Kontaktai</a>
+  <a href="https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt" target="_blank" rel="noopener" class="m-cta ml" data-i18n="cta_book">Rezervuoti</a>
 </div>
 
 <!-- ═══ HERO ═══ -->
@@ -507,16 +516,16 @@
   <div class="hero-bg"><img src="images/Skrydis/header croped.jpg" alt="Lagūna Šventoji" id="hero-img" /></div>
   <div class="hero-center">
     <div class="hero-text-wrap">
-      <h1>Tarp jūros, uosto<br /><em>ir pušyno</em></h1>
+      <h1 data-i18n-html="hero_h1">Tarp jūros, uosto<br /><em>ir pušyno</em></h1>
       <p class="hero-sub">Modernūs apartamentai ir restoranas Šventojoje.<br />Vos 50 metrų nuo Baltijos jūros kopų.</p>
       <div class="bw-wrap">
-        <span class="bw-label">Pasirinkite datas ir apartamento tipą</span>
+        <span class="bw-label" data-i18n="bw_label">Pasirinkite datas ir apartamento tipą</span>
         <div class="bw-card">
           <div class="bw-form">
-            <div class="bw-field"><label for="bw-from">Atvykimas</label><input type="date" id="bw-from" /></div>
-            <div class="bw-field"><label for="bw-to">Išvykimas</label><input type="date" id="bw-to" /></div>
+            <div class="bw-field"><label for="bw-from" data-i18n="bw_from">Atvykimas</label><input type="date" id="bw-from" /></div>
+            <div class="bw-field"><label for="bw-to" data-i18n="bw_to">Išvykimas</label><input type="date" id="bw-to" /></div>
             <div class="bw-field">
-              <label for="bw-adults">Suaugę</label>
+              <label for="bw-adults" data-i18n="bw_adults">Suaugę</label>
               <select id="bw-adults">
                 <option value="1">1</option>
                 <option value="2" selected>2</option>
@@ -527,7 +536,7 @@
               </select>
             </div>
             <div class="bw-field">
-              <label for="bw-children">Vaikai</label>
+              <label for="bw-children" data-i18n="bw_children">Vaikai</label>
               <select id="bw-children">
                 <option value="0" selected>0</option>
                 <option value="1">1</option>
@@ -537,7 +546,7 @@
                 <option value="5">5</option>
               </select>
             </div>
-            <button class="bw-btn" onclick="goToBooking()">Tikrinti</button>
+            <button class="bw-btn" onclick="goToBooking()" data-i18n="bw_check">Tikrinti</button>
           </div>
         </div>
       </div>
@@ -550,13 +559,13 @@
 
 <!-- ═══ MOBILE BOOKING ═══ -->
 <div id="mobile-booking">
-  <span class="bw-label">Pasirinkite datas ir rezervuokite</span>
+  <span class="bw-label" data-i18n="bw_label2">Pasirinkite datas ir rezervuokite</span>
   <div class="bw-card">
     <div class="bw-form">
-      <div class="bw-field"><label for="mbw-from">Atvykimas</label><input type="date" id="mbw-from" /></div>
-      <div class="bw-field"><label for="mbw-to">Išvykimas</label><input type="date" id="mbw-to" /></div>
+      <div class="bw-field"><label for="mbw-from" data-i18n="bw_from">Atvykimas</label><input type="date" id="mbw-from" /></div>
+      <div class="bw-field"><label for="mbw-to" data-i18n="bw_to">Išvykimas</label><input type="date" id="mbw-to" /></div>
       <div class="bw-field">
-        <label for="mbw-adults">Suaugę</label>
+        <label for="mbw-adults" data-i18n="bw_adults">Suaugę</label>
         <select id="mbw-adults">
           <option value="1">1</option>
           <option value="2" selected>2</option>
@@ -567,7 +576,7 @@
         </select>
       </div>
       <div class="bw-field">
-        <label for="mbw-children">Vaikai</label>
+        <label for="mbw-children" data-i18n="bw_children">Vaikai</label>
         <select id="mbw-children">
           <option value="0" selected>0</option>
           <option value="1">1</option>
@@ -584,24 +593,24 @@
 
 <!-- ═══ STATS BAND ═══ -->
 <div id="stats-band">
-  <div class="sband-item"><div class="sband-num">50 m iki kopų</div></div>
-  <div class="sband-item"><div class="sband-num">apartamentai iki 43 kv. m.</div></div>
-  <div class="sband-item"><div class="sband-num">vaikų žaidimų aikštelė</div></div>
-  <div class="sband-item"><div class="sband-num">restoranas</div></div>
+  <div class="sband-item"><div class="sband-num" data-i18n="stats_sea">50 m iki kopų</div></div>
+  <div class="sband-item"><div class="sband-num" data-i18n="stats_size">apartamentai iki 43 kv. m.</div></div>
+  <div class="sband-item"><div class="sband-num" data-i18n="stats_play">vaikų žaidimų aikštelė</div></div>
+  <div class="sband-item"><div class="sband-num" data-i18n="stats_resto">restoranas</div></div>
 </div>
 
 <!-- ═══ APIE ═══ -->
 <section id="apie">
   <div class="about-text">
     <div class="about-inner">
-      <span class="section-label">Apie mus</span>
-      <h2 class="fade-up">Jūros, uosto ir pušyno apsuptas poilsis</h2>
+      <span class="section-label" data-i18n="nav_about">Apie mus</span>
+      <h2 class="fade-up" data-i18n="about_h2">Jūros, uosto ir pušyno apsuptas poilsis</h2>
       <div class="divider"></div>
       <div class="about-cols">
-        <p class="fade-up d1">Lagūna – modernus apartamentų kompleksas vienoje gražiausių Šventosios vietų, kviečiantis patirti tikrą pajūrio poilsį. Čia jūsų laukia viskas, ko reikia tobuloms atostogoms: jaukūs šeimyniniai apartamentai su visais patogumais, vaikų žaidimų aikštelė, autentiškas restoranas ir ypatinga, tik pakrantei būdinga atmosfera.</p>
-        <p class="fade-up d2">Mūsų apartamentai sukurti taip, kad kiekvienas rastų sau idealų pasirinkimą – nuo jaukių dviviečių iki erdvių šešiaviečių. Visuose įrengtos virtuvėlės, todėl galėsite mėgautis tiek trumpu savaitgalio pabėgimu, tiek ilgesniu, ramiu poilsiu prie jūros.</p>
+        <p class="fade-up d1" data-i18n-html="about_p1">Lagūna – modernus apartamentų kompleksas vienoje gražiausių Šventosios vietų, kviečiantis patirti tikrą pajūrio poilsį. Čia jūsų laukia viskas, ko reikia tobuloms atostogoms: jaukūs šeimyniniai apartamentai su visais patogumais, vaikų žaidimų aikštelė, autentiškas restoranas ir ypatinga, tik pakrantei būdinga atmosfera.</p>
+        <p class="fade-up d2" data-i18n-html="about_p2">Mūsų apartamentai sukurti taip, kad kiekvienas rastų sau idealų pasirinkimą – nuo jaukių dviviečių iki erdvių šešiaviečių. Visuose įrengtos virtuvėlės, todėl galėsite mėgautis tiek trumpu savaitgalio pabėgimu, tiek ilgesniu, ramiu poilsiu prie jūros.</p>
       </div>
-      <a href="https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt" target="_blank" rel="noopener" class="btn-primary fade-up d3" style="margin-top:1.8rem;display:inline-block">Rezervuoti</a>
+      <a href="https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt" target="_blank" rel="noopener" class="btn-primary fade-up d3" style="margin-top:1.8rem;display:inline-block"data-i18n="cta_book">Rezervuoti</a>
     </div>
   </div>
 </section>
@@ -610,46 +619,46 @@
 <section id="kambariai">
   <div class="container">
     <div class="rooms-header">
-      <span class="section-label">Apartamentai</span>
-      <h2 class="fade-up">Išsirinkite sau tinkamiausią</h2>
+      <span class="section-label" data-i18n="nav_rooms">Apartamentai</span>
+      <h2 class="fade-up" data-i18n="rooms_h2">Išsirinkite sau tinkamiausią</h2>
       <div class="amenity-icons fade-up d1">
-        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path d="M3 9V6a1 1 0 011-1h4v4H3z"/><path d="M3 9h7v11H4a1 1 0 01-1-1V9z"/><path d="M10 5h4a1 1 0 011 1v14H10V5z"/><path d="M15 8h2a2 2 0 012 2v9a1 1 0 01-1 1h-3V8z"/></svg>Balkonas / Terasa</span>
-        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Televizorius 32"</span>
-        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path d="M5 12.55a11 11 0 0114 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01"/></svg>Bevielis internetas</span>
-        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path d="M4 12h1m14 0h1M12 4v1m0 14v1M6.3 6.3l.7.7m10 10l.7.7M6.3 17.7l.7-.7m10-10l.7-.7"/><circle cx="12" cy="12" r="4"/><path d="M5 12a7 7 0 016-6.93"/></svg>Privatus vonios kambarys</span>
-        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/><circle cx="8.5" cy="14" r="1.5"/><circle cx="15.5" cy="14" r="1.5"/></svg>Elektrinė viryklė</span>
-        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M5 10h14"/><path d="M9 6h2"/><circle cx="16" cy="16" r="1.5"/></svg>Šaldytuvas su šaldymo kamera</span>
-        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/><circle cx="8" cy="15" r="1"/><circle cx="12" cy="15" r="1"/></svg>Mikrobangų krosnelė</span>
-        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path d="M8 3v2m4-2v2m4-2v2"/><path d="M3 8h18v2a9 9 0 01-18 0V8z"/><path d="M8 19h8"/></svg>Valgymo reikmenys</span>
-        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path d="M2 12h2m16 0h2M7 6a5 5 0 0110 0v6H7V6z"/><path d="M7 12v3a2 2 0 002 2h6a2 2 0 002-2v-3"/><path d="M10 18v2m4-2v2"/></svg>Puodai ir keptuvė</span>
-        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path d="M3 9h18v10a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path d="M3 9V7a2 2 0 012-2h14a2 2 0 012 2v2"/><path d="M12 12v5"/></svg>Rankšluosčiai ir patalynė</span>
-        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path d="M4 4h10a4 4 0 010 8H4V4z"/><path d="M4 8h10"/><path d="M14 12l3 5"/><path d="M17 17h3"/><circle cx="8" cy="8" r="1.5" fill="currentColor" stroke="none"/></svg>Plaukų džiovintuvas</span>
+        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path d="M3 9V6a1 1 0 011-1h4v4H3z"/><path d="M3 9h7v11H4a1 1 0 01-1-1V9z"/><path d="M10 5h4a1 1 0 011 1v14H10V5z"/><path d="M15 8h2a2 2 0 012 2v9a1 1 0 01-1 1h-3V8z"/></svg data-i18n="am_balcony">Balkonas / Terasa</span>
+        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg data-i18n="am_tv">Televizorius 32"</span>
+        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path d="M5 12.55a11 11 0 0114 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01"/></svg data-i18n="am_wifi">Bevielis internetas</span>
+        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path d="M4 12h1m14 0h1M12 4v1m0 14v1M6.3 6.3l.7.7m10 10l.7.7M6.3 17.7l.7-.7m10-10l.7-.7"/><circle cx="12" cy="12" r="4"/><path d="M5 12a7 7 0 016-6.93"/></svg data-i18n="am_bath">Privatus vonios kambarys</span>
+        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/><circle cx="8.5" cy="14" r="1.5"/><circle cx="15.5" cy="14" r="1.5"/></svg data-i18n="am_stove">Elektrinė viryklė</span>
+        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M5 10h14"/><path d="M9 6h2"/><circle cx="16" cy="16" r="1.5"/></svg data-i18n="am_fridge">Šaldytuvas su šaldymo kamera</span>
+        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/><circle cx="8" cy="15" r="1"/><circle cx="12" cy="15" r="1"/></svg data-i18n="am_micro">Mikrobangų krosnelė</span>
+        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path d="M8 3v2m4-2v2m4-2v2"/><path d="M3 8h18v2a9 9 0 01-18 0V8z"/><path d="M8 19h8"/></svg data-i18n="am_cutlery">Valgymo reikmenys</span>
+        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path d="M2 12h2m16 0h2M7 6a5 5 0 0110 0v6H7V6z"/><path d="M7 12v3a2 2 0 002 2h6a2 2 0 002-2v-3"/><path d="M10 18v2m4-2v2"/></svg data-i18n="am_pots">Puodai ir keptuvė</span>
+        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path d="M3 9h18v10a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path d="M3 9V7a2 2 0 012-2h14a2 2 0 012 2v2"/><path d="M12 12v5"/></svg data-i18n="am_towels">Rankšluosčiai ir patalynė</span>
+        <span class="amenity-icon"><svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path d="M4 4h10a4 4 0 010 8H4V4z"/><path d="M4 8h10"/><path d="M14 12l3 5"/><path d="M17 17h3"/><circle cx="8" cy="8" r="1.5" fill="currentColor" stroke="none"/></svg data-i18n="am_hairdryer">Plaukų džiovintuvas</span>
       </div>
     </div>
     <div class="price-note fade-up d2">
       <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" d="M12 8v4m0 4h.01"/></svg>
-      <span>Kainos orientacinės ir nurodytos už parą. <strong>Ne sezono metu</strong> — iki birželio vidurio ir nuo rugsėjo pradžios. <strong>Sezono metu</strong> — liepos pradžia – rugpjūčio pabaiga. Tiksli kaina bus rodoma rezervacijos sistemoje.</span>
+      <span data-i18n-html="price_note">Kainos orientacinės ir nurodytos už parą. <strong>Ne sezono metu</strong> — iki birželio vidurio ir nuo rugsėjo pradžios. <strong>Sezono metu</strong> — liepos pradžia – rugpjūčio pabaiga. Tiksli kaina bus rodoma rezervacijos sistemoje.</span>
     </div>
     <div class="rooms-filter-wrap fade-up d2">
       <div class="rf-row">
-        <span class="rf-row-label">Apartamentai:</span>
+        <span class="rf-row-label" data-i18n="filter_apts">Apartamentai:</span>
         <div class="rf-pills" id="cap-pills">
-          <button class="rf-pill active" onclick="filterCap('all',this)">Visi</button>
-          <button class="rf-pill" onclick="filterCap('2',this)">Dviviečiai</button>
-          <button class="rf-pill" onclick="filterCap('3',this)">Triviečiai</button>
-          <button class="rf-pill" onclick="filterCap('4',this)">Keturviečiai</button>
-          <button class="rf-pill" onclick="filterCap('6',this)">Šešiaviečiai</button>
+          <button class="rf-pill active" onclick="filterCap('all',this)" data-i18n="pill_all">Visi</button>
+          <button class="rf-pill" onclick="filterCap('2',this)" data-i18n="pill_2bed">Dviviečiai</button>
+          <button class="rf-pill" onclick="filterCap('3',this)" data-i18n="pill_3bed">Triviečiai</button>
+          <button class="rf-pill" onclick="filterCap('4',this)" data-i18n="pill_4bed">Keturviečiai</button>
+          <button class="rf-pill" onclick="filterCap('6',this)" data-i18n="pill_6bed">Šešiaviečiai</button>
         </div>
       </div>
       <div class="rf-row">
-        <span class="rf-row-label">Filtrai:</span>
+        <span class="rf-row-label" data-i18n="filter_filters">Filtrai:</span>
         <div class="rf-pills" id="feat-pills">
-          <button class="rf-pill feat-pill active" onclick="filterFeat('all',this)">Visi</button>
-          <button class="rf-pill feat-pill" onclick="filterFeat('studio',this)">Studio</button>
-          <button class="rf-pill feat-pill" onclick="filterFeat('lux',this)">Vienas miegamasis</button>
-          <button class="rf-pill feat-pill" onclick="filterFeat('delux',this)">Du miegamieji</button>
-          <button class="rf-pill feat-pill" onclick="filterFeat('ac',this)">Kondicionierius &amp; palydovinė TV</button>
-          <button class="rf-pill feat-pill" onclick="filterFeat('pusyna',this)">Su vaizdu į pušyną</button>
+          <button class="rf-pill feat-pill active" onclick="filterFeat('all',this)" data-i18n="pill_all">Visi</button>
+          <button class="rf-pill feat-pill" onclick="filterFeat('studio',this)" data-i18n="pill_studio">Studio</button>
+          <button class="rf-pill feat-pill" onclick="filterFeat('lux',this)" data-i18n="pill_one">Vienas miegamasis</button>
+          <button class="rf-pill feat-pill" onclick="filterFeat('delux',this)" data-i18n="pill_two">Du miegamieji</button>
+          <button class="rf-pill feat-pill" onclick="filterFeat('ac',this)" data-i18n="pill_ac">Kondicionierius &amp; palydovinė TV</button>
+          <button class="rf-pill feat-pill" onclick="filterFeat('pusyna',this)" data-i18n="pill_forest">Su vaizdu į pušyną</button>
         </div>
       </div>
     </div>
@@ -672,12 +681,12 @@
         <div class="room-body">
           <h3>Dvivietis Mini</h3>
           <ul class="room-features">
-            <li>Studijos tipo išplanavimas</li>
-            <li>Dvi viengulės lovos</li>
+            <li data-i18n="feat_studio">Studijos tipo išplanavimas</li>
+            <li data-i18n="feat_2single">Dvi viengulės lovos</li>
           </ul>
           <div class="room-price">
-            <span><small>ne sezono metu</small><strong>nuo 65 Eur/nakvynė</strong></span>
-            <span><small>sezono metu</small><strong>nuo 90 Eur/nakvynė</strong></span>
+            <span><small data-i18n="price_off">ne sezono metu</small><strong>nuo 65 Eur/nakvynė</strong></span>
+            <span><small data-i18n="price_peak">sezono metu</small><strong>nuo 90 Eur/nakvynė</strong></span>
           </div>
         </div>
       </div>
@@ -699,12 +708,12 @@
         <div class="room-body">
           <h3>Dvivietis Studio</h3>
           <ul class="room-features">
-            <li>Studijos tipo išplanavimas</li>
-            <li>Dvigulė lova</li>
+            <li data-i18n="feat_studio">Studijos tipo išplanavimas</li>
+            <li data-i18n="feat_double">Dvigulė lova</li>
           </ul>
           <div class="room-price">
-            <span><small>ne sezono metu</small><strong>nuo 70 Eur/nakvynė</strong></span>
-            <span><small>sezono metu</small><strong>nuo 100 Eur/nakvynė</strong></span>
+            <span><small data-i18n="price_off">ne sezono metu</small><strong>nuo 70 Eur/nakvynė</strong></span>
+            <span><small data-i18n="price_peak">sezono metu</small><strong>nuo 100 Eur/nakvynė</strong></span>
           </div>
         </div>
       </div>
@@ -726,12 +735,12 @@
         <div class="room-body">
           <h3>Trivietis Studio</h3>
           <ul class="room-features">
-            <li>Studijos tipo išplanavimas</li>
-            <li>Dvigulė ir viengulė lova</li>
+            <li data-i18n="feat_studio">Studijos tipo išplanavimas</li>
+            <li data-i18n="feat_dbl_sgl">Dvigulė ir viengulė lova</li>
           </ul>
           <div class="room-price">
-            <span><small>ne sezono metu</small><strong>nuo 70 Eur/nakvynė</strong></span>
-            <span><small>sezono metu</small><strong>nuo 100 Eur/nakvynė</strong></span>
+            <span><small data-i18n="price_off">ne sezono metu</small><strong>nuo 70 Eur/nakvynė</strong></span>
+            <span><small data-i18n="price_peak">sezono metu</small><strong>nuo 100 Eur/nakvynė</strong></span>
           </div>
         </div>
       </div>
@@ -753,12 +762,12 @@
         <div class="room-body">
           <h3>Keturvietis Studio</h3>
           <ul class="room-features">
-            <li>Studijos tipo išplanavimas</li>
-            <li>Dvi dvigulės lovos</li>
+            <li data-i18n="feat_studio">Studijos tipo išplanavimas</li>
+            <li data-i18n="feat_2double">Dvi dvigulės lovos</li>
           </ul>
           <div class="room-price">
-            <span><small>ne sezono metu</small><strong>nuo 75 Eur/nakvynė</strong></span>
-            <span><small>sezono metu</small><strong>nuo 105 Eur/nakvynė</strong></span>
+            <span><small data-i18n="price_off">ne sezono metu</small><strong>nuo 75 Eur/nakvynė</strong></span>
+            <span><small data-i18n="price_peak">sezono metu</small><strong>nuo 105 Eur/nakvynė</strong></span>
           </div>
         </div>
       </div>
@@ -779,12 +788,12 @@
         <div class="room-body">
           <h3>Keturvietis LUX</h3>
           <ul class="room-features">
-            <li>Vienas uždaras miegamasis</li>
-            <li>Dvigulė lova ir dvi viengulės lovos</li>
+            <li data-i18n="feat_1bed">Vienas uždaras miegamasis</li>
+            <li data-i18n="feat_dbl2sgl">Dvigulė lova ir dvi viengulės lovos</li>
           </ul>
           <div class="room-price">
-            <span><small>ne sezono metu</small><strong>nuo 80 Eur/nakvynė</strong></span>
-            <span><small>sezono metu</small><strong>nuo 115 Eur/nakvynė</strong></span>
+            <span><small data-i18n="price_off">ne sezono metu</small><strong>nuo 80 Eur/nakvynė</strong></span>
+            <span><small data-i18n="price_peak">sezono metu</small><strong>nuo 115 Eur/nakvynė</strong></span>
           </div>
         </div>
       </div>
@@ -806,12 +815,12 @@
         <div class="room-body">
           <h3>Keturvietis Delux</h3>
           <ul class="room-features">
-            <li>Du uždari miegamieji</li>
-            <li>Dvigulė lova ir dvi viengulės lovos</li>
+            <li data-i18n="feat_2bed">Du uždari miegamieji</li>
+            <li data-i18n="feat_dbl2sgl">Dvigulė lova ir dvi viengulės lovos</li>
           </ul>
           <div class="room-price">
-            <span><small>ne sezono metu</small><strong>nuo 85 Eur/nakvynė</strong></span>
-            <span><small>sezono metu</small><strong>nuo 120 Eur/nakvynė</strong></span>
+            <span><small data-i18n="price_off">ne sezono metu</small><strong>nuo 85 Eur/nakvynė</strong></span>
+            <span><small data-i18n="price_peak">sezono metu</small><strong>nuo 120 Eur/nakvynė</strong></span>
           </div>
         </div>
       </div>
@@ -833,13 +842,13 @@
         <div class="room-body">
           <h3>Šešiavietis</h3>
           <ul class="room-features">
-            <li>Vienas uždaras miegamasis</li>
-            <li>Dvigulė lova ir dvi viengulės lovos</li>
-            <li>Sofa-lova</li>
+            <li data-i18n="feat_1bed">Vienas uždaras miegamasis</li>
+            <li data-i18n="feat_dbl2sgl">Dvigulė lova ir dvi viengulės lovos</li>
+            <li data-i18n="feat_sofa">Sofa-lova</li>
           </ul>
           <div class="room-price">
-            <span><small>ne sezono metu</small><strong>nuo 110 Eur/nakvynė</strong></span>
-            <span><small>sezono metu</small><strong>nuo 135 Eur/nakvynė</strong></span>
+            <span><small data-i18n="price_off">ne sezono metu</small><strong>nuo 110 Eur/nakvynė</strong></span>
+            <span><small data-i18n="price_peak">sezono metu</small><strong>nuo 135 Eur/nakvynė</strong></span>
           </div>
         </div>
       </div>
@@ -861,15 +870,15 @@
         <div class="room-body">
           <h3>Trivietis Premium</h3>
           <ul class="room-features">
-            <li>Uždaras miegamasis</li>
-            <li>Dvigulė ir viengulė lova</li>
-            <li>Oro kondicionierius</li>
-            <li>Palydovinė TV</li>
-            <li>Su vaizdu į pušyną</li>
+            <li data-i18n="feat_1bed_s">Uždaras miegamasis</li>
+            <li data-i18n="feat_dbl_sgl">Dvigulė ir viengulė lova</li>
+            <li data-i18n="feat_ac">Oro kondicionierius</li>
+            <li data-i18n="feat_sat">Palydovinė TV</li>
+            <li data-i18n="feat_forest">Su vaizdu į pušyną</li>
           </ul>
           <div class="room-price">
-            <span><small>ne sezono metu</small><strong>nuo 75 Eur/nakvynė</strong></span>
-            <span><small>sezono metu</small><strong>nuo 110 Eur/nakvynė</strong></span>
+            <span><small data-i18n="price_off">ne sezono metu</small><strong>nuo 75 Eur/nakvynė</strong></span>
+            <span><small data-i18n="price_peak">sezono metu</small><strong>nuo 110 Eur/nakvynė</strong></span>
           </div>
         </div>
       </div>
@@ -891,15 +900,15 @@
         <div class="room-body">
           <h3>Keturvietis Lux Premium</h3>
           <ul class="room-features">
-            <li>Vienas uždaras miegamasis</li>
-            <li>Dvigulė lova ir dvi viengulės lovos</li>
-            <li>Oro kondicionierius</li>
-            <li>Palydovinė TV</li>
+            <li data-i18n="feat_1bed">Vienas uždaras miegamasis</li>
+            <li data-i18n="feat_dbl2sgl">Dvigulė lova ir dvi viengulės lovos</li>
+            <li data-i18n="feat_ac">Oro kondicionierius</li>
+            <li data-i18n="feat_sat">Palydovinė TV</li>
             <li>Su vaizdu į pušyną (už papildomą mokestį)</li>
           </ul>
           <div class="room-price">
-            <span><small>ne sezono metu</small><strong>nuo 85 Eur/nakvynė</strong></span>
-            <span><small>sezono metu</small><strong>nuo 125 Eur/nakvynė</strong></span>
+            <span><small data-i18n="price_off">ne sezono metu</small><strong>nuo 85 Eur/nakvynė</strong></span>
+            <span><small data-i18n="price_peak">sezono metu</small><strong>nuo 125 Eur/nakvynė</strong></span>
           </div>
         </div>
       </div>
@@ -921,15 +930,15 @@
         <div class="room-body">
           <h3>Keturvietis Delux Premium</h3>
           <ul class="room-features">
-            <li>Du uždari miegamieji</li>
-            <li>Dvigulė lova ir dvi viengulės lovos</li>
-            <li>Oro kondicionierius</li>
-            <li>Palydovinė TV</li>
+            <li data-i18n="feat_2bed">Du uždari miegamieji</li>
+            <li data-i18n="feat_dbl2sgl">Dvigulė lova ir dvi viengulės lovos</li>
+            <li data-i18n="feat_ac">Oro kondicionierius</li>
+            <li data-i18n="feat_sat">Palydovinė TV</li>
             <li>Su vaizdu į pušyną (už papildomą mokestį)</li>
           </ul>
           <div class="room-price">
-            <span><small>ne sezono metu</small><strong>nuo 90 Eur/nakvynė</strong></span>
-            <span><small>sezono metu</small><strong>nuo 130 Eur/nakvynė</strong></span>
+            <span><small data-i18n="price_off">ne sezono metu</small><strong>nuo 90 Eur/nakvynė</strong></span>
+            <span><small data-i18n="price_peak">sezono metu</small><strong>nuo 130 Eur/nakvynė</strong></span>
           </div>
         </div>
       </div>
@@ -951,14 +960,14 @@
         <div class="room-body">
           <h3>Keturvietis Delux Premium 2×2</h3>
           <ul class="room-features">
-            <li>Du uždari miegamieji</li>
-            <li>Dvi dvigulės lovos</li>
-            <li>Oro kondicionierius</li>
-            <li>Palydovinė TV</li>
+            <li data-i18n="feat_2bed">Du uždari miegamieji</li>
+            <li data-i18n="feat_2double">Dvi dvigulės lovos</li>
+            <li data-i18n="feat_ac">Oro kondicionierius</li>
+            <li data-i18n="feat_sat">Palydovinė TV</li>
           </ul>
           <div class="room-price">
-            <span><small>ne sezono metu</small><strong>nuo 90 Eur/nakvynė</strong></span>
-            <span><small>sezono metu</small><strong>nuo 145 Eur/nakvynė</strong></span>
+            <span><small data-i18n="price_off">ne sezono metu</small><strong>nuo 90 Eur/nakvynė</strong></span>
+            <span><small data-i18n="price_peak">sezono metu</small><strong>nuo 145 Eur/nakvynė</strong></span>
           </div>
         </div>
       </div>
@@ -982,12 +991,12 @@
   <div class="container">
 
     <div class="resto-header fade-up">
-      <span class="section-label">Restoranas</span>
-      <h2>Skoniai, <em>įkvėpti jūros</em></h2>
-      <p>Lagūna Resto – vieta, kur skonis susilieja su jūros nuotaika. Čia jūsų laukia itališkos picos, žuvies ir mėsos patiekalai, o nuolat atnaujinamas veganiškas meniu užtikrina platų pasirinkimą kiekvieno apsilankymo metu.<br><br>Mažieji svečiai taip pat neliks pamiršti – jų laukia atskiras meniu ir erdvi lauko žaidimų aikštelė terasoje. Vasarą visa patirtis persikelia į atvirą terasą po dangumi, kur maistas dar skanesnis, o tempas – daug lėtesnis.</p>
+      <span class="section-label" data-i18n="nav_resto">Restoranas</span>
+      <h2 data-i18n-html="resto_h2">Skoniai, <em>įkvėpti jūros</em></h2>
+      <p data-i18n-html="resto_p">Lagūna Resto – vieta, kur skonis susilieja su jūros nuotaika. Čia jūsų laukia itališkos picos, žuvies ir mėsos patiekalai, o nuolat atnaujinamas veganiškas meniu užtikrina platų pasirinkimą kiekvieno apsilankymo metu.<br><br>Mažieji svečiai taip pat neliks pamiršti – jų laukia atskiras meniu ir erdvi lauko žaidimų aikštelė terasoje. Vasarą visa patirtis persikelia į atvirą terasą po dangumi, kur maistas dar skanesnis, o tempas – daug lėtesnis.</p>
       <div class="resto-opening">
         <span class="resto-opening-dot"></span>
-        <span>Restoranas dirba nuo birželio iki rugsėjo</span>
+        <span data-i18n="resto_badge">Restoranas dirba nuo birželio iki rugsėjo</span>
       </div>
     </div>
 
@@ -1016,9 +1025,9 @@
 
     <div class="resto-bottom fade-up">
       <div class="resto-times">
-        <div class="resto-time-item"><span class="resto-time-label">Pusryčiai</span><span class="resto-time-val">8:30 – 12:00</span></div>
-        <div class="resto-time-item"><span class="resto-time-label">Virtuvė</span><span class="resto-time-val">iki 21:00</span></div>
-        <div class="resto-time-item"><span class="resto-time-label">Baras</span><span class="resto-time-val">iki 22:00</span></div>
+        <div class="resto-time-item"><span class="resto-time-label" data-i18n="time_breakfast">Pusryčiai</span><span class="resto-time-val">8:30 – 12:00</span></div>
+        <div class="resto-time-item"><span class="resto-time-label" data-i18n="time_kitchen">Virtuvė</span><span class="resto-time-val" data-i18n="time_until21">iki 21:00</span></div>
+        <div class="resto-time-item"><span class="resto-time-label" data-i18n="time_bar">Baras</span><span class="resto-time-val" data-i18n="time_until22">iki 22:00</span></div>
       </div>
       <div class="resto-ctas">
         <div class="resto-ctas-event">
@@ -1059,9 +1068,9 @@
 <section id="video">
   <div class="container">
     <div class="yt-header fade-up">
-      <span class="section-label">Lagūna iš arti</span>
-      <h2 style="color:#fff">Pajuskite Lagūnos dvasią</h2>
-      <p>Žiūrėkite kaip atrodo mūsų kompleksas ir aplinka</p>
+      <span class="section-label" data-i18n="vid_label">Lagūna iš arti</span>
+      <h2 style="color:#fff" data-i18n="vid_h2">Pajuskite Lagūnos dvasią</h2>
+      <p data-i18n="vid_sub">Žiūrėkite kaip atrodo mūsų kompleksas ir aplinka</p>
     </div>
     <div class="yt-embed-wrap fade-up d1">
       <iframe width="560" height="315" src="https://www.youtube.com/embed/gJ_2ec-jCNA?si=unBvhgQdlu-PyWiY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -1073,9 +1082,9 @@
 <section id="galerija" class="section section--light">
   <div class="container">
     <div class="gal-header">
-      <span class="section-label">Galerija</span>
-      <h2 class="fade-up">Apartamentai ir aplinka</h2>
-      <p class="fade-up d1">Visi apartamentų tipai ir komplekso aplinka Šventojoje</p>
+      <span class="section-label" data-i18n="nav_gallery">Galerija</span>
+      <h2 class="fade-up" data-i18n="gal_h2">Apartamentai ir aplinka</h2>
+      <p class="fade-up d1" data-i18n="gal_sub">Visi apartamentų tipai ir komplekso aplinka Šventojoje</p>
     </div>
     <div class="gal-grid" id="gal-grid">
       <!-- VISIBLE: first 12 -->
@@ -1118,7 +1127,7 @@
       <div class="gal-item" data-extra><img src="images/11. Keturvietis Delux Premium 2x2/0Z7A6568.jpg" alt="Delux Premium 2×2" loading="lazy" /><div class="ov"><svg class="ov-icon" width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg></div><span class="gal-label">Delux Premium 2×2</span></div>
     </div>
     <div class="gal-load-wrap">
-      <button class="gal-load-btn" id="gal-load-btn" onclick="galLoadMore()">Daugiau nuotraukų</button>
+      <button class="gal-load-btn" id="gal-load-btn" onclick="galLoadMore()" data-i18n="gal_more">Daugiau nuotraukų</button>
     </div>
   </div>
 </section>
@@ -1147,15 +1156,15 @@
 <section id="duk">
   <div class="container">
     <div class="duk-header">
-      <span class="section-label">Pagalba</span>
-      <h2 class="fade-up">Dažniausiai užduodami klausimai</h2>
-      <p class="fade-up d1">Neradote atsakymo? Susisiekite su mumis tiesiogiai — mielai padėsime.</p>
+      <span class="section-label" data-i18n="faq_label">Pagalba</span>
+      <h2 class="fade-up" data-i18n="faq_h2">Dažniausiai užduodami klausimai</h2>
+      <p class="fade-up d1" data-i18n="faq_sub">Neradote atsakymo? Susisiekite su mumis tiesiogiai — mielai padėsime.</p>
     </div>
     <div class="duk-list fade-up d2">
 
       <div class="duk-item">
         <button class="duk-q" onclick="dukToggle(this)">
-          Kada galiu įsiregistruoti ir išsiregistruoti?
+          <span data-i18n="faq_q1">Kada galiu įsiregistruoti ir išsiregistruoti?</span>
           <span class="duk-icon"></span>
         </button>
         <div class="duk-a">
@@ -1167,7 +1176,7 @@
 
       <div class="duk-item">
         <button class="duk-q" onclick="dukToggle(this)">
-          Ar mokama miesto rinkliava?
+          <span data-i18n="faq_q2">Ar mokama miesto rinkliava?</span>
           <span class="duk-icon"></span>
         </button>
         <div class="duk-a">
@@ -1177,7 +1186,7 @@
 
       <div class="duk-item">
         <button class="duk-q" onclick="dukToggle(this)">
-          Ką būtina turėti atvykus?
+          <span data-i18n="faq_q3">Ką būtina turėti atvykus?</span>
           <span class="duk-icon"></span>
         </button>
         <div class="duk-a">
@@ -1190,7 +1199,7 @@
 
       <div class="duk-item">
         <button class="duk-q" onclick="dukToggle(this)">
-          Ar yra vietos parkavimui?
+          <span data-i18n="faq_q4">Ar yra vietos parkavimui?</span>
           <span class="duk-icon"></span>
         </button>
         <div class="duk-a">
@@ -1201,7 +1210,7 @@
 
       <div class="duk-item">
         <button class="duk-q" onclick="dukToggle(this)">
-          Koks avansas reikalingas rezervacijai?
+          <span data-i18n="faq_q5">Koks avansas reikalingas rezervacijai?</span>
           <span class="duk-icon"></span>
         </button>
         <div class="duk-a">
@@ -1214,7 +1223,7 @@
 
       <div class="duk-item">
         <button class="duk-q" onclick="dukToggle(this)">
-          Ar galiu atšaukti rezervaciją arba keisti datas?
+          <span data-i18n="faq_q6">Ar galiu atšaukti rezervaciją arba keisti datas?</span>
           <span class="duk-icon"></span>
         </button>
         <div class="duk-a">
@@ -1231,7 +1240,7 @@
 
       <div class="duk-item">
         <button class="duk-q" onclick="dukToggle(this)">
-          Ar galiu atvykti su augintiniu?
+          <span data-i18n="faq_q7">Ar galiu atvykti su augintiniu?</span>
           <span class="duk-icon"></span>
         </button>
         <div class="duk-a">
@@ -1241,7 +1250,7 @@
 
       <div class="duk-item">
         <button class="duk-q" onclick="dukToggle(this)">
-          Ar galima vėliau išvykti?
+          <span data-i18n="faq_q8">Ar galima vėliau išvykti?</span>
           <span class="duk-icon"></span>
         </button>
         <div class="duk-a">
@@ -1255,7 +1264,7 @@
 
       <div class="duk-item">
         <button class="duk-q" onclick="dukToggle(this)">
-          Ar į kainą įskaičiuoti pusryčiai?
+          <span data-i18n="faq_q9">Ar į kainą įskaičiuoti pusryčiai?</span>
           <span class="duk-icon"></span>
         </button>
         <div class="duk-a">
@@ -1265,7 +1274,7 @@
 
       <div class="duk-item">
         <button class="duk-q" onclick="dukToggle(this)">
-          Ar galiu įsigyti dovanų kuponą?
+          <span data-i18n="faq_q10">Ar galiu įsigyti dovanų kuponą?</span>
           <span class="duk-icon"></span>
         </button>
         <div class="duk-a">
@@ -1275,7 +1284,7 @@
 
       <div class="duk-item">
         <button class="duk-q" onclick="dukToggle(this)">
-          Ar yra maniežas ir maitinimo kėdutė?
+          <span data-i18n="faq_q11">Ar yra maniežas ir maitinimo kėdutė?</span>
           <span class="duk-icon"></span>
         </button>
         <div class="duk-a">
@@ -1287,7 +1296,7 @@
 
       <div class="duk-item">
         <button class="duk-q" onclick="dukToggle(this)">
-          Ar galima pasinaudoti skalbimo paslauga?
+          <span data-i18n="faq_q12">Ar galima pasinaudoti skalbimo paslauga?</span>
           <span class="duk-icon"></span>
         </button>
         <div class="duk-a">
@@ -1297,7 +1306,7 @@
 
       <div class="duk-item">
         <button class="duk-q" onclick="dukToggle(this)">
-          Ar teikiamas poilsiautojų transportavimas?
+          <span data-i18n="faq_q13">Ar teikiamas poilsiautojų transportavimas?</span>
           <span class="duk-icon"></span>
         </button>
         <div class="duk-a">
@@ -1313,9 +1322,9 @@
 <section id="instagram" class="section section--light">
   <div class="container">
     <div class="insta-header fade-up">
-      <span class="section-label">Socialiniai tinklai</span>
-      <h2>Naujienos ir įspūdžiai</h2>
-      <p>Sekite mus Instagram ir būkite pirmieji, kurie sužino apie naujausius pasiūlymus, renginius ir daugiau.</p>
+      <span class="section-label" data-i18n="ig_label">Socialiniai tinklai</span>
+      <h2 data-i18n="ig_h2">Naujienos ir įspūdžiai</h2>
+      <p data-i18n="ig_sub">Sekite mus Instagram ir būkite pirmieji, kurie sužino apie naujausius pasiūlymus, renginius ir daugiau.</p>
     </div>
 
     <div class="ig-feed-wrap fade-up">
@@ -1329,8 +1338,8 @@
   <div class="container">
     <div class="contact-inner">
       <div>
-        <span class="section-label">Kontaktai</span>
-        <h2 class="fade-up">Susisiekite su mumis</h2>
+        <span class="section-label" data-i18n="nav_contact">Kontaktai</span>
+        <h2 class="fade-up" data-i18n="contact_h2">Susisiekite su mumis</h2>
         <div class="divider"></div>
         <div class="contact-details">
           <div class="crow">
@@ -1376,9 +1385,9 @@
 <section id="vieta">
   <div class="container">
     <div class="vieta-header">
-      <span class="section-label">Vieta</span>
-      <h2 class="fade-up">Kur mus rasti</h2>
-      <p class="fade-up d1">Prieplaukos g. 18, Palanga (Šventoji). Tarp jūros, uosto ir pušyno.</p>
+      <span class="section-label" data-i18n="loc_label">Vieta</span>
+      <h2 class="fade-up" data-i18n="loc_h2">Kur mus rasti</h2>
+      <p class="fade-up d1" data-i18n="loc_sub">Prieplaukos g. 18, Palanga (Šventoji). Tarp jūros, uosto ir pušyno.</p>
     </div>
   </div>
   <div class="vieta-map-wrap">
@@ -1391,17 +1400,17 @@
   <div class="footer-inner">
     <div class="footer-brand">
       <img src="images/Laguna logo/laguna logo white.png" alt="Lagūna" />
-      <p>Modernūs apartamentai ir restoranas Šventojoje. Vos 50 metrų nuo Baltijos jūros kopų.</p>
+      <p data-i18n="foot_tagline">Modernūs apartamentai ir restoranas Šventojoje. Vos 50 metrų nuo Baltijos jūros kopų.</p>
     </div>
     <div class="fcol">
       <h4>Navigacija</h4>
       <ul>
-        <li><a href="#apie">Apie mus</a></li>
-        <li><a href="#kambariai">Apartamentai</a></li>
-        <li><a href="#restoranas">Restoranas</a></li>
-        <li><a href="#galerija">Galerija</a></li>
-        <li><a href="#duk">DUK</a></li>
-      <li><a href="#kontaktai">Kontaktai</a></li>
+        <li><a href="#apie" data-i18n="nav_about">Apie mus</a></li>
+        <li><a href="#kambariai" data-i18n="nav_rooms">Apartamentai</a></li>
+        <li><a href="#restoranas" data-i18n="nav_resto">Restoranas</a></li>
+        <li><a href="#galerija" data-i18n="nav_gallery">Galerija</a></li>
+        <li><a href="#duk" data-i18n="nav_faq">DUK</a></li>
+      <li><a href="#kontaktai" data-i18n="nav_contact">Kontaktai</a></li>
               </ul>
     </div>
     <div class="fcol">
@@ -1431,7 +1440,7 @@
 </footer>
 
 <!-- ═══ STICKY CTA ═══ -->
-<div id="sticky-cta"><a href="https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt" target="_blank" rel="noopener">Rezervuoti</a></div>
+<div id="sticky-cta"><a href="https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt" target="_blank" rel="noopener"data-i18n="cta_book">Rezervuoti</a></div>
 
 <!-- ═══ PHONE FLOAT ═══ -->
 <a id="phone-float" href="tel:+37067647693" title="Skambinti">
@@ -1841,6 +1850,292 @@ window.addEventListener('scroll', () => {
     const d=document,s=d.createElement("script");s.type="module";
     s.src="https://w.behold.so/widget.js";d.head.append(s);
   })();
+</script>
+
+<script>
+const TRANSLATIONS = {
+  lt: {
+    // Nav
+    nav_about: 'Apie mus',
+    nav_rooms: 'Apartamentai',
+    nav_resto: 'Restoranas',
+    nav_gallery: 'Galerija',
+    nav_faq: 'DUK',
+    nav_contact: 'Kontaktai',
+    cta_book: 'Rezervuoti',
+    // Booking widget
+    bw_label: 'Pasirinkite datas ir apartamento tipą',
+    bw_label2: 'Pasirinkite datas ir rezervuokite',
+    bw_from: 'Atvykimas',
+    bw_to: 'Išvykimas',
+    bw_adults: 'Suaugę',
+    bw_children: 'Vaikai',
+    bw_check: 'Tikrinti',
+    // Stats
+    stats_sea: '50 m iki kopų',
+    stats_size: 'apartamentai iki 43 kv. m.',
+    stats_play: 'vaikų žaidimų aikštelė',
+    stats_resto: 'restoranas',
+    // About
+    about_h2: 'Jūros, uosto ir pušyno apsuptas poilsis',
+    // Rooms
+    rooms_h2: 'Išsirinkite sau tinkamiausią',
+    // Amenities
+    am_balcony: 'Balkonas / Terasa',
+    am_tv: 'Televizorius 32"',
+    am_wifi: 'Bevielis internetas',
+    am_bath: 'Privatus vonios kambarys',
+    am_stove: 'Elektrinė viryklė',
+    am_fridge: 'Šaldytuvas su šaldymo kamera',
+    am_micro: 'Mikrobangų krosnelė',
+    am_cutlery: 'Valgymo reikmenys',
+    am_pots: 'Puodai ir keptuvė',
+    am_towels: 'Rankšluosčiai ir patalynė',
+    am_hairdryer: 'Plaukų džiovintuvas',
+    // Price note
+    // Filters
+    filter_apts: 'Apartamentai:',
+    filter_filters: 'Filtrai:',
+    pill_all: 'Visi',
+    pill_2bed: 'Dviviečiai',
+    pill_3bed: 'Triviečiai',
+    pill_4bed: 'Keturviečiai',
+    pill_6bed: 'Šešiaviečiai',
+    pill_studio: 'Studio',
+    pill_one: 'Vienas miegamasis',
+    pill_two: 'Du miegamieji',
+    pill_ac: 'Kondicionierius & palydovinė TV',
+    pill_forest: 'Su vaizdu į pušyną',
+    // Room features
+    feat_studio: 'Studijos tipo išplanavimas',
+    feat_2single: 'Dvi viengulės lovos',
+    feat_double: 'Dvigulė lova',
+    feat_dbl_sgl: 'Dvigulė ir viengulė lova',
+    feat_2double: 'Dvi dvigulės lovos',
+    feat_1bed: 'Vienas uždaras miegamasis',
+    feat_1bed_s: 'Uždaras miegamasis',
+    feat_2bed: 'Du uždari miegamieji',
+    feat_dbl2sgl: 'Dvigulė lova ir dvi viengulės lovos',
+    feat_sofa: 'Sofa-lova',
+    feat_ac: 'Oro kondicionierius',
+    feat_sat: 'Palydovinė TV',
+    feat_forest: 'Su vaizdu į pušyną',
+    // Prices
+    price_off: 'ne sezono metu',
+    price_peak: 'sezono metu',
+    // Restaurant
+    resto_badge: 'Restoranas dirba nuo birželio iki rugsėjo',
+    time_breakfast: 'Pusryčiai',
+    time_kitchen: 'Virtuvė',
+    time_bar: 'Baras',
+    time_until21: 'iki 21:00',
+    time_until22: 'iki 22:00',
+    // Video
+    vid_label: 'Lagūna iš arti',
+    vid_h2: 'Pajuskite Lagūnos dvasią',
+    vid_sub: 'Žiūrėkite kaip atrodo mūsų kompleksas ir aplinka',
+    // Gallery
+    gal_h2: 'Apartamentai ir aplinka',
+    gal_sub: 'Visi apartamentų tipai ir komplekso aplinka Šventojoje',
+    gal_more: 'Daugiau nuotraukų',
+    // FAQ
+    faq_label: 'Pagalba',
+    faq_h2: 'Dažniausiai užduodami klausimai',
+    faq_sub: 'Neradote atsakymo? Susisiekite su mumis tiesiogiai — mielai padėsime.',
+    faq_q1: 'Kada galiu įsiregistruoti ir išsiregistruoti?',
+    faq_q2: 'Ar mokama miesto rinkliava?',
+    faq_q3: 'Ką būtina turėti atvykus?',
+    faq_q4: 'Ar yra vietos parkavimui?',
+    faq_q5: 'Koks avansas reikalingas rezervacijai?',
+    faq_q6: 'Ar galiu atšaukti rezervaciją arba keisti datas?',
+    faq_q7: 'Ar galiu atvykti su augintiniu?',
+    faq_q8: 'Ar galima vėliau išvykti?',
+    faq_q9: 'Ar į kainą įskaičiuoti pusryčiai?',
+    faq_q10: 'Ar galiu įsigyti dovanų kuponą?',
+    faq_q11: 'Ar yra maniežas ir maitinimo kėdutė?',
+    faq_q12: 'Ar galima pasinaudoti skalbimo paslauga?',
+    faq_q13: 'Ar teikiamas poilsiautojų transportavimas?',
+    // Instagram
+    ig_label: 'Socialiniai tinklai',
+    ig_h2: 'Naujienos ir įspūdžiai',
+    ig_sub: 'Sekite mus Instagram ir būkite pirmieji, kurie sužino apie naujausius pasiūlymus, renginius ir daugiau.',
+    // Contact
+    contact_h2: 'Susisiekite su mumis',
+    // Location
+    loc_label: 'Vieta',
+    loc_h2: 'Kur mus rasti',
+    loc_sub: 'Prieplaukos g. 18, Palanga (Šventoji). Tarp jūros, uosto ir pušyno.',
+    // Footer
+    foot_tagline: 'Modernūs apartamentai ir restoranas Šventojoje. Vos 50 metrų nuo Baltijos jūros kopų.',
+  },
+  en: {
+    // Nav
+    nav_about: 'About',
+    nav_rooms: 'Apartments',
+    nav_resto: 'Restaurant',
+    nav_gallery: 'Gallery',
+    nav_faq: 'FAQ',
+    nav_contact: 'Contact',
+    cta_book: 'Book now',
+    // Booking widget
+    bw_label: 'Select dates and apartment type',
+    bw_label2: 'Select dates and book',
+    bw_from: 'Check-in',
+    bw_to: 'Check-out',
+    bw_adults: 'Adults',
+    bw_children: 'Children',
+    bw_check: 'Check',
+    // Stats
+    stats_sea: '50 m to the dunes',
+    stats_size: 'apartments up to 43 m²',
+    stats_play: "children's playground",
+    stats_resto: 'restaurant',
+    // About
+    about_h2: 'A retreat by the sea, harbour and pine forest',
+    // Rooms
+    rooms_h2: 'Find your perfect match',
+    // Amenities
+    am_balcony: 'Balcony / Terrace',
+    am_tv: '32" TV',
+    am_wifi: 'Free Wi-Fi',
+    am_bath: 'Private bathroom',
+    am_stove: 'Electric hob',
+    am_fridge: 'Fridge with freezer',
+    am_micro: 'Microwave',
+    am_cutlery: 'Kitchenware',
+    am_pots: 'Pots and pan',
+    am_towels: 'Towels and bed linen',
+    am_hairdryer: 'Hair dryer',
+    // Filters
+    filter_apts: 'Apartments:',
+    filter_filters: 'Filters:',
+    pill_all: 'All',
+    pill_2bed: '2-person',
+    pill_3bed: '3-person',
+    pill_4bed: '4-person',
+    pill_6bed: '6-person',
+    pill_studio: 'Studio',
+    pill_one: 'One bedroom',
+    pill_two: 'Two bedrooms',
+    pill_ac: 'A/C & satellite TV',
+    pill_forest: 'Pine forest view',
+    // Room features
+    feat_studio: 'Open-plan studio',
+    feat_2single: 'Two single beds',
+    feat_double: 'Double bed',
+    feat_dbl_sgl: 'Double + single bed',
+    feat_2double: 'Two double beds',
+    feat_1bed: 'One separate bedroom',
+    feat_1bed_s: 'Separate bedroom',
+    feat_2bed: 'Two separate bedrooms',
+    feat_dbl2sgl: 'Double bed + two single beds',
+    feat_sofa: 'Sofa bed',
+    feat_ac: 'Air conditioning',
+    feat_sat: 'Satellite TV',
+    feat_forest: 'Pine forest view',
+    // Prices
+    price_off: 'off-season',
+    price_peak: 'peak season',
+    // Restaurant
+    resto_badge: 'Restaurant open June – September',
+    time_breakfast: 'Breakfast',
+    time_kitchen: 'Kitchen',
+    time_bar: 'Bar',
+    time_until21: 'until 21:00',
+    time_until22: 'until 22:00',
+    // Video
+    vid_label: 'Lagūna up close',
+    vid_h2: 'Experience the spirit of Lagūna',
+    vid_sub: 'See how our complex and surroundings look',
+    // Gallery
+    gal_h2: 'Apartments & surroundings',
+    gal_sub: 'All apartment types and the complex surroundings in Šventoji',
+    gal_more: 'More photos',
+    // FAQ
+    faq_label: 'Help',
+    faq_h2: 'Frequently asked questions',
+    faq_sub: "Can't find an answer? Contact us directly — we'll be happy to help.",
+    faq_q1: 'What are the check-in and check-out times?',
+    faq_q2: 'Is there a resort fee?',
+    faq_q3: 'What do I need to bring upon arrival?',
+    faq_q4: 'Is parking available?',
+    faq_q5: 'What deposit is required to make a reservation?',
+    faq_q6: 'Can I cancel my reservation or change the dates?',
+    faq_q7: 'Can I bring a pet?',
+    faq_q8: 'Can I check out later?',
+    faq_q9: 'Is breakfast included in the price?',
+    faq_q10: 'Can I purchase a gift voucher?',
+    faq_q11: 'Is a travel cot or high chair available?',
+    faq_q12: 'Is a laundry service available?',
+    faq_q13: 'Do you offer a transfer service?',
+    // Instagram
+    ig_label: 'Social media',
+    ig_h2: 'News & impressions',
+    ig_sub: 'Follow us on Instagram to be the first to hear about our latest offers, events and more.',
+    // Contact
+    contact_h2: 'Get in touch',
+    // Location
+    loc_label: 'Location',
+    loc_h2: 'Find us',
+    loc_sub: 'Prieplaukos g. 18, Palanga (Šventoji). Between the sea, harbour and pine forest.',
+    // Footer
+    foot_tagline: 'Modern apartments and restaurant in Šventoji. Just 50 metres from the Baltic Sea dunes.',
+  }
+};
+
+const HTML_TRANSLATIONS = {
+  lt: {
+    hero_h1: 'Tarp jūros, uosto<br /><em>ir pušyno</em>',
+    about_p1: 'Lagūna – modernus apartamentų kompleksas vienoje gražiausių Šventosios vietų, kviečiantis patirti tikrą pajūrio poilsį. Čia jūsų laukia viskas, ko reikia tobuloms atostogoms: jaukūs šeimyniniai apartamentai su visais patogumais, vaikų žaidimų aikštelė, autentiškas restoranas ir ypatinga, tik pakrantei būdinga atmosfera.',
+    about_p2: 'Mūsų apartamentai sukurti taip, kad kiekvienas rastų sau idealų pasirinkimą – nuo jaukių dviviečių iki erdvių šešiaviečių. Visuose įrengtos virtuvėlės, todėl galėsite mėgautis tiek trumpu savaitgalio pabėgimu, tiek ilgesniu, ramiu poilsiu prie jūros.',
+    price_note: 'Kainos orientacinės ir nurodytos už parą. <strong>Ne sezono metu</strong> — iki birželio vidurio ir nuo rugsėjo pradžios. <strong>Sezono metu</strong> — liepos pradžia – rugpjūčio pabaiga. Tiksli kaina bus rodoma rezervacijos sistemoje.',
+    resto_h2: 'Skoniai, <em>įkvėpti jūros</em>',
+    resto_p: 'Lagūna Resto – vieta, kur skonis susilieja su jūros nuotaika. Čia jūsų laukia itališkos picos, žuvies ir mėsos patiekalai, o nuolat atnaujinamas veganiškas meniu užtikrina platų pasirinkimą kiekvieno apsilankymo metu.<br><br>Mažieji svečiai taip pat neliks pamiršti – jų laukia atskiras meniu ir erdvi lauko žaidimų aikštelė terasoje. Vasarą visa patirtis persikelia į atvirą terasą po dangumi, kur maistas dar skanesnis, o tempas – daug lėtesnis.',
+  },
+  en: {
+    hero_h1: 'Between the sea, harbour<br /><em>and pine forest</em>',
+    about_p1: 'Lagūna is a modern apartment complex in one of the most beautiful spots in Šventoji, inviting you to experience a true seaside retreat. Everything you need for a perfect holiday awaits: cosy family apartments with all amenities, a children\'s playground, an authentic restaurant, and the unique atmosphere only a coastline can offer.',
+    about_p2: 'Our apartments are designed so that everyone finds their ideal match — from intimate doubles to spacious six-person units. All feature a kitchenette, so you can enjoy a quick weekend escape or a longer, relaxed stay by the sea.',
+    price_note: 'Prices are indicative and shown per night. <strong>Off-season</strong> — until mid-June and from early September. <strong>Peak season</strong> — early July to late August. The exact price will be shown in the booking system.',
+    resto_h2: 'Flavours <em>inspired by the sea</em>',
+    resto_p: 'Lagūna Resto is a place where taste meets the mood of the sea. Enjoy Italian-style pizzas, fish and meat dishes, and a regularly updated vegan menu offering something for everyone on every visit.<br><br>Our youngest guests are not forgotten — they have their own menu and a spacious outdoor play area on the terrace. In summer the whole experience moves outside to our open-air terrace, where the food tastes even better and the pace slows right down.',
+  }
+};
+
+function setLang(lang) {
+  // Update active button
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('lang-' + lang);
+  if (btn) btn.classList.add('active');
+
+  // Update text content
+  const t = TRANSLATIONS[lang] || TRANSLATIONS.lt;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+
+  // Update HTML content
+  const th = HTML_TRANSLATIONS[lang] || HTML_TRANSLATIONS.lt;
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.getAttribute('data-i18n-html');
+    if (th[key] !== undefined) el.innerHTML = th[key];
+  });
+
+  // Update html lang attribute
+  document.documentElement.lang = lang;
+
+  // Persist preference
+  try { localStorage.setItem('laguna_lang', lang); } catch(e) {}
+}
+
+// Restore saved language
+(function() {
+  try {
+    const saved = localStorage.getItem('laguna_lang');
+    if (saved && saved !== 'lt') setLang(saved);
+  } catch(e) {}
+})();
 </script>
 </body>
 </html>
