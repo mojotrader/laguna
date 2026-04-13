@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lagūna — Taisyklės ir sąlygos</title>
   <meta name="description" content="Lagūna apartamentų nuomos taisyklės ir sąlygos. Registracijos laikas, atšaukimo politika, elgesio taisyklės." />
+  <link rel="icon" type="image/png" href="images/Laguna logo/laguna logo black.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -29,6 +30,15 @@
 
     /* ── PROGRESS ── */
     #progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:9999;width:0%;transition:width .1s linear}
+
+    /* ── LANG SWITCH ── */
+    .lang-switch{display:flex;align-items:center;gap:5px;margin-right:10px}
+    .lang-btn{font-family:'Inter',sans-serif;font-size:.68rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);background:none;border:none;cursor:pointer;padding:3px 1px;transition:color .25s;line-height:1}
+    .lang-btn.active{color:#fff}
+    .lang-sep{color:rgba(255,255,255,.25);font-size:.65rem;line-height:1}
+    #nav.scrolled .lang-btn{color:var(--mid)}
+    #nav.scrolled .lang-btn.active{color:var(--dark)}
+    #nav.scrolled .lang-sep{color:var(--border)}
 
     /* ── NAV ── */
     #nav{position:fixed;top:3px;left:0;right:0;z-index:1000;height:var(--nav-h);transition:background .4s,box-shadow .4s;display:flex;align-items:center}
@@ -115,25 +125,26 @@
   <div class="nav-inner">
     <a href="index.html" class="nav-logo"><img src="images/Laguna logo/laguna logo white.png" alt="Lagūna" id="nav-logo-img" /></a>
     <ul>
-      <li><a href="index.html#apie">Apie mus</a></li>
-      <li><a href="index.html#kambariai">Kambariai</a></li>
-      <li><a href="index.html#restoranas">Restoranas</a></li>
-      <li><a href="index.html#galerija">Galerija</a></li>
-      <li><a href="index.html#kontaktai">Kontaktai</a></li>
+      <li><a href="index.html#apie" data-i18n="nav_about">Apie mus</a></li>
+      <li><a href="index.html#kambariai" data-i18n="nav_rooms">Apartamentai</a></li>
+      <li><a href="index.html#restoranas" data-i18n="nav_resto">Restoranas</a></li>
+      <li><a href="index.html#galerija" data-i18n="nav_gallery">Galerija</a></li>
+      <li><a href="index.html#kontaktai" data-i18n="nav_contact">Kontaktai</a></li>
     </ul>
-    <a href="https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt" target="_blank" rel="noopener" class="nav-cta">Rezervuoti</a>
+    <div class="lang-switch"><button class="lang-btn active" id="lang-lt" onclick="setLang('lt')">LT</button><span class="lang-sep">|</span><button class="lang-btn" id="lang-en" onclick="setLang('en')">EN</button></div>
+    <a href="https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt" target="_blank" rel="noopener" class="nav-cta" data-booking data-i18n="cta_book">Rezervuoti</a>
     <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
 <div id="mobile-menu">
   <button class="m-close" id="m-close">&times;</button>
-  <a href="index.html#apie">Apie mus</a>
-  <a href="index.html#kambariai">Kambariai</a>
-  <a href="index.html#restoranas">Restoranas</a>
-  <a href="index.html#galerija">Galerija</a>
-  <a href="index.html#kontaktai">Kontaktai</a>
-  <a href="https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt" target="_blank" rel="noopener" class="m-cta">Rezervuoti</a>
+  <a href="index.html#apie" data-i18n="nav_about">Apie mus</a>
+  <a href="index.html#kambariai" data-i18n="nav_rooms">Apartamentai</a>
+  <a href="index.html#restoranas" data-i18n="nav_resto">Restoranas</a>
+  <a href="index.html#galerija" data-i18n="nav_gallery">Galerija</a>
+  <a href="index.html#kontaktai" data-i18n="nav_contact">Kontaktai</a>
+  <a href="https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt" target="_blank" rel="noopener" class="m-cta" data-booking data-i18n="cta_book">Rezervuoti</a>
 </div>
 
 <!-- ═══ HERO ═══ -->
@@ -141,167 +152,148 @@
   <div class="hero-bg"><img src="images/Skrydis/DJI_0448.jpg" alt="Lagūna taisyklės" /></div>
   <div class="container hero-content">
     <span class="hero-eyebrow">Lagūna &mdash; Šventoji</span>
-    <h1>Taisyklės ir <em>sąlygos</em></h1>
+    <h1 data-i18n-html="page_title">Taisyklės ir <em>sąlygos</em></h1>
   </div>
 </section>
 
-<!-- ═══ TAISYKLĖS ═══ -->
+<!-- ═══ CONTENT ═══ -->
 <section class="taisykles-section">
   <div class="container">
 
     <div class="divider-sm"></div>
 
-    <!-- 1. Bendrosios nuostatos -->
     <div class="taisykles-block">
-      <h3>1. Bendrosios nuostatos</h3>
-      <p>Šios taisyklės taikomos visiems Lagūnos apartamentų svečiams. Rezervuodami apartamentą arba atvykę į Lagūną, svečiai patvirtina, kad susipažino su šiomis taisyklėmis ir įsipareigoja jų laikytis.</p>
-      <p>Lagūna — apartamentų ir restorano kompleksas Šventojoje, Lietuva. Visos taisyklės sukurtos siekiant užtikrinti malonią ir saugią poilsio aplinką visiems svečiams.</p>
+      <h3 data-i18n="s1_title">1. Bendrosios nuostatos</h3>
+      <p data-i18n="s1_p1">Šios taisyklės taikomos visiems Lagūnos apartamentų svečiams. Rezervuodami apartamentą arba atvykę į Lagūną, svečiai patvirtina, kad susipažino su šiomis taisyklėmis ir įsipareigoja jų laikytis.</p>
+      <p data-i18n="s1_p2">Lagūna — apartamentų ir restorano kompleksas Šventojoje, Lietuva. Visos taisyklės sukurtos siekiant užtikrinti malonią ir saugią poilsio aplinką visiems svečiams.</p>
     </div>
 
-    <!-- 2. Registracija ir išvykimas -->
     <div class="taisykles-block">
-      <h3>2. Registracijos ir išvykimo laikas</h3>
+      <h3 data-i18n="s2_title">2. Registracijos ir išvykimo laikas</h3>
       <div class="highlight-box">
-        <p><strong>Įsiregistravimas (Check-in):</strong> nuo <strong>15:00 val.</strong><br />
-        <strong>Išvykimas (Check-out):</strong> iki <strong>11:00 val.</strong></p>
+        <p data-i18n-html="s2_box"><strong>Įsiregistravimas (Check-in):</strong> nuo <strong>15:00 val.</strong><br /><strong>Išvykimas (Check-out):</strong> iki <strong>11:00 val.</strong></p>
       </div>
-      <p>Esant galimybei, ankstesnis įsiregistravimas gali būti suderintas su administracija atvykimo dieną. Prašome iš anksto susisiekti telefonu <a href="tel:+37067647693" style="color:var(--accent)">+370 676 47693</a>.</p>
-      <p>Vėlesnis išvykimas galimas tik iš anksto suderinus su administracija:</p>
+      <p data-i18n-html="s2_p1">Esant galimybei, ankstesnis įsiregistravimas gali būti suderintas su administracija atvykimo dieną. Prašome iš anksto susisiekti telefonu <a href="tel:+37067647693" style="color:var(--accent)">+370 676 47693</a>.</p>
+      <p data-i18n="s2_p2">Vėlesnis išvykimas galimas tik iš anksto suderinus su administracija:</p>
       <ul>
-        <li>Iki 15:00 — taikomas 25% paros kainos mokestis</li>
-        <li>Po 15:00 — skaičiuojama pilna papildoma para</li>
+        <li data-i18n="s2_li1">Iki 15:00 — taikomas 25% paros kainos mokestis</li>
+        <li data-i18n="s2_li2">Po 15:00 — skaičiuojama pilna papildoma para</li>
       </ul>
     </div>
 
-    <!-- 3. Rezervacija ir mokėjimas -->
     <div class="taisykles-block">
-      <h3>3. Rezervacija ir mokėjimas</h3>
-      <p>Rezervacija patvirtinama tik gavus avansinį mokėjimą. Rezervuojant tiesiogiai (telefonu ar el. paštu), taikomas vienos nakvynės kainos avansas. Rezervuojant per sistemą — avanso dydis nurodomas užsakymo metu.</p>
-      <p><strong>Likusi suma apmokama atvykimo dieną.</strong></p>
-      <p>Atsiskaityti galima:</p>
+      <h3 data-i18n="s3_title">3. Rezervacija ir mokėjimas</h3>
+      <p data-i18n="s3_p1">Rezervacija patvirtinama tik gavus avansinį mokėjimą. Rezervuojant tiesiogiai (telefonu ar el. paštu), taikomas vienos nakvynės kainos avansas. Rezervuojant per sistemą — avanso dydis nurodomas užsakymo metu.</p>
+      <p data-i18n="s3_p2"><strong>Likusi suma apmokama atvykimo dieną.</strong></p>
+      <p data-i18n="s3_p3">Atsiskaityti galima:</p>
       <ul>
-        <li>Grynaisiais pinigais</li>
-        <li>Mokėjimo kortele</li>
-        <li>Bankiniu pavedimu</li>
+        <li data-i18n="s3_li1">Grynaisiais pinigais</li>
+        <li data-i18n="s3_li2">Mokėjimo kortele</li>
+        <li data-i18n="s3_li3">Bankiniu pavedimu</li>
       </ul>
       <div class="highlight-box">
-        <p><strong>Geriausios kainos garantija:</strong> Rezervuodami tiesiogiai per mūsų svetainę ar telefonu, gausite geriausią galimą kainą.</p>
+        <p data-i18n="s3_box">Rezervuodami tiesiogiai per mūsų svetainę ar telefonu, gausite geriausią galimą kainą.</p>
       </div>
     </div>
 
-    <!-- 4. Atšaukimo politika -->
     <div class="taisykles-block">
-      <h3>4. Atšaukimo politika</h3>
-      <p>Atšaukimo sąlygos priklauso nuo to, kiek laiko iki atvykimo pranešate apie atšaukimą:</p>
+      <h3 data-i18n="s4_title">4. Atšaukimo politika</h3>
+      <p data-i18n="s4_p1">Atšaukimo sąlygos priklauso nuo to, kiek laiko iki atvykimo pranešate apie atšaukimą:</p>
       <ul>
-        <li><strong>Likus 14 ir daugiau dienų</strong> — grąžinamas visas sumokėtas avansas</li>
-        <li><strong>Likus 10–13 dienų</strong> — grąžinama 80% avanso</li>
-        <li><strong>Likus 7–9 dienoms</strong> — grąžinama 40% avanso</li>
-        <li><strong>Likus 6 ir mažiau dienų</strong> — avansas negrąžinamas</li>
-        <li><strong>Neatvykus be pranešimo (No-show)</strong> — avansas negrąžinamas</li>
+        <li data-i18n="s4_li1"><strong>Likus 14 ir daugiau dienų</strong> — grąžinamas visas sumokėtas avansas</li>
+        <li data-i18n="s4_li2"><strong>Likus 10–13 dienų</strong> — grąžinama 80% avanso</li>
+        <li data-i18n="s4_li3"><strong>Likus 7–9 dienoms</strong> — grąžinama 40% avanso</li>
+        <li data-i18n="s4_li4"><strong>Likus 6 ir mažiau dienų</strong> — avansas negrąžinamas</li>
+        <li data-i18n="s4_li5"><strong>Neatvykus be pranešimo (No-show)</strong> — avansas negrąžinamas</li>
       </ul>
       <div class="warn-box">
-        <p><strong>Svarbu:</strong> Sutrumpinus rezervaciją atvykimo metu arba viešnagės eigoje — taikomas 100% vienos nakvynės mokestis už kiekvieną neišgyventą parą.</p>
+        <p data-i18n="s4_warn">Sutrumpinus rezervaciją atvykimo metu arba viešnagės eigoje — taikomas 100% vienos nakvynės mokestis už kiekvieną neišgyventą parą.</p>
       </div>
-      <p>Datų keitimas galimas iš anksto susitarus su administracija, esant laisvų vietų pasirinktu laikotarpiu.</p>
+      <p data-i18n="s4_p2">Datų keitimas galimas iš anksto susitarus su administracija, esant laisvų vietų pasirinktu laikotarpiu.</p>
     </div>
 
-    <!-- 5. Svečių skaičius -->
     <div class="taisykles-block">
-      <h3>5. Svečių skaičius</h3>
-      <p>Kiekviename apartamente leidžiamas svečių skaičius nurodytas rezervacijos metu. Viršijant maksimalų leistiną svečių skaičių, administracija turi teisę atsisakyti apgyvendinti papildomus asmenis arba reikalauti papildomo mokesčio.</p>
-      <p>Neregistruoti asmenys (ne svečiai) gali lankytis tik su išankstinės administracijos žinia. Nakvojantys asmenys privalo būti registruoti.</p>
+      <h3 data-i18n="s5_title">5. Svečių skaičius</h3>
+      <p data-i18n="s5_p1">Kiekviename apartamente leidžiamas svečių skaičius nurodytas rezervacijos metu. Viršijant maksimalų leistiną svečių skaičių, administracija turi teisę atsisakyti apgyvendinti papildomus asmenis arba reikalauti papildomo mokesčio.</p>
+      <p data-i18n="s5_p2">Neregistruoti asmenys (ne svečiai) gali lankytis tik su išankstinės administracijos žinia. Nakvojantys asmenys privalo būti registruoti.</p>
     </div>
 
-    <!-- 6. Ramybės valandos ir taisyklės -->
     <div class="taisykles-block">
-      <h3>6. Ramybės valandos ir elgesio taisyklės</h3>
+      <h3 data-i18n="s6_title">6. Ramybės valandos ir elgesio taisyklės</h3>
       <div class="highlight-box">
-        <p><strong>Ramybės valandos:</strong> nuo <strong>22:00</strong> iki <strong>9:00</strong></p>
+        <p data-i18n-html="s6_box"><strong>Ramybės valandos:</strong> nuo <strong>22:00</strong> iki <strong>9:00</strong></p>
       </div>
-      <p>Ramybės valandomis draudžiama:</p>
+      <p data-i18n="s6_p1">Ramybės valandomis draudžiama:</p>
       <ul>
-        <li>Triukšmauti, leisti garsią muziką</li>
-        <li>Organizuoti renginius ar vakarėlius</li>
-        <li>Trikdyti kitų svečių poilsį</li>
+        <li data-i18n="s6_li1">Triukšmauti, leisti garsią muziką</li>
+        <li data-i18n="s6_li2">Organizuoti renginius ar vakarėlius</li>
+        <li data-i18n="s6_li3">Trikdyti kitų svečių poilsį</li>
       </ul>
-      <p>Pažeidus ramybės valandų taisykles, administracija turi teisę reikalauti atlaisvinti apartamentą be avanso grąžinimo.</p>
+      <p data-i18n="s6_p2">Pažeidus ramybės valandų taisykles, administracija turi teisę reikalauti atlaisvinti apartamentą be avanso grąžinimo.</p>
     </div>
 
-    <!-- 7. Rūkymas ir ugnis -->
     <div class="taisykles-block">
-      <h3>7. Rūkymas, žvakės ir atvira ugnis</h3>
+      <h3 data-i18n="s7_title">7. Rūkymas, žvakės ir atvira ugnis</h3>
       <div class="warn-box">
-        <p><strong>Rūkymas, žvakių degimas ir atvira ugnis patalpose griežtai draudžiami.</strong> Už pažeidimą taikoma <strong>200 EUR bauda</strong>.</p>
+        <p data-i18n-html="s7_warn"><strong>Rūkymas, žvakių degimas ir atvira ugnis patalpose griežtai draudžiami.</strong> Už pažeidimą taikoma <strong>200 EUR bauda</strong>.</p>
       </div>
-      <p>Rūkyti leidžiama tik specialiai tam skirtose vietose lauke. Prašome laikytis šios taisyklės dėl kitų svečių saugumo ir komforto.</p>
+      <p data-i18n="s7_p1">Rūkyti leidžiama tik specialiai tam skirtose vietose lauke. Prašome laikytis šios taisyklės dėl kitų svečių saugumo ir komforto.</p>
     </div>
 
-    <!-- 8. Augintiniai -->
     <div class="taisykles-block">
-      <h3>8. Augintiniai</h3>
-      <p>Augintiniai priimami tik iš anksto susitarus su administracija. Teikiamos šios sąlygos:</p>
+      <h3 data-i18n="s8_title">8. Augintiniai</h3>
+      <p data-i18n="s8_p1">Augintiniai priimami tik iš anksto susitarus su administracija. Teikiamos šios sąlygos:</p>
       <ul>
-        <li>Priimami tik šunys iki 10 kg svorio</li>
-        <li>Papildomas mokestis: <strong>10 EUR / nakvynė</strong></li>
-        <li>Svečias atsako už visą augintinio padarytą žalą</li>
-        <li>Augintinis negali būti paliktas vienas apartamente</li>
+        <li data-i18n="s8_li1">Priimami tik šunys iki 10 kg svorio</li>
+        <li data-i18n="s8_li2">Papildomas mokestis: <strong>10 EUR / nakvynė</strong></li>
+        <li data-i18n="s8_li3">Svečias atsako už visą augintinio padarytą žalą</li>
+        <li data-i18n="s8_li4">Augintinis negali būti paliktas vienas apartamente</li>
       </ul>
-      <p>Prašome iš anksto informuoti administraciją apie atvykimą su augintiniu — tai priklauso nuo konkrečios situacijos ir galimybių.</p>
+      <p data-i18n="s8_p2">Prašome iš anksto informuoti administraciją apie atvykimą su augintiniu — tai priklauso nuo konkrečios situacijos ir galimybių.</p>
     </div>
 
-    <!-- 9. Atsakomybė už turtą -->
     <div class="taisykles-block">
-      <h3>9. Atsakomybė už turtą</h3>
-      <p>Svečiai visiškai atsako už visą žalą, padarytą apartamento inventoriui, baldams, įrangai ar kitam Lagūnos turtui viešnagės metu. Žalos atlyginimas reikalaujamas pagal rinkos kainą.</p>
+      <h3 data-i18n="s9_title">9. Atsakomybė už turtą</h3>
+      <p data-i18n="s9_p1">Svečiai visiškai atsako už visą žalą, padarytą apartamento inventoriui, baldams, įrangai ar kitam Lagūnos turtui viešnagės metu. Žalos atlyginimas reikalaujamas pagal rinkos kainą.</p>
       <ul>
-        <li>Draudžiama išnešti baldus, inventorių ar kitus daiktus iš apartamento</li>
-        <li>Pastebėjus gedimus ar žalą atvykus — prašome nedelsiant informuoti administraciją</li>
-        <li>Rakto (ar elektroninės kortelės) praradimo atveju — taikomas 50 EUR mokestis</li>
+        <li data-i18n="s9_li1">Draudžiama išnešti baldus, inventorių ar kitus daiktus iš apartamento</li>
+        <li data-i18n="s9_li2">Pastebėjus gedimus ar žalą atvykus — prašome nedelsiant informuoti administraciją</li>
+        <li data-i18n="s9_li3">Rakto (ar elektroninės kortelės) praradimo atveju — taikomas 50 EUR mokestis</li>
       </ul>
     </div>
 
-    <!-- 10. Higiena ir švarumas -->
     <div class="taisykles-block">
-      <h3>10. Higiena ir švarumas</h3>
-      <p>Prašome Lagūną palikti tokios tvarkos, kokia ji buvo atvykus. Apartamente suteikiama:</p>
+      <h3 data-i18n="s10_title">10. Higiena ir švarumas</h3>
+      <p data-i18n="s10_p1">Prašome Lagūną palikti tokios tvarkos, kokia ji buvo atvykus. Apartamente suteikiama:</p>
       <ul>
-        <li>Patalynė ir rankšluosčiai (keičiami prireikus)</li>
-        <li>Pagrindinės higienos priemonės</li>
-        <li>Galutinis apartamento valymas įskaičiuotas į kainą</li>
+        <li data-i18n="s10_li1">Patalynė ir rankšluosčiai (keičiami prireikus)</li>
+        <li data-i18n="s10_li2">Pagrindinės higienos priemonės</li>
+        <li data-i18n="s10_li3">Galutinis apartamento valymas įskaičiuotas į kainą</li>
       </ul>
-      <p>Už itin didelį netvarkingumą (rūkymo pasekmės, dėmės, išsklaidos) gali būti taikomas papildomas valymo mokestis.</p>
+      <p data-i18n="s10_p2">Už itin didelį netvarkingumą (rūkymo pasekmės, dėmės, išsklaidos) gali būti taikomas papildomas valymo mokestis.</p>
     </div>
 
-    <!-- 11. Restoranas -->
     <div class="taisykles-block">
-      <h3>11. Restoranas</h3>
-      <p>Lagūnos restoranas veikia sezono metu. Rezervuoti stalą galima skambinant <a href="tel:+37067647693" style="color:var(--accent)">+370 676 47693</a> arba rašant <a href="mailto:labas@laguna.lt" style="color:var(--accent)">labas@laguna.lt</a>.</p>
-      <p>Valymas ir elgesys restorane turi atitikti bendras viešo maitinimo įstaigos taisykles. Administracija pasilieka teisę atsisakyti aptarnauti asmenis, pažeidžiančius viešąją tvarką.</p>
+      <h3 data-i18n="s11_title">11. Restoranas</h3>
+      <p data-i18n-html="s11_p1">Lagūnos restoranas veikia sezono metu. Rezervuoti stalą galima skambinant <a href="tel:+37067647693" style="color:var(--accent)">+370 676 47693</a> arba rašant <a href="mailto:labas@laguna.lt" style="color:var(--accent)">labas@laguna.lt</a>.</p>
+      <p data-i18n="s11_p2">Valymas ir elgesys restorane turi atitikti bendras viešo maitinimo įstaigos taisykles. Administracija pasilieka teisę atsisakyti aptarnauti asmenis, pažeidžiančius viešąją tvarką.</p>
     </div>
 
-    <!-- 12. Privatumas -->
     <div class="taisykles-block">
-      <h3>12. Asmens duomenys ir privatumas</h3>
-      <p>Lagūna tvarko svečių asmens duomenis (vardą, el. paštą, telefono numerį) tik rezervacijos ir komunikacijos tikslais. Duomenys neskelbiami trečiosioms šalims ir saugomi pagal BDAR reikalavimus.</p>
-      <p>Susisiekdami su mumis, jūs sutinkate su šia asmens duomenų tvarkymo tvarka. Turite teisę bet kada paprašyti ištrinti savo duomenis rašydami <a href="mailto:labas@laguna.lt" style="color:var(--accent)">labas@laguna.lt</a>.</p>
+      <h3 data-i18n="s12_title">12. Asmens duomenys ir privatumas</h3>
+      <p data-i18n="s12_p1">Lagūna tvarko svečių asmens duomenis (vardą, el. paštą, telefono numerį) tik rezervacijos ir komunikacijos tikslais. Duomenys neskelbiami trečiosioms šalims ir saugomi pagal BDAR reikalavimus.</p>
+      <p data-i18n-html="s12_p2">Susisiekdami su mumis, jūs sutinkate su šia asmens duomenų tvarkymo tvarka. Turite teisę bet kada paprašyti ištrinti savo duomenis rašydami <a href="mailto:labas@laguna.lt" style="color:var(--accent)">labas@laguna.lt</a>.</p>
     </div>
 
-    <!-- 13. Kontaktai -->
     <div class="taisykles-block">
-      <h3>13. Kontaktinė informacija</h3>
+      <h3 data-i18n="s13_title">13. Kontaktinė informacija</h3>
       <div class="highlight-box">
-        <p>
-          <strong>Lagūna</strong><br />
-          Šventoji, Palanga, Lietuva<br />
-          Telefonas: <a href="tel:+37067647693" style="color:var(--accent)">+370 676 47693</a><br />
-          El. paštas: <a href="mailto:labas@laguna.lt" style="color:var(--accent)">labas@laguna.lt</a>
-        </p>
+        <p data-i18n-html="s13_box"><strong>Lagūna</strong><br />Šventoji, Palanga, Lietuva<br />Telefonas: <a href="tel:+37067647693" style="color:var(--accent)">+370 676 47693</a><br />El. paštas: <a href="mailto:labas@laguna.lt" style="color:var(--accent)">labas@laguna.lt</a></p>
       </div>
-      <p>Kilus klausimų dėl taisyklių ar jūsų rezervacijos, nedvejodami susisiekite su mūsų administracija — mielai padėsime.</p>
+      <p data-i18n="s13_p1">Kilus klausimų dėl taisyklių ar jūsų rezervacijos, nedvejodami susisiekite su mūsų administracija — mielai padėsime.</p>
     </div>
 
-    <p style="font-size:.78rem;color:rgba(0,0,0,.35);margin-top:2rem">Paskutinį kartą atnaujinta: 2025 m. Lagūna pasilieka teisę keisti šias taisykles. Svečiai bus informuoti apie esminius pakeitimus rezervacijos metu.</p>
+    <p style="font-size:.78rem;color:rgba(0,0,0,.35);margin-top:2rem" data-i18n="footer_note">Paskutinį kartą atnaujinta: 2025 m. Lagūna pasilieka teisę keisti šias taisykles. Svečiai bus informuoti apie esminius pakeitimus rezervacijos metu.</p>
 
   </div>
 </section>
@@ -311,20 +303,20 @@
   <div class="footer-inner">
     <div class="footer-brand">
       <img src="images/Laguna logo/laguna logo white.png" alt="Lagūna" />
-      <p>Modernūs apartamentai ir restoranas Šventojoje. Vos 50 metrų nuo Baltijos jūros kopų.</p>
+      <p data-i18n="foot_tagline">Modernūs apartamentai ir restoranas Šventojoje. Vos 50 metrų nuo Baltijos jūros kopų.</p>
     </div>
     <div class="fcol">
-      <h4>Navigacija</h4>
+      <h4 data-i18n="foot_nav_h">Navigacija</h4>
       <ul>
-        <li><a href="index.html#apie">Apie mus</a></li>
-        <li><a href="index.html#kambariai">Kambariai</a></li>
-        <li><a href="index.html#restoranas">Restoranas</a></li>
-        <li><a href="index.html#kontaktai">Kontaktai</a></li>
-        <li><a href="taisykles.html">Taisyklės</a></li>
+        <li><a href="index.html#apie" data-i18n="nav_about">Apie mus</a></li>
+        <li><a href="index.html#kambariai" data-i18n="nav_rooms">Apartamentai</a></li>
+        <li><a href="index.html#restoranas" data-i18n="nav_resto">Restoranas</a></li>
+        <li><a href="index.html#kontaktai" data-i18n="nav_contact">Kontaktai</a></li>
+        <li><a href="taisykles.html" data-i18n="foot_terms">Taisyklės</a></li>
       </ul>
     </div>
     <div class="fcol">
-      <h4>Kontaktai</h4>
+      <h4 data-i18n="foot_contact_h">Kontaktai</h4>
       <ul>
         <li><a href="tel:+37067647693">+370 676 47693</a></li>
         <li><a href="mailto:labas@laguna.lt">labas@laguna.lt</a></li>
@@ -333,13 +325,12 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2025 Lagūna. Visos teisės saugomos.</span>
-    <a href="taisykles.html" style="color:var(--accent)">Taisyklės ir sąlygos</a>
+    <span data-i18n="foot_copy">© 2025 Lagūna. Visos teisės saugomos.</span>
+    <a href="taisykles.html" style="color:var(--accent)" data-i18n="foot_terms">Taisyklės ir sąlygos</a>
   </div>
 </footer>
 
 <script>
-// Nav scroll
 const nav = document.getElementById('nav');
 const logoImg = document.getElementById('nav-logo-img');
 window.addEventListener('scroll', () => {
@@ -350,9 +341,205 @@ window.addEventListener('scroll', () => {
   document.getElementById('progress-bar').style.width = (window.scrollY / total * 100) + '%';
 }, { passive: true });
 
-// Mobile menu
 document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobile-menu').classList.add('open'));
 document.getElementById('m-close').addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('open'));
+</script>
+
+<script>
+const TRANSLATIONS = {
+  lt: {
+    nav_about: 'Apie mus', nav_rooms: 'Apartamentai', nav_resto: 'Restoranas',
+    nav_gallery: 'Galerija', nav_contact: 'Kontaktai', cta_book: 'Rezervuoti',
+    foot_tagline: 'Modernūs apartamentai ir restoranas Šventojoje. Vos 50 metrų nuo Baltijos jūros kopų.',
+    foot_nav_h: 'Navigacija', foot_contact_h: 'Kontaktai',
+    foot_copy: '© 2025 Lagūna. Visos teisės saugomos.',
+    foot_terms: 'Taisyklės ir sąlygos',
+    s1_title: '1. Bendrosios nuostatos',
+    s1_p1: 'Šios taisyklės taikomos visiems Lagūnos apartamentų svečiams. Rezervuodami apartamentą arba atvykę į Lagūną, svečiai patvirtina, kad susipažino su šiomis taisyklėmis ir įsipareigoja jų laikytis.',
+    s1_p2: 'Lagūna — apartamentų ir restorano kompleksas Šventojoje, Lietuva. Visos taisyklės sukurtos siekiant užtikrinti malonią ir saugią poilsio aplinką visiems svečiams.',
+    s2_title: '2. Registracijos ir išvykimo laikas',
+    s2_p2: 'Vėlesnis išvykimas galimas tik iš anksto suderinus su administracija:',
+    s2_li1: 'Iki 15:00 — taikomas 25% paros kainos mokestis',
+    s2_li2: 'Po 15:00 — skaičiuojama pilna papildoma para',
+    s3_title: '3. Rezervacija ir mokėjimas',
+    s3_p1: 'Rezervacija patvirtinama tik gavus avansinį mokėjimą. Rezervuojant tiesiogiai (telefonu ar el. paštu), taikomas vienos nakvynės kainos avansas. Rezervuojant per sistemą — avanso dydis nurodomas užsakymo metu.',
+    s3_p2: 'Likusi suma apmokama atvykimo dieną.',
+    s3_p3: 'Atsiskaityti galima:',
+    s3_li1: 'Grynaisiais pinigais',
+    s3_li2: 'Mokėjimo kortele',
+    s3_li3: 'Bankiniu pavedimu',
+    s3_box: 'Rezervuodami tiesiogiai per mūsų svetainę ar telefonu, gausite geriausią galimą kainą.',
+    s4_title: '4. Atšaukimo politika',
+    s4_p1: 'Atšaukimo sąlygos priklauso nuo to, kiek laiko iki atvykimo pranešate apie atšaukimą:',
+    s4_li1: 'Likus 14 ir daugiau dienų — grąžinamas visas sumokėtas avansas',
+    s4_li2: 'Likus 10–13 dienų — grąžinama 80% avanso',
+    s4_li3: 'Likus 7–9 dienoms — grąžinama 40% avanso',
+    s4_li4: 'Likus 6 ir mažiau dienų — avansas negrąžinamas',
+    s4_li5: 'Neatvykus be pranešimo (No-show) — avansas negrąžinamas',
+    s4_warn: 'Sutrumpinus rezervaciją atvykimo metu arba viešnagės eigoje — taikomas 100% vienos nakvynės mokestis už kiekvieną neišgyventą parą.',
+    s4_p2: 'Datų keitimas galimas iš anksto susitarus su administracija, esant laisvų vietų pasirinktu laikotarpiu.',
+    s5_title: '5. Svečių skaičius',
+    s5_p1: 'Kiekviename apartamente leidžiamas svečių skaičius nurodytas rezervacijos metu. Viršijant maksimalų leistiną svečių skaičių, administracija turi teisę atsisakyti apgyvendinti papildomus asmenis arba reikalauti papildomo mokesčio.',
+    s5_p2: 'Neregistruoti asmenys (ne svečiai) gali lankytis tik su išankstinės administracijos žinia. Nakvojantys asmenys privalo būti registruoti.',
+    s6_title: '6. Ramybės valandos ir elgesio taisyklės',
+    s6_p1: 'Ramybės valandomis draudžiama:',
+    s6_li1: 'Triukšmauti, leisti garsią muziką',
+    s6_li2: 'Organizuoti renginius ar vakarėlius',
+    s6_li3: 'Trikdyti kitų svečių poilsį',
+    s6_p2: 'Pažeidus ramybės valandų taisykles, administracija turi teisę reikalauti atlaisvinti apartamentą be avanso grąžinimo.',
+    s7_title: '7. Rūkymas, žvakės ir atvira ugnis',
+    s7_p1: 'Rūkyti leidžiama tik specialiai tam skirtose vietose lauke. Prašome laikytis šios taisyklės dėl kitų svečių saugumo ir komforto.',
+    s8_title: '8. Augintiniai',
+    s8_p1: 'Augintiniai priimami tik iš anksto susitarus su administracija. Teikiamos šios sąlygos:',
+    s8_li1: 'Priimami tik šunys iki 10 kg svorio',
+    s8_li2: 'Papildomas mokestis: 10 EUR / nakvynė',
+    s8_li3: 'Svečias atsako už visą augintinio padarytą žalą',
+    s8_li4: 'Augintinis negali būti paliktas vienas apartamente',
+    s8_p2: 'Prašome iš anksto informuoti administraciją apie atvykimą su augintiniu — tai priklauso nuo konkrečios situacijos ir galimybių.',
+    s9_title: '9. Atsakomybė už turtą',
+    s9_p1: 'Svečiai visiškai atsako už visą žalą, padarytą apartamento inventoriui, baldams, įrangai ar kitam Lagūnos turtui viešnagės metu. Žalos atlyginimas reikalaujamas pagal rinkos kainą.',
+    s9_li1: 'Draudžiama išnešti baldus, inventorių ar kitus daiktus iš apartamento',
+    s9_li2: 'Pastebėjus gedimus ar žalą atvykus — prašome nedelsiant informuoti administraciją',
+    s9_li3: 'Rakto (ar elektroninės kortelės) praradimo atveju — taikomas 50 EUR mokestis',
+    s10_title: '10. Higiena ir švarumas',
+    s10_p1: 'Prašome Lagūną palikti tokios tvarkos, kokia ji buvo atvykus. Apartamente suteikiama:',
+    s10_li1: 'Patalynė ir rankšluosčiai (keičiami prireikus)',
+    s10_li2: 'Pagrindinės higienos priemonės',
+    s10_li3: 'Galutinis apartamento valymas įskaičiuotas į kainą',
+    s10_p2: 'Už itin didelį netvarkingumą (rūkymo pasekmės, dėmės, išsklaidos) gali būti taikomas papildomas valymo mokestis.',
+    s11_title: '11. Restoranas',
+    s11_p2: 'Valymas ir elgesys restorane turi atitikti bendras viešo maitinimo įstaigos taisykles. Administracija pasilieka teisę atsisakyti aptarnauti asmenis, pažeidžiančius viešąją tvarką.',
+    s12_title: '12. Asmens duomenys ir privatumas',
+    s12_p1: 'Lagūna tvarko svečių asmens duomenis (vardą, el. paštą, telefono numerį) tik rezervacijos ir komunikacijos tikslais. Duomenys neskelbiami trečiosioms šalims ir saugomi pagal BDAR reikalavimus.',
+    s13_title: '13. Kontaktinė informacija',
+    s13_p1: 'Kilus klausimų dėl taisyklių ar jūsų rezervacijos, nedvejodami susisiekite su mūsų administracija — mielai padėsime.',
+    footer_note: 'Paskutinį kartą atnaujinta: 2025 m. Lagūna pasilieka teisę keisti šias taisykles. Svečiai bus informuoti apie esminius pakeitimus rezervacijos metu.',
+  },
+  en: {
+    nav_about: 'About', nav_rooms: 'Apartments', nav_resto: 'Restaurant',
+    nav_gallery: 'Gallery', nav_contact: 'Contact', cta_book: 'Book now',
+    foot_tagline: 'Modern apartments and restaurant in Šventoji. Just 50 metres from the Baltic Sea dunes.',
+    foot_nav_h: 'Navigation', foot_contact_h: 'Contact',
+    foot_copy: '© 2025 Lagūna. All rights reserved.',
+    foot_terms: 'Rules & conditions',
+    s1_title: '1. General provisions',
+    s1_p1: 'These rules apply to all guests of Lagūna apartments. By making a reservation or arriving at Lagūna, guests confirm that they have read these rules and agree to abide by them.',
+    s1_p2: 'Lagūna is an apartment and restaurant complex in Šventoji, Lithuania. All rules are designed to ensure a pleasant and safe holiday environment for all guests.',
+    s2_title: '2. Check-in and check-out times',
+    s2_p2: 'Late check-out is available only with prior arrangement with reception:',
+    s2_li1: 'Until 15:00 — 25% of the nightly rate applies',
+    s2_li2: 'After 15:00 — a full additional night is charged',
+    s3_title: '3. Reservation and payment',
+    s3_p1: 'A reservation is confirmed only upon receipt of a deposit. When booking directly (by phone or email), a deposit equal to one night\'s rate applies. When booking via the system, the deposit amount is stated at the time of booking.',
+    s3_p2: 'The remaining balance is paid on the day of arrival.',
+    s3_p3: 'Payment can be made by:',
+    s3_li1: 'Cash',
+    s3_li2: 'Payment card',
+    s3_li3: 'Bank transfer',
+    s3_box: 'Book directly through our website or by phone for the best available price.',
+    s4_title: '4. Cancellation policy',
+    s4_p1: 'Cancellation terms depend on how far in advance you notify us:',
+    s4_li1: '14 or more days before arrival — full deposit refunded',
+    s4_li2: '10–13 days before arrival — 80% of deposit refunded',
+    s4_li3: '7–9 days before arrival — 40% of deposit refunded',
+    s4_li4: '6 days or fewer before arrival — deposit is non-refundable',
+    s4_li5: 'No-show — deposit is non-refundable',
+    s4_warn: 'If the stay is shortened at arrival or during the stay, 100% of one night\'s rate is charged for each unused night.',
+    s4_p2: 'Date changes are possible with prior agreement from reception, subject to availability for the requested period.',
+    s5_title: '5. Number of guests',
+    s5_p1: 'The permitted number of guests per apartment is stated at the time of reservation. If the maximum permitted number of guests is exceeded, management reserves the right to refuse accommodation to additional persons or to charge an additional fee.',
+    s5_p2: 'Unregistered persons (non-guests) may only visit with prior knowledge of management. All overnight guests must be registered.',
+    s6_title: '6. Quiet hours and house rules',
+    s6_p1: 'During quiet hours the following are prohibited:',
+    s6_li1: 'Making noise or playing loud music',
+    s6_li2: 'Organising events or parties',
+    s6_li3: 'Disturbing other guests\' rest',
+    s6_p2: 'If quiet hours rules are violated, management reserves the right to ask guests to vacate the apartment without refund of the deposit.',
+    s7_title: '7. Smoking, candles and open flames',
+    s7_p1: 'Smoking is permitted only in designated outdoor areas. Please observe this rule for the safety and comfort of other guests.',
+    s8_title: '8. Pets',
+    s8_p1: 'Pets are accepted only with prior agreement from management. The following conditions apply:',
+    s8_li1: 'Only dogs up to 10 kg are accepted',
+    s8_li2: 'Additional fee: €10 / night',
+    s8_li3: 'The guest is responsible for any damage caused by their pet',
+    s8_li4: 'Pets must not be left alone in the apartment',
+    s8_p2: 'Please inform management in advance about your intention to bring a pet — acceptance depends on the specific situation and availability.',
+    s9_title: '9. Liability for property',
+    s9_p1: 'Guests are fully responsible for any damage caused to apartment furnishings, furniture, equipment or any other Lagūna property during their stay. Compensation for damage is required at market value.',
+    s9_li1: 'Removing furniture, inventory or other items from the apartment is prohibited',
+    s9_li2: 'If damage or defects are noticed on arrival, please inform management immediately',
+    s9_li3: 'Loss of a key (or key card) — a €50 fee applies',
+    s10_title: '10. Hygiene and cleanliness',
+    s10_p1: 'Please leave Lagūna in the same condition as it was on arrival. The apartment provides:',
+    s10_li1: 'Bed linen and towels (changed on request)',
+    s10_li2: 'Basic toiletries',
+    s10_li3: 'Final apartment cleaning included in the price',
+    s10_p2: 'An additional cleaning fee may apply for excessive untidiness (smoking residue, stains, spillage).',
+    s11_title: '11. Restaurant',
+    s11_p2: 'Behaviour in the restaurant must comply with the general rules of a public catering establishment. Management reserves the right to refuse service to persons who disturb public order.',
+    s12_title: '12. Personal data and privacy',
+    s12_p1: 'Lagūna processes guests\' personal data (name, email, phone number) solely for reservation and communication purposes. Data is not disclosed to third parties and is stored in accordance with GDPR requirements.',
+    s13_title: '13. Contact information',
+    s13_p1: 'If you have any questions about the rules or your reservation, please do not hesitate to contact our team — we will be happy to help.',
+    footer_note: 'Last updated: 2025. Lagūna reserves the right to amend these rules. Guests will be informed of any material changes at the time of reservation.',
+  }
+};
+
+const HTML_TRANSLATIONS = {
+  lt: {
+    page_title: 'Taisyklės ir <em>sąlygos</em>',
+    s2_box: '<strong>Įsiregistravimas (Check-in):</strong> nuo <strong>15:00 val.</strong><br /><strong>Išvykimas (Check-out):</strong> iki <strong>11:00 val.</strong>',
+    s2_p1: 'Esant galimybei, ankstesnis įsiregistravimas gali būti suderintas su administracija atvykimo dieną. Prašome iš anksto susisiekti telefonu <a href="tel:+37067647693" style="color:var(--accent)">+370 676 47693</a>.',
+    s6_box: '<strong>Ramybės valandos:</strong> nuo <strong>22:00</strong> iki <strong>9:00</strong>',
+    s7_warn: '<strong>Rūkymas, žvakių degimas ir atvira ugnis patalpose griežtai draudžiami.</strong> Už pažeidimą taikoma <strong>200 EUR bauda</strong>.',
+    s11_p1: 'Lagūnos restoranas veikia sezono metu. Rezervuoti stalą galima skambinant <a href="tel:+37067647693" style="color:var(--accent)">+370 676 47693</a> arba rašant <a href="mailto:labas@laguna.lt" style="color:var(--accent)">labas@laguna.lt</a>.',
+    s12_p2: 'Susisiekdami su mumis, jūs sutinkate su šia asmens duomenų tvarkymo tvarka. Turite teisę bet kada paprašyti ištrinti savo duomenis rašydami <a href="mailto:labas@laguna.lt" style="color:var(--accent)">labas@laguna.lt</a>.',
+    s13_box: '<strong>Lagūna</strong><br />Šventoji, Palanga, Lietuva<br />Telefonas: <a href="tel:+37067647693" style="color:var(--accent)">+370 676 47693</a><br />El. paštas: <a href="mailto:labas@laguna.lt" style="color:var(--accent)">labas@laguna.lt</a>',
+  },
+  en: {
+    page_title: 'Rules & <em>conditions</em>',
+    s2_box: '<strong>Check-in:</strong> from <strong>15:00</strong><br /><strong>Check-out:</strong> by <strong>11:00</strong>',
+    s2_p1: 'Where possible, early check-in can be arranged with management on the day of arrival. Please contact us in advance by phone <a href="tel:+37067647693" style="color:var(--accent)">+370 676 47693</a>.',
+    s6_box: '<strong>Quiet hours:</strong> from <strong>22:00</strong> to <strong>9:00</strong>',
+    s7_warn: '<strong>Smoking, burning candles and open flames inside the apartments are strictly prohibited.</strong> A fine of <strong>€200</strong> applies for violations.',
+    s11_p1: 'The Lagūna restaurant operates during the season. Table reservations can be made by calling <a href="tel:+37067647693" style="color:var(--accent)">+370 676 47693</a> or emailing <a href="mailto:labas@laguna.lt" style="color:var(--accent)">labas@laguna.lt</a>.',
+    s12_p2: 'By contacting us you agree to this personal data processing procedure. You have the right to request deletion of your data at any time by writing to <a href="mailto:labas@laguna.lt" style="color:var(--accent)">labas@laguna.lt</a>.',
+    s13_box: '<strong>Lagūna</strong><br />Šventoji, Palanga, Lithuania<br />Phone: <a href="tel:+37067647693" style="color:var(--accent)">+370 676 47693</a><br />Email: <a href="mailto:labas@laguna.lt" style="color:var(--accent)">labas@laguna.lt</a>',
+  }
+};
+
+function setLang(lang) {
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  const btn = document.getElementById('lang-' + lang);
+  if (btn) btn.classList.add('active');
+
+  const t = TRANSLATIONS[lang] || TRANSLATIONS.lt;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+
+  const th = HTML_TRANSLATIONS[lang] || HTML_TRANSLATIONS.lt;
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.getAttribute('data-i18n-html');
+    if (th[key] !== undefined) el.innerHTML = th[key];
+  });
+
+  const bookingUrl = lang === 'en'
+    ? 'https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-booking/?p=bSp833e4f0d9cbea803&l=en'
+    : 'https://ibe.sabeeapp.com/properties/Lagūna-Šventoji-užsakymas/?p=bSp833e4f0d9cbea803&l=lt';
+  document.querySelectorAll('[data-booking]').forEach(el => el.href = bookingUrl);
+
+  document.documentElement.lang = lang;
+  try { localStorage.setItem('laguna_lang', lang); } catch(e) {}
+}
+
+(function() {
+  try {
+    const saved = localStorage.getItem('laguna_lang');
+    if (saved && saved !== 'lt') setLang(saved);
+  } catch(e) {}
+})();
 </script>
 </body>
 </html>
