@@ -93,6 +93,34 @@
     @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
     @keyframes bounceY{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
     @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(201,169,110,.4)}70%{box-shadow:0 0 0 10px rgba(201,169,110,0)}}
+    @keyframes labelReveal{from{opacity:0;letter-spacing:.35em}to{opacity:1;letter-spacing:.2em}}
+    @keyframes accentLine{from{width:0}to{width:44px}}
+
+    /* ── SECTION LABEL REVEAL ── */
+    .section-label{animation:labelReveal .7s ease both}
+
+    /* ── DIVIDER DRAW ── */
+    .divider{width:44px;height:1px;background:var(--accent);margin:1.4rem 0;animation:accentLine .6s ease both}
+
+    /* ── ROOM CARD IMAGE ZOOM ── */
+    .room-slider{overflow:hidden}
+    .room-slide img{transition:transform .6s ease}
+    .room-card:hover .room-slide.active img{transform:scale(1.04)}
+
+    /* ── GALLERY IMAGE HOVER ── */
+    .gal-item{overflow:hidden}
+    .gal-item img{transition:transform .5s ease}
+    .gal-item:hover img{transform:scale(1.05)}
+    .gal-item .ov{transition:opacity .3s}
+    .gal-item:not(:hover) .ov{opacity:0}
+
+    /* ── STATS COUNTER ── */
+    .sband-num{transition:color .3s}
+    .sband-item:hover .sband-num{color:var(--accent)}
+
+    /* ── CONTACT ROW HOVER ── */
+    .crow{transition:transform .25s}
+    .crow:hover{transform:translateX(4px)}
 
     /* ── NAV ── */
     #nav{position:fixed;top:3px;left:0;right:0;z-index:1000;height:var(--nav-h);transition:background .4s,box-shadow .4s;display:flex;align-items:center}
